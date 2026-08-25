@@ -202,6 +202,12 @@
                 <span>Hubungi Kami</span>
               </router-link>
             </li>
+            <li>
+              <router-link to="/syarat-ketentuan" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Syarat &amp; Ketentuan</span>
+              </router-link>
+            </li>
           </ul>
         </div>
 
@@ -301,6 +307,10 @@
       <div class="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 text-center sm:text-left">
           <p>&copy; {{ new Date().getFullYear() }} <strong class="text-slate-400">MPTopUp Official</strong>. Hak Cipta Dilindungi.</p>
+          <span class="hidden sm:inline text-slate-700">&bull;</span>
+          <router-link to="/syarat-ketentuan" class="hover:text-sky-400 transition-colors">
+            Syarat &amp; Ketentuan
+          </router-link>
           <span class="hidden sm:inline text-slate-700">&bull;</span>
           <p>Didesain untuk Komunitas Gamers Indonesia</p>
         </div>

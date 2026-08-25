@@ -15,6 +15,7 @@ import ArticleDetailView from '@/views/public/ArticleDetailView.vue';
 import CalculatorView from '@/views/public/CalculatorView.vue';
 import ContactView from '@/views/public/ContactView.vue';
 import ReviewsView from '@/views/public/ReviewsView.vue';
+import TermsView from '@/views/public/TermsView.vue';
 
 // Auth Views
 import LoginView from '@/views/auth/LoginView.vue';
@@ -50,7 +51,9 @@ const routes = [
       { path: 'kalkulator', name: 'Calculator', component: CalculatorView },
       { path: 'kalkulator/:type', name: 'CalculatorType', component: CalculatorView },
       { path: 'hubungi-kami', name: 'Contact', component: ContactView },
-      { path: 'ulasan', name: 'Reviews', component: ReviewsView }
+      { path: 'ulasan', name: 'Reviews', component: ReviewsView },
+      { path: 'syarat-ketentuan', name: 'Terms', component: TermsView },
+      { path: 'terms', redirect: '/syarat-ketentuan' }
     ]
   },
 
