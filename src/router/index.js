@@ -33,9 +33,9 @@ const routes = [
     ]
   },
 
-  // Admin Portal
+  // Admin Portal (Obfuscated route: /modules)
   {
-    path: '/admin',
+    path: '/modules',
     component: AdminLayout,
     children: [
       { path: '', name: 'AdminRoot', component: DashboardView },

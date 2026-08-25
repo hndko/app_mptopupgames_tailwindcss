@@ -29,7 +29,7 @@
             <li><router-link to="/" class="hover:text-sky-400 transition-colors">Beranda</router-link></li>
             <li><router-link to="/produk" class="hover:text-sky-400 transition-colors">Katalog Game</router-link></li>
             <li><router-link to="/riwayat" class="hover:text-sky-400 transition-colors">Lacak Pesanan</router-link></li>
-            <li><router-link to="/admin" class="hover:text-sky-400 transition-colors">Portal Administrator</router-link></li>
+            <li><router-link to="/modules" class="hover:text-sky-400 transition-colors">Portal Administrator</router-link></li>
           </ul>
         </div>
 

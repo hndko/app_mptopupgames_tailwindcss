@@ -24,56 +24,56 @@
       <!-- Navigation Menu -->
       <nav class="flex-1 overflow-y-auto px-4 py-6 space-y-1.5 text-xs font-semibold">
         <router-link 
-          to="/admin" 
-          :class="[$route.path === '/admin' || $route.path === '/admin/dashboard' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
+          to="/modules" 
+          :class="[$route.path === '/modules' || $route.path === '/modules/dashboard' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all"
         >
           <i class="fas fa-chart-pie w-4 text-center"></i> <span>Dashboard</span>
         </router-link>
 
         <router-link 
-          to="/admin/pesanan" 
-          :class="[$route.path === '/admin/pesanan' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
+          to="/modules/pesanan" 
+          :class="[$route.path === '/modules/pesanan' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all"
         >
           <i class="fas fa-list-check w-4 text-center"></i> <span>Pesanan Masuk</span>
         </router-link>
 
         <router-link 
-          to="/admin/produk" 
-          :class="[$route.path === '/admin/produk' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
+          to="/modules/produk" 
+          :class="[$route.path === '/modules/produk' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all"
         >
           <i class="fas fa-gamepad w-4 text-center"></i> <span>Katalog &amp; SKU</span>
         </router-link>
 
         <router-link 
-          to="/admin/pengguna" 
-          :class="[$route.path === '/admin/pengguna' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
+          to="/modules/pengguna" 
+          :class="[$route.path === '/modules/pengguna' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all"
         >
           <i class="fas fa-users w-4 text-center"></i> <span>Pengguna</span>
         </router-link>
 
         <router-link 
-          to="/admin/promo" 
-          :class="[$route.path === '/admin/promo' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
+          to="/modules/promo" 
+          :class="[$route.path === '/modules/promo' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all"
         >
           <i class="fas fa-tags w-4 text-center"></i> <span>Promo &amp; Kupon</span>
         </router-link>
 
         <router-link 
-          to="/admin/laporan" 
-          :class="[$route.path === '/admin/laporan' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
+          to="/modules/laporan" 
+          :class="[$route.path === '/modules/laporan' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all"
         >
           <i class="fas fa-file-invoice-dollar w-4 text-center"></i> <span>Laporan Penjualan</span>
         </router-link>
 
         <router-link 
-          to="/admin/pengaturan" 
-          :class="[$route.path === '/admin/pengaturan' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
+          to="/modules/pengaturan" 
+          :class="[$route.path === '/modules/pengaturan' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'text-slate-300 hover:bg-slate-800/80 hover:text-white']"
           class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all"
         >
           <i class="fas fa-gear w-4 text-center"></i> <span>Pengaturan Toko</span>
@@ -151,7 +151,7 @@ const route = useRoute();
 const sidebarOpen = ref(false);
 
 const routeTitle = computed(() => {
-  if (route.path === '/admin' || route.path === '/admin/dashboard') return 'Dashboard Ringkasan';
+  if (route.path === '/modules' || route.path === '/modules/dashboard') return 'Dashboard Ringkasan';
   if (route.path.includes('/pesanan')) return 'Manajemen Pesanan';
   if (route.path.includes('/produk')) return 'Katalog Game & SKU';
   if (route.path.includes('/pengguna')) return 'Manajemen Pengguna';

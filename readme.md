@@ -154,15 +154,15 @@ tailwind-web-topup-games/
 │       ├── auth/
 │       │   ├── LoginView.vue    # Halaman Masuk Akun
 │       │   └── RegisterView.vue # Halaman Registrasi Member Baru
-│       └── admin/
-│           ├── DashboardView.vue# Ringkasan KPI & Pesanan Masuk
-│           ├── OrdersView.vue   # Kelola Status Pesanan & Modal Edit
-│           ├── ProductsView.vue # Kelola Katalog Game & Modal Varian SKU
-│           ├── UsersView.vue    # Kelola Data Pengguna & Modal Tambah/Edit
-│           ├── PromoView.vue    # Kelola Program Promo & Modal Kupon
-│           ├── ReportsView.vue  # Laporan Analitik & Ekspor CSV
-│           └── SettingsView.vue # Tab Pengaturan (Umum, Bayar, Notif, API Gateway)
-└── README.md                    # Dokumentasi Resmi Proyek
+│       └── admin/                   # Tampilan Portal Manajemen (URL: /modules)
+│           ├── DashboardView.vue    # Ringkasan KPI & Pesanan Masuk (/modules)
+│           ├── OrdersView.vue       # Kelola Status Pesanan & Modal Edit (/modules/pesanan)
+│           ├── ProductsView.vue     # Kelola Katalog Game & Modal Varian SKU (/modules/produk)
+│           ├── UsersView.vue        # Kelola Data Pengguna & Modal Tambah/Edit (/modules/pengguna)
+│           ├── PromoView.vue        # Kelola Program Promo & Modal Kupon (/modules/promo)
+│           ├── ReportsView.vue      # Laporan Analitik & Ekspor CSV (/modules/laporan)
+│           └── SettingsView.vue     # Tab Pengaturan Sistem (/modules/pengaturan)
+└── README.md                        # Dokumentasi Resmi Proyek
 ```
 
 ---

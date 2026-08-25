@@ -108,7 +108,7 @@
           <h2 class="text-sm font-bold text-white">Pesanan Masuk Terkini</h2>
           <p class="text-xs text-slate-400">Daftar transaksi pelanggan yang baru saja diproses</p>
         </div>
-        <router-link to="/admin/pesanan" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
+        <router-link to="/modules/pesanan" class="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1">
           <span>Lihat Semua Pesanan</span> <i class="fas fa-arrow-right text-[10px]"></i>
         </router-link>
       </div>

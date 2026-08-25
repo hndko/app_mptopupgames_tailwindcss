@@ -33,8 +33,8 @@
             class="px-4 py-2 rounded-xl transition-all flex items-center gap-1.5">
             <i class="fas fa-receipt text-xs"></i> <span>Lacak Pesanan</span>
           </router-link>
-          <router-link to="/admin" 
-            :class="[$route.path.startsWith('/admin') ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'hover:text-white hover:bg-slate-800 text-slate-400']"
+          <router-link to="/modules" 
+            :class="[$route.path.startsWith('/modules') ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'hover:text-white hover:bg-slate-800 text-slate-400']"
             class="px-4 py-2 rounded-xl transition-all flex items-center gap-1.5">
             <i class="fas fa-shield-halved text-xs"></i> <span>Admin Portal</span>
           </router-link>
@@ -71,7 +71,7 @@
         <router-link to="/riwayat" @click="mobileMenuOpen = false" class="px-3 py-2.5 rounded-xl hover:bg-slate-900 text-slate-200 flex items-center gap-2.5">
           <i class="fas fa-receipt text-sky-400 w-5"></i> <span>Lacak Pesanan</span>
         </router-link>
-        <router-link to="/admin" @click="mobileMenuOpen = false" class="px-3 py-2.5 rounded-xl hover:bg-slate-900 text-slate-200 flex items-center gap-2.5">
+        <router-link to="/modules" @click="mobileMenuOpen = false" class="px-3 py-2.5 rounded-xl hover:bg-slate-900 text-slate-200 flex items-center gap-2.5">
           <i class="fas fa-shield-halved text-sky-400 w-5"></i> <span>Admin Portal</span>
         </router-link>
       </div>
