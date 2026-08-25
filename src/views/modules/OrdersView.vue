@@ -134,7 +134,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useOrdersStore } from '@/stores/ordersStore';
 import Modal from '@/components/common/Modal.vue';
 
@@ -143,6 +143,10 @@ const isModalOpen = ref(false);
 const selectedOrderIndex = ref(null);
 const selectedOrder = ref(null);
 const newStatus = ref('Selesai');
+
+onMounted(() => {
+  ordersStore.fetchOrders();
+});
 
 function openEditStatus(idx, order) {
   selectedOrderIndex.value = idx;

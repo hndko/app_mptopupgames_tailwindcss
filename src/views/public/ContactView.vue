@@ -277,6 +277,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 const loading = ref(false);
 const submitted = ref(false);
@@ -292,7 +293,25 @@ const form = ref({
 
 async function handleSubmit() {
   loading.value = true;
-  await new Promise(r => setTimeout(r, 600));
+
+  if (isSupabaseConfigured && supabase) {
+    try {
+      await supabase.from('contacts').insert({
+        name: form.value.name.trim(),
+        email: form.value.email.trim(),
+        phone: form.value.phone.trim(),
+        category: form.value.category,
+        order_id: form.value.orderId.trim() || null,
+        message: form.value.message.trim(),
+        status: 'Baru'
+      });
+    } catch (err) {
+      console.warn('Gagal menyimpan pesan kontak ke database:', err);
+    }
+  } else {
+    await new Promise(r => setTimeout(r, 600));
+  }
+
   loading.value = false;
   submitted.value = true;
   form.value = {

@@ -107,11 +107,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { usePromoStore } from '@/stores/promoStore';
 import Modal from '@/components/common/Modal.vue';
 
 const promoStore = usePromoStore();
+
+onMounted(() => {
+  promoStore.fetchPromos();
+});
 
 const promoModalOpen = ref(false);
 const formTitle = ref('');

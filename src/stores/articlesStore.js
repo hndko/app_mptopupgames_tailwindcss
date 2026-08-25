@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export const INITIAL_ARTICLES = [
   {
@@ -112,6 +113,7 @@ export const useArticlesStore = defineStore('articles', {
     articles: INITIAL_ARTICLES,
     selectedCategory: 'Semua',
     searchQuery: '',
+    isLoading: false,
     categories: ['Semua', 'Tips & Trik', 'Panduan Hero', 'Event Promo', 'Patch Update']
   }),
 
@@ -139,13 +141,55 @@ export const useArticlesStore = defineStore('articles', {
     setCategory(category) {
       this.selectedCategory = category;
     },
+
     setSearch(query) {
       this.searchQuery = query;
     },
-    incrementViews(slug) {
+
+    async fetchArticles() {
+      if (!isSupabaseConfigured || !supabase) return;
+      try {
+        this.isLoading = true;
+        const { data, error } = await supabase
+          .from('articles')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data && data.length > 0) {
+          this.articles = data.map(item => ({
+            id: item.id,
+            slug: item.slug,
+            title: item.title,
+            category: item.category,
+            author: item.author,
+            date: new Date(item.created_at).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }),
+            readTime: item.read_time || '4 menit baca',
+            views: item.views || 0,
+            banner: item.banner_url || '/images/promo/promo-mlbb.svg',
+            gameId: item.game_id,
+            gameTitle: item.game_id === 'game1' ? 'Mobile Legends' : (item.game_id === 'game2' ? 'Valorant' : 'Game Populer'),
+            summary: item.summary,
+            content: item.content
+          }));
+        }
+      } catch (err) {
+        console.warn('Gagal memuat artikel dari database, menggunakan fallback lokal:', err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    async incrementViews(slug) {
       const art = this.articles.find(a => a.slug === slug);
       if (art) {
         art.views += 1;
+      }
+      if (isSupabaseConfigured && supabase) {
+        try {
+          await supabase.rpc('increment_article_views', { p_slug: slug });
+        } catch {
+          // Ignored
+        }
       }
     }
   }

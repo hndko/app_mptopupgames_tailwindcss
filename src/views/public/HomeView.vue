@@ -543,6 +543,7 @@ const faqs = [
 
 onMounted(() => {
   resumeSlideTimer();
+  promoStore.fetchPromos();
 
   let totalSeconds = 5 * 3600 + 42 * 60 + 19;
   countdownInterval = setInterval(() => {

@@ -230,12 +230,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useReviewsStore } from '@/stores/reviewsStore';
 import Modal from '@/components/common/Modal.vue';
 
 const reviewsStore = useReviewsStore();
 const modalOpen = ref(false);
+
+onMounted(() => {
+  reviewsStore.fetchReviews();
+});
 
 const newReview = ref({
   name: '',

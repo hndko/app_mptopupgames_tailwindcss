@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export const INITIAL_REVIEWS = [
   {
@@ -72,7 +73,8 @@ export const INITIAL_REVIEWS = [
 export const useReviewsStore = defineStore('reviews', {
   state: () => ({
     reviews: JSON.parse(localStorage.getItem('mptopup_reviews_v1') || 'null') || INITIAL_REVIEWS,
-    selectedStarFilter: 0 // 0 = Semua, 5 = 5 bintang, dll.
+    selectedStarFilter: 0,
+    isLoading: false
   }),
 
   getters: {
@@ -116,7 +118,37 @@ export const useReviewsStore = defineStore('reviews', {
       this.selectedStarFilter = star;
     },
 
-    addReview({ name, game, rating, comment }) {
+    async fetchReviews() {
+      if (!isSupabaseConfigured || !supabase) return;
+      try {
+        this.isLoading = true;
+        const { data, error } = await supabase
+          .from('reviews')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data && data.length > 0) {
+          this.reviews = data.map(r => ({
+            id: r.id,
+            name: r.name,
+            avatar: r.avatar_url || '/images/avatars/default-avatar.svg',
+            game: r.game,
+            rating: r.rating,
+            date: new Date(r.created_at).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }),
+            comment: r.comment,
+            verified: r.is_verified ?? true,
+            likes: r.likes || 0
+          }));
+          this.saveToStorage();
+        }
+      } catch (err) {
+        console.warn('Gagal memuat ulasan dari database, menggunakan fallback lokal:', err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    async addReview({ name, game, rating, comment }) {
       const newReview = {
         id: Date.now(),
         name: name.trim(),
@@ -131,14 +163,38 @@ export const useReviewsStore = defineStore('reviews', {
 
       this.reviews.unshift(newReview);
       this.saveToStorage();
+
+      if (isSupabaseConfigured && supabase) {
+        try {
+          await supabase.from('reviews').insert({
+            name: newReview.name,
+            avatar_url: newReview.avatar,
+            game: newReview.game,
+            rating: newReview.rating,
+            comment: newReview.comment,
+            is_verified: true,
+            likes: 0
+          });
+        } catch (err) {
+          console.warn('Ulasan tersimpan di lokal, namun sinkronisasi database gagal:', err);
+        }
+      }
+
       return newReview;
     },
 
-    likeReview(id) {
+    async likeReview(id) {
       const review = this.reviews.find(r => r.id === id);
       if (review) {
         review.likes += 1;
         this.saveToStorage();
+        if (isSupabaseConfigured && supabase) {
+          try {
+            await supabase.from('reviews').update({ likes: review.likes }).eq('id', id);
+          } catch {
+            // Ignored
+          }
+        }
       }
     }
   }

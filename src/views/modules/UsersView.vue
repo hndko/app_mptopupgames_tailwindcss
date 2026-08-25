@@ -163,11 +163,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useUsersStore } from '@/stores/usersStore';
 import Modal from '@/components/common/Modal.vue';
 
 const usersStore = useUsersStore();
+
+onMounted(() => {
+  usersStore.fetchUsers();
+});
 
 const userModalOpen = ref(false);
 const editIndex = ref(null);

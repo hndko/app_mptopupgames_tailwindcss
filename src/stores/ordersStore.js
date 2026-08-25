@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export const INITIAL_ORDERS = [
   {
@@ -68,7 +69,8 @@ export const useOrdersStore = defineStore('orders', {
     orders: JSON.parse(localStorage.getItem('mptopup_orders_history_v3') || 'null') || INITIAL_ORDERS,
     latestOrder: JSON.parse(localStorage.getItem('latestOrder') || 'null') || INITIAL_ORDERS[0],
     searchQuery: '',
-    statusFilter: 'all'
+    statusFilter: 'all',
+    isLoading: false
   }),
 
   getters: {
@@ -91,9 +93,42 @@ export const useOrdersStore = defineStore('orders', {
       localStorage.setItem('mptopup_orders_history_v3', JSON.stringify(this.orders));
     },
 
-    createOrder(orderData) {
+    async fetchOrders() {
+      if (!isSupabaseConfigured || !supabase) return;
+      try {
+        this.isLoading = true;
+        const { data, error } = await supabase
+          .from('orders')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data && data.length > 0) {
+          this.orders = data.map(o => ({
+            id: o.id,
+            date: new Date(o.created_at).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + 
+                  new Date(o.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':'),
+            game: { title: o.game_title },
+            product: { name: o.product_name },
+            userId: o.user_game_id,
+            zoneId: o.zone_id || '',
+            total: Number(o.total_price),
+            payment: { name: o.payment_method },
+            whatsapp: o.whatsapp,
+            status: o.status
+          }));
+          this.saveToStorage();
+        }
+      } catch (err) {
+        console.warn('Gagal memuat pesanan dari database, menggunakan fallback lokal:', err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    async createOrder(orderData) {
+      const orderId = "#MP" + Math.floor(100000 + Math.random() * 900000);
       const newOrder = {
-        id: "#MP" + Math.floor(100000 + Math.random() * 900000),
+        id: orderId,
         date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + 
               new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace('.', ':'),
         ...orderData,
@@ -104,13 +139,42 @@ export const useOrdersStore = defineStore('orders', {
       this.latestOrder = newOrder;
       this.saveToStorage();
       localStorage.setItem('latestOrder', JSON.stringify(newOrder));
+
+      if (isSupabaseConfigured && supabase) {
+        try {
+          await supabase.from('orders').insert({
+            id: newOrder.id,
+            game_id: orderData.game?.id || null,
+            game_title: orderData.game?.title || 'Game Populer',
+            product_name: orderData.product?.name || 'Varian Item',
+            user_game_id: orderData.userId || '',
+            zone_id: orderData.zoneId || '',
+            total_price: Number(orderData.total) || 0,
+            payment_method: orderData.payment?.name || 'QRIS',
+            whatsapp: orderData.whatsapp || '',
+            status: 'Selesai'
+          });
+        } catch (err) {
+          console.warn('Pesanan tersimpan di lokal, sinkronisasi Supabase gagal:', err);
+        }
+      }
+
       return newOrder;
     },
 
-    updateOrderStatus(index, newStatus) {
+    async updateOrderStatus(index, newStatus) {
       if (this.orders[index]) {
-        this.orders[index].status = newStatus;
+        const order = this.orders[index];
+        order.status = newStatus;
         this.saveToStorage();
+
+        if (isSupabaseConfigured && supabase) {
+          try {
+            await supabase.from('orders').update({ status: newStatus }).eq('id', order.id);
+          } catch (err) {
+            console.warn('Update status database gagal:', err);
+          }
+        }
       }
     },
 

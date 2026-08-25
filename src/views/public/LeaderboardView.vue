@@ -178,10 +178,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useLeaderboardStore } from '@/stores/leaderboardStore';
 
 const leaderboardStore = useLeaderboardStore();
+
+onMounted(() => {
+  leaderboardStore.fetchLeaderboard(leaderboardStore.activePeriod);
+});
 
 const periods = [
   { key: 'daily', label: 'Hari Ini', icon: 'fas fa-calendar-day' },

@@ -128,10 +128,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useArticlesStore } from '@/stores/articlesStore';
 
 const articlesStore = useArticlesStore();
+
+onMounted(() => {
+  articlesStore.fetchArticles();
+});
 
 const searchQuery = computed({
   get: () => articlesStore.searchQuery,

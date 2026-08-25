@@ -278,6 +278,27 @@ FOR INSERT WITH CHECK (true);
 CREATE POLICY "Admins can manage reviews" ON public.reviews 
 FOR ALL USING (public.is_admin());
 
+-- 9. TABEL PESAN KONTAK / BANTUAN (CONTACT INQUIRIES)
+CREATE TABLE IF NOT EXISTS public.contacts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    order_id VARCHAR(50),
+    message TEXT NOT NULL,
+    status VARCHAR(50) DEFAULT 'Baru',
+    created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+ALTER TABLE public.contacts ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can insert contact message" ON public.contacts 
+FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Admins can manage contact messages" ON public.contacts 
+FOR ALL USING (public.is_admin());
+
 -- ==============================================================================
 -- RPC SECURE FUNCTION: PELACAKAN PESANAN TAMU (GUEST TRACKING TANPA EXPOSE DATA)
 -- ==============================================================================
@@ -312,3 +333,21 @@ VALUES
     ('BONUS10', 'Flash Promo Top Up', 'Persentase', '10%', 0.10, 20000, 30000, '15 Agu - 30 Agu 2026', 'Aktif', '/images/promo/promo-valorant.svg'),
     ('MLBB5K', 'Cashback MLBB Weekend', 'Nominal', 'Rp 5.000', 0.00, 5000, 50000, '01 Sep - 05 Sep 2026', 'Dijadwalkan', '/images/promo/promo-cashback.svg')
 ON CONFLICT (code) DO NOTHING;
+
+INSERT INTO public.articles (slug, title, category, author, read_time, views, banner_url, game_id, summary, content)
+VALUES
+    ('trik-hemat-diamond-event-zodiac-mlbb-2026', 'Trik Hemat Beli Skin Zodiac Mobile Legends 2026 dengan Diskon COA', 'Tips & Trik', 'Admin MPTopUp', '4 menit baca', 3420, '/images/promo/promo-mlbb.svg', 'game1', 'Ingin mendapatkan skin Zodiac favorit dengan biaya paling hemat? Simak panduan kombinasi Crystal of Aurora (COA) harian dan diskon draw 5x di sini.', '<h3>Mengapa Skin Zodiac Sangat Diincar?</h3><p>Skin seri Zodiac di Mobile Legends: Bang Bang merupakan salah satu koleksi skin paling prestisius dengan visual efek rasi bintang yang memukau. Setiap bulannya, Moonton merilis skin Zodiac sesuai zodiak yang sedang berlangsung.</p><h3>Strategi Mengumpulkan 100 Star Power Paling Hemat</h3><p>Untuk membuka skin Zodiac secara penuh, Anda membutuhkan 100 Star Power. Gunakan Weekly Diamond Pass dan diskon draw 5x!</p>'),
+    ('rekomendasi-agent-valorant-patch-terbaru-solo-rank', 'Top 5 Agent Valorant Paling Efektif untuk Push Rank Solo Queue', 'Panduan Hero', 'Coach Vandal', '6 menit baca', 2890, '/images/promo/promo-valorant.svg', 'game2', 'Rekomendasi agent duelist dan initiator dengan impact tertinggi untuk memenangkan ranked match tanpa harus bergantung penuh pada party.', '<h3>5 Agent Pilihan Patch Ini</h3><p>Bermain ranked solo queue menuntut pemilihan agent mandiri seperti Jett, Omen, Fade, Clove, dan Cypher.</p>'),
+    ('cara-hitung-win-rate-mlbb-target-mythic-glory', 'Cara Menghitung Jumlah Kemenangan Beruntun untuk Target Win Rate Impian', 'Tips & Trik', 'Meta Analyst', '3 menit baca', 4120, '/images/promo/hero-slide-1.svg', 'game1', 'Pelajari formula matematika di balik kalkulator Win Rate MLBB dan bagaimana menyusun target kemenangan yang realistis per season.', '<h3>Formula Matematis Win Rate</h3><p>Gunakan kalkulator Win Rate MPTopUp untuk menghitung win streak yang Anda butuhkan!</p>'),
+    ('event-flash-sale-cashback-top-up-agustus-2026', 'Event Promo Merdeka: Cashback Top Up Game hingga 20% di MPTopUp', 'Event Promo', 'Tim Promo MPTopUp', '2 menit baca', 5310, '/images/promo/promo-cashback.svg', 'game1', 'Rayakan bulan kemerdekaan dengan kode voucher NEWUSER20 dan cashback instan via QRIS dan E-Wallet tanpa minimum transaksi.', '<h3>Promo Kemerdekaan MPTopUp</h3><p>Gunakan kode voucher NEWUSER20 saat checkout untuk mendapatkan potongan hingga 20%!</p>')
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO public.reviews (name, game, rating, comment, is_verified, likes)
+VALUES
+    ('Budi Santoso', 'Mobile Legends', 5, 'Top up 250 Diamonds prosesnya super kilat! Belum sempat keluar dari halaman invoice, diamond sudah masuk ke akun in-game. Sangat recommended!', true, 24),
+    ('Kevin Pratama', 'Valorant', 5, 'Beli 1000 VP via QRIS langsung beres detik itu juga. CS WhatsApp juga sangat responsif saat tanya-tanya promo diskon.', true, 18),
+    ('Rizky Alamsyah', 'Genshin Impact', 5, 'Blessing of Welkin Moon termurah se-Indonesia! Aman 100% legal via UID tanpa minta password. Sukses terus MPTopUp!', true, 31),
+    ('Siti Nurhaliza', 'Free Fire', 5, 'Dapat diskon 20% pake kupon NEWUSER20, lumayan banget buat borong diamond event FF. Makasih admin!', true, 12),
+    ('Andi Wijaya', 'PUBG Mobile', 4, 'Proses cepat dan lancar. Tampilan website juga sangat modern dan mudah digunakan lewat HP.', true, 8),
+    ('David Christian', 'Steam Wallet IDR', 5, 'Kode voucher Steam langsung muncul di layar setelah pembayaran QRIS terkonfirmasi. Mantap banget!', true, 15)
+ON CONFLICT DO NOTHING;

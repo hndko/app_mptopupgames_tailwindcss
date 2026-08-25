@@ -171,11 +171,16 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { useGamesStore } from '@/stores/gamesStore';
 import { useOrdersStore } from '@/stores/ordersStore';
 
 const gamesStore = useGamesStore();
 const ordersStore = useOrdersStore();
+
+onMounted(() => {
+  ordersStore.fetchOrders();
+});
 
 const weekData = [
   { day: 'Sen', height: '40%', val: 'Rp 5.2M' },

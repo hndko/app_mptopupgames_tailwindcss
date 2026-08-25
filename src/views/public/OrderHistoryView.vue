@@ -263,10 +263,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useOrdersStore } from '@/stores/ordersStore';
 
 const ordersStore = useOrdersStore();
+
+onMounted(() => {
+  ordersStore.fetchOrders();
+});
 
 const quickSearchQuery = ref('');
 const trackedOrder = ref(null);

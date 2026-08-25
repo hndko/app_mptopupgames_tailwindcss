@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
 export const INITIAL_PROMOS = [
   { name: "Diskon Pengguna Baru", code: "NEWUSER20", type: "Persentase", value: "20% (Max 10K)", rate: 0.20, maxDiscount: 10000, period: "01 Agu - 31 Agu 2026", status: "Aktif", banner: "/images/promo/promo-mlbb.svg" },
@@ -9,7 +10,8 @@ export const INITIAL_PROMOS = [
 
 export const usePromoStore = defineStore('promo', {
   state: () => ({
-    promos: INITIAL_PROMOS
+    promos: INITIAL_PROMOS,
+    isLoading: false
   }),
 
   getters: {
@@ -18,6 +20,32 @@ export const usePromoStore = defineStore('promo', {
   },
 
   actions: {
+    async fetchPromos() {
+      if (!isSupabaseConfigured || !supabase) return;
+      try {
+        this.isLoading = true;
+        const { data, error } = await supabase.from('promos').select('*');
+        if (!error && data && data.length > 0) {
+          this.promos = data.map(p => ({
+            name: p.name,
+            code: p.code,
+            type: p.type,
+            value: p.value,
+            rate: Number(p.rate) || 0,
+            maxDiscount: Number(p.max_discount) || 0,
+            fixedDiscount: Number(p.max_discount) || 0,
+            period: p.period,
+            status: p.status,
+            banner: p.banner_url || '/images/promo/promo-mlbb.svg'
+          }));
+        }
+      } catch (err) {
+        console.warn('Gagal memuat promo dari database, fallback lokal:', err);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
     validatePromoCode(code, originalPrice) {
       if (!code) return { valid: false, message: "Masukkan kode promo." };
       const promo = this.promos.find(p => p.code.toUpperCase() === code.toUpperCase() && p.status === "Aktif");
@@ -27,7 +55,7 @@ export const usePromoStore = defineStore('promo', {
 
       let discountAmount = 0;
       if (promo.type === "Persentase") {
-        discountAmount = Math.min(Math.round(originalPrice * promo.rate), promo.maxDiscount || 10000);
+        discountAmount = Math.min(Math.round(originalPrice * (promo.rate || 0.1)), promo.maxDiscount || 10000);
       } else if (promo.type === "Nominal") {
         discountAmount = promo.fixedDiscount || 5000;
       }
@@ -40,12 +68,37 @@ export const usePromoStore = defineStore('promo', {
       };
     },
 
-    addPromo(newPromo) {
+    async addPromo(newPromo) {
       this.promos.unshift(newPromo);
+      if (isSupabaseConfigured && supabase) {
+        try {
+          await supabase.from('promos').insert({
+            name: newPromo.name,
+            code: newPromo.code,
+            type: newPromo.type,
+            value: newPromo.value,
+            rate: newPromo.rate || 0,
+            max_discount: newPromo.maxDiscount || 0,
+            period: newPromo.period,
+            status: newPromo.status,
+            banner_url: newPromo.banner
+          });
+        } catch (err) {
+          console.warn('Gagal sinkronisasi promo baru ke Supabase:', err);
+        }
+      }
     },
 
-    deletePromo(index) {
+    async deletePromo(index) {
+      const promo = this.promos[index];
       this.promos.splice(index, 1);
+      if (promo && isSupabaseConfigured && supabase) {
+        try {
+          await supabase.from('promos').delete().eq('code', promo.code);
+        } catch (err) {
+          console.warn('Gagal menghapus promo dari Supabase:', err);
+        }
+      }
     }
   }
 });
