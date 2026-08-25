@@ -12,5 +12,15 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-vue': ['vue', 'vue-router', 'pinia'],
+          'vendor-supabase': ['@supabase/supabase-js']
+        }
+      }
+    }
   }
 });

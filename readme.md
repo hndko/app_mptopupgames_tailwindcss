@@ -33,9 +33,9 @@ Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan 
 - 🔍 **Pencarian Real-Time**: Filter pencarian reaktif instan untuk menemukan game favorit dalam hitungan detik.
 - 🏷️ **Sistem Kupon Promo**: Validasi kode diskon langsung saat checkout (contoh: `NEWUSER20` diskon 20%, `BONUS10` diskon 10%).
 - 💳 **Metode Pembayaran Lengkap**: Mendukung QRIS (Semua E-Wallet & Mobile Banking), GoPay, DANA, OVO, BCA Virtual Account, dan Mandiri Virtual Account.
-- 🧾 **Tanda Terima Digital & Cetak Bukti**: Invoice transaksi resmi dengan nomor pesanan otomatis `#MPxxxxxx`, upload bukti transfer via drag & drop, dan tombol cetak receipt (`window.print()`).
 - 🕒 **Pelacakan Status Pesanan**: Lacak status pemrosesan item game secara real-time melalui halaman Riwayat lengkap dengan penomoran `#` otomatis dan tombol aksi icon invoice.
-- 🔐 **Autentikasi Pengguna**: Formulir Masuk dan Pendaftaran Member Baru dengan input icon group, visibilitas kata sandi, dan validasi data.
+- 🔐 **Autentikasi Pengguna & Google OAuth**: Mendukung login instan via **Google OAuth** dan pendaftaran manual dengan enkripsi aman, serta sinkronisasi otomatis ke profil Supabase.
+- 🗄️ **Database Cloud Supabase**: Terintegrasi dengan PostgreSQL Supabase + Row Level Security (RLS) dan panduan setup lengkap di [`docs/SUPABASE_SETUP.md`](docs/SUPABASE_SETUP.md).
 
 #### 2. Sisi Administrator (Admin Dashboard)
 - 📊 **Dashboard Analitik**: Ringkasan omzet bulanan, jumlah transaksi sukses, grafik tren penjualan 7 hari, dan tabel transaksi terkini berpenomoran `#`.
@@ -48,68 +48,62 @@ Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan 
 
 #### 3. Standar Desain & Interaksi (Design System Standards)
 - 🪟 **Modal Full-Screen Viewport**: Modal overlay responsif (`fixed inset-0 min-h-screen bg-slate-950/85 backdrop-blur-md`) menutup layar secara penuh dengan dialog box di tengah.
-- 🔤 **Form Input Icon Groups**: Seluruh input dan select form dilengkapi icon group pendukung dan teks placeholder yang informatif.
-- 📤 **Drag & Drop File Upload**: Komponen upload file interaktif yang menampilkan hasil kartu preview file (nama, ukuran file, thumbnail preview, dan tombol hapus).
-- 🔘 **Konsistensi Tombol & Aksi Tabel**: Tombol reguler memiliki icon + teks, sedangkan tombol aksi pada tabel (`<td>`) khusus hanya icon tooltip untuk kerapian visual.
-- 🔢 **Penomoran Tabel Otomatis**: Setiap baris tabel dilengkapi kolom nomor urut `#` yang terisi secara otomatis.
+- 📁 **Unggah Berkas Drag & Drop**: Area dropzone interaktif dengan indikator visual dan kartu preview file sukses ber-icon.
+- 🔘 **Icon + Teks Harmonis**: Semua tombol utama memiliki ikon + label teks, dan tombol aksi tabel berbentuk ikon presisi.
+- 🔢 **Penomoran Otomatis**: Setiap tabel data memiliki kolom penomoran `#` yang rapi.
+- ⚡ **Animasi Halus 60fps**: Transisi antar halaman dan interaksi kartu responsif tanpa membebani performa browser.
 
 ---
 
 ## ⚙️ Prasyarat Sistem
 
-Sebelum memasang dan menjalankan proyek ini, pastikan sistem Anda telah memenuhi prasyarat berikut:
-
-- **Node.js**: Versi `18.x` atau lebih baru (Disarankan `v20.x` / `v22.x`)
-- **NPM**: Versi `9.x` atau lebih baru
-- **Git**: Versi `2.x` atau lebih baru
-- **Web Browser**: Google Chrome, Mozilla Firefox, Microsoft Edge, atau Safari versi modern
+- **Node.js**: Versi `>= 18.x`
+- **NPM**: Versi `>= 9.x`
+- **Web Browser**: Chrome, Firefox, Safari, atau Edge versi modern
 
 ---
 
-## 🚀 Panduan Instalasi & Menjalankan Proyek
+## 🚀 Panduan Instalasi & Setup
 
-Ikuti langkah-langkah berikut untuk mengunduh, memasang dependensi, dan menjalankan server secara manual di komputer lokal:
-
-### 1. Kloning Repositori
 ```bash
-git clone https://github.com/hndko/app_mptopupgames_tailwindcss.git
-cd app_mptopupgames_tailwindcss
-```
+# 1. Masuk ke direktori proyek
+cd /path/to/tailwind-web-topup-games
 
-### 2. Pasang Dependensi Proyek
-```bash
+# 2. Instal seluruh dependensi lokal (tanpa CDN)
 npm install
-```
 
-### 3. Jalankan Server Pengembangan (Vite Dev Server)
-Jalankan perintah berikut di terminal:
-```bash
+# 3. Buat file konfigurasi lingkungan (.env)
+cp .env.example .env
+# (Opsional) Isi VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY sesuai panduan di docs/SUPABASE_SETUP.md
+
+# 4. Jalankan server pengembangan lokal
 npm run dev
 ```
-Setelah dijalankan, buka browser di alamat yang tertera pada terminal:
-👉 **`http://localhost:3000`**
-
-### 4. Build untuk Lingkungan Produksi (Opsional)
-Untuk mengompilasi seluruh kode sumber menjadi bundle produksi terminifikasi:
-```bash
-npm run build
-```
-
-### 5. Preview Hasil Build Produksi (Opsional)
-Untuk menguji hasil build produksi secara lokal:
-```bash
-npm run preview
-```
 
 ---
 
-## 💻 Rangkuman Perintah Terminal
+## 💻 Penggunaan & Alur Kerja
 
-| Perintah Terminal | Deskripsi Fungsi |
+### 🛠️ Perintah Pengembangan
+
+| Perintah | Fungsi |
 | :--- | :--- |
-| `npm run dev` | Menjalankan server pengembangan lokal (Vite) dengan *Hot Module Replacement (HMR)* pada port 3000. |
-| `npm run build` | Mengompilasi dan membundle aplikasi Vue 3 ke dalam direktori `dist/` untuk deployment produksi. |
-| `npm run preview` | Menjalankan server lokal untuk menguji build produksi yang ada di direktori `dist/`. |
+| `npm run dev` | Menjalankan server lokal Vite pada port 3000 |
+| `npm run build` | Melakukan kompilasi aset untuk deployment produksi ke folder `dist/` |
+| `npm run preview` | Menjalankan server preview lokal untuk memverifikasi hasil build `dist/` |
+
+### 🌐 Menjalankan Aplikasi
+
+1. **Aplikasi Publik / Toko Pelanggan**:
+   👉 **`http://localhost:3000`**
+2. **Katalog Lengkap Game**:
+   👉 **`http://localhost:3000/produk`**
+3. **Lacak Pesanan Real-Time**:
+   👉 **`http://localhost:3000/riwayat`**
+4. **Masuk Akun (Email / Google OAuth)**:
+   👉 **`http://localhost:3000/login`**
+5. **Portal Manajemen Administrator**:
+   👉 **`http://localhost:3000/modules`** *(URL khusus admin)*
 
 ---
 
@@ -117,22 +111,31 @@ npm run preview
 
 ```
 tailwind-web-topup-games/
-├── index.html                   # HTML Entrypoint Vite
-├── package.json                 # Dependensi Vue 3, Vite, Vue Router, Pinia & Tailwind
-├── vite.config.js               # Konfigurasi Vite & Alias path (@/ -> src/)
-├── tailwind.config.js           # Konfigurasi Tailwind CSS (Color Palette & Content Paths)
-├── postcss.config.js            # PostCSS plugin (Tailwind + Autoprefixer)
-├── public/                      # Aset Statis Publik (Favicon, Logo, Images)
-│   └── images/                  # Aset grafis SVG vektor & logo pembayaran
-├── src/
-│   ├── main.js                  # Entrypoint aplikasi (Inisialisasi Vue, Router, Pinia, CSS)
-│   ├── App.vue                  # Root Component Vue
+├── index.html                   # Entry point dokumen HTML
+├── package.json                 # Konfigurasi dependensi NPM & script
+├── vite.config.js               # Konfigurasi bundler Vite
+├── tailwind.config.js           # Konfigurasi tema Tailwind CSS
+├── postcss.config.js            # Plugin PostCSS (Tailwind & Autoprefixer)
+├── .env.example                 # Template environment variables Supabase
+├── docs/                        # Dokumentasi Proyek
+│   └── SUPABASE_SETUP.md        # Panduan Setup Supabase & Google OAuth Lengkap
+├── supabase/                    # Skema Database & Migrasi
+│   └── migrations/
+│       └── 20260825_initial_schema.sql # Skema PostgreSQL, RLS & Trigger
+├── public/                      # Asset statis lokal (Zero-CDN)
+│   ├── favicon.ico              # Favicon resmi
+│   └── images/                  # Aset gambar & ilustrasi
+├── src/                         # Sumber Kode Aplikasi Vue 3
+│   ├── main.js                  # Inisialisasi Vue, Pinia & Router
+│   ├── App.vue                  # Root component dengan transition
+│   ├── lib/
+│   │   └── supabase.js          # Inisialisasi Supabase Client & fallback
 │   ├── assets/
 │   │   └── css/
 │   │       └── main.css         # Tailwind directives & global dark gaming styling
 │   ├── components/              # Komponen Modular & Reusable
 │   │   ├── common/
-│   │   │   ├── Navbar.vue       # Header navigasi pelanggan dengan pencarian & link
+│   │   │   ├── Navbar.vue       # Header navigasi pelanggan dengan profil login & logout
 │   │   │   ├── Footer.vue       # Footer resmi beranda & customer support
 │   │   │   ├── Modal.vue        # Universal full-screen viewport modal dialog
 │   │   │   └── DragDropUpload.vue # Drag & Drop file uploader dengan live file card preview
@@ -141,8 +144,9 @@ tailwind-web-topup-games/
 │   │   ├── app-auth.vue         # Layout modul autentikasi (Header + Centered Card + Footer)
 │   │   └── app-modules.vue      # Layout portal administrator (Sidebar + Topbar + Content)
 │   ├── router/
-│   │   └── index.js             # Definisi rute SPA (Vue Router 4)
+│   │   └── index.js             # Definisi rute SPA, callback & RBAC guards
 │   ├── stores/
+│   │   ├── authStore.js         # Store Pinia: Autentikasi Google OAuth & Email
 │   │   ├── gamesStore.js        # Store Pinia: Katalog game, varian SKU, CRUD Admin
 │   │   ├── ordersStore.js       # Store Pinia: Checkout aktif, riwayat transaksi, filter
 │   │   ├── promoStore.js        # Store Pinia: Kupon diskon, validasi promo
@@ -156,7 +160,8 @@ tailwind-web-topup-games/
 │       │   └── OrderHistoryView.vue # Halaman Lacak Pesanan & Riwayat Transaksi (# Auto-numbered)
 │       ├── auth/                # Modul Autentikasi Pengguna
 │       │   ├── LoginView.vue        # Halaman Masuk Akun
-│       │   └── RegisterView.vue     # Halaman Registrasi Member Baru
+│       │   ├── RegisterView.vue     # Halaman Registrasi Member Baru
+│       │   └── AuthCallbackView.vue # Handler Callback Redirect Google OAuth
 │       └── modules/             # Halaman Portal Manajemen / Admin (URL: /modules)
 │           ├── DashboardView.vue    # Ringkasan KPI & Pesanan Masuk (/modules)
 │           ├── OrdersView.vue       # Kelola Status Pesanan & Modal Edit (/modules/pesanan)

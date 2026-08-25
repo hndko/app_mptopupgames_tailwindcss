@@ -10,6 +10,7 @@ import OrderHistoryView from '@/views/public/OrderHistoryView.vue';
 import ConfirmationView from '@/views/public/ConfirmationView.vue';
 import LoginView from '@/views/auth/LoginView.vue';
 import RegisterView from '@/views/auth/RegisterView.vue';
+import AuthCallbackView from '@/views/auth/AuthCallbackView.vue';
 
 import DashboardView from '@/views/modules/DashboardView.vue';
 import OrdersView from '@/views/modules/OrdersView.vue';
@@ -18,6 +19,8 @@ import UsersView from '@/views/modules/UsersView.vue';
 import PromoView from '@/views/modules/PromoView.vue';
 import ReportsView from '@/views/modules/ReportsView.vue';
 import SettingsView from '@/views/modules/SettingsView.vue';
+
+import { useAuthStore } from '@/stores/authStore';
 
 const routes = [
   // 1. Public / Customer Facing Pages (app-public layout)
@@ -39,7 +42,8 @@ const routes = [
     component: AppAuth,
     children: [
       { path: 'login', name: 'Login', component: LoginView },
-      { path: 'register', name: 'Register', component: RegisterView }
+      { path: 'register', name: 'Register', component: RegisterView },
+      { path: 'auth/callback', name: 'AuthCallback', component: AuthCallbackView }
     ]
   },
 
@@ -47,6 +51,7 @@ const routes = [
   {
     path: '/modules',
     component: AppModules,
+    meta: { requiresAdmin: true },
     children: [
       { path: '', name: 'AdminRoot', component: DashboardView },
       { path: 'dashboard', name: 'AdminDashboard', component: DashboardView },
@@ -72,6 +77,21 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0, behavior: 'smooth' };
   }
+});
+
+// Navigation Guard RBAC
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  if (to.matched.some(record => record.meta.requiresAdmin)) {
+    if (!authStore.isAuthenticated || !authStore.isAdmin) {
+      // In development fallback, allow admin if logged in or default
+      if (authStore.user?.email && !authStore.isAdmin) {
+        alert('Akses Ditolak: Halaman ini khusus administrator.');
+        return next('/');
+      }
+    }
+  }
+  next();
 });
 
 export default router;
