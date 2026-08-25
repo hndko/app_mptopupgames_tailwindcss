@@ -305,23 +305,23 @@
             <p class="text-xs sm:text-sm text-slate-400 mt-1">Salin dan gunakan kode kupon untuk potongan harga ekstra saat checkout.</p>
           </div>
           <span class="text-xs font-bold text-sky-400 bg-sky-950/80 border border-sky-800/80 px-3 py-1.5 rounded-full">
-            {{ promoStore.coupons.length }} Promo Tersedia
+            {{ (promoStore.coupons || []).length }} Promo Tersedia
           </span>
         </div>
 
         <!-- Coupon Cards Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div 
-            v-for="coupon in promoStore.coupons" 
-            :key="coupon.id"
+            v-for="coupon in (promoStore.coupons || [])" 
+            :key="coupon.code"
             class="bg-slate-800/60 border border-dashed border-sky-500/40 rounded-2xl p-4 flex items-center justify-between gap-4 interactive-card relative overflow-hidden"
           >
             <div class="space-y-1">
               <div class="inline-block font-mono font-black text-sm text-sky-400 bg-sky-950/90 px-2.5 py-0.5 rounded-lg border border-sky-800">
                 {{ coupon.code }}
               </div>
-              <p class="text-xs font-bold text-white">{{ coupon.title }}</p>
-              <p class="text-[10px] text-slate-400">Diskon {{ coupon.discountText }} &bull; Min. Rp {{ coupon.minSpend.toLocaleString('id-ID') }}</p>
+              <p class="text-xs font-bold text-white">{{ coupon.name || coupon.title }}</p>
+              <p class="text-[10px] text-slate-400">Potongan {{ coupon.value || coupon.discountText }} &bull; {{ coupon.period || 'Terbatas' }}</p>
             </div>
             <button 
               type="button" 

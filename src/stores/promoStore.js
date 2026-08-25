@@ -12,6 +12,11 @@ export const usePromoStore = defineStore('promo', {
     promos: INITIAL_PROMOS
   }),
 
+  getters: {
+    activePromos: (state) => (state.promos || []).filter(p => p.status === 'Aktif'),
+    coupons: (state) => (state.promos || []).filter(p => p.status === 'Aktif')
+  },
+
   actions: {
     validatePromoCode(code, originalPrice) {
       if (!code) return { valid: false, message: "Masukkan kode promo." };
