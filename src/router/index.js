@@ -3,15 +3,25 @@ import AppPublic from '@/layouts/app-public.vue';
 import AppAuth from '@/layouts/app-auth.vue';
 import AppModules from '@/layouts/app-modules.vue';
 
+// Public Views
 import HomeView from '@/views/public/HomeView.vue';
 import CatalogView from '@/views/public/CatalogView.vue';
 import ProductDetailView from '@/views/public/ProductDetailView.vue';
 import OrderHistoryView from '@/views/public/OrderHistoryView.vue';
 import ConfirmationView from '@/views/public/ConfirmationView.vue';
+import LeaderboardView from '@/views/public/LeaderboardView.vue';
+import ArticlesView from '@/views/public/ArticlesView.vue';
+import ArticleDetailView from '@/views/public/ArticleDetailView.vue';
+import CalculatorView from '@/views/public/CalculatorView.vue';
+import ContactView from '@/views/public/ContactView.vue';
+import ReviewsView from '@/views/public/ReviewsView.vue';
+
+// Auth Views
 import LoginView from '@/views/auth/LoginView.vue';
 import RegisterView from '@/views/auth/RegisterView.vue';
 import AuthCallbackView from '@/views/auth/AuthCallbackView.vue';
 
+// Admin Module Views
 import DashboardView from '@/views/modules/DashboardView.vue';
 import OrdersView from '@/views/modules/OrdersView.vue';
 import ProductsView from '@/views/modules/ProductsView.vue';
@@ -33,7 +43,14 @@ const routes = [
       { path: 'produk', name: 'ProductCatalog', component: CatalogView },
       { path: 'produk/:id', name: 'ProductDetail', component: ProductDetailView },
       { path: 'riwayat', name: 'OrderHistory', component: OrderHistoryView },
-      { path: 'konfirmasi', name: 'Confirmation', component: ConfirmationView }
+      { path: 'konfirmasi', name: 'Confirmation', component: ConfirmationView },
+      { path: 'leaderboard', name: 'Leaderboard', component: LeaderboardView },
+      { path: 'artikel', name: 'Articles', component: ArticlesView },
+      { path: 'artikel/:slug', name: 'ArticleDetail', component: ArticleDetailView },
+      { path: 'kalkulator', name: 'Calculator', component: CalculatorView },
+      { path: 'kalkulator/:type', name: 'CalculatorType', component: CalculatorView },
+      { path: 'hubungi-kami', name: 'Contact', component: ContactView },
+      { path: 'ulasan', name: 'Reviews', component: ReviewsView }
     ]
   },
 
@@ -89,7 +106,10 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior() {
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
     return { top: 0, behavior: 'smooth' };
   }
 });

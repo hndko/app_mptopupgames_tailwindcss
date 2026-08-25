@@ -173,10 +173,34 @@
               </router-link>
             </li>
             <li>
-              <a href="#faq" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/leaderboard" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Tanya Jawab (FAQ)</span>
-              </a>
+                <span>Leaderboard Sultan</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/kalkulator" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Kalkulator MLBB</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/artikel" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Artikel &amp; Berita</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/ulasan" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Ulasan Pelanggan</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/hubungi-kami" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Hubungi Kami</span>
+              </router-link>
             </li>
           </ul>
         </div>

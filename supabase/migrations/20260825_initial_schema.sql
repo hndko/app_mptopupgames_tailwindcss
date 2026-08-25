@@ -105,6 +105,42 @@ CREATE TABLE IF NOT EXISTS public.system_settings (
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
+-- 7. TABEL ARTIKEL & PANDUAN GAMING
+CREATE TABLE IF NOT EXISTS public.articles (
+    id SERIAL PRIMARY KEY,
+    slug VARCHAR(200) UNIQUE NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    read_time VARCHAR(50) DEFAULT '4 menit baca',
+    views INT DEFAULT 0,
+    banner_url TEXT NOT NULL,
+    game_id VARCHAR(50) REFERENCES public.games(id) ON DELETE SET NULL,
+    summary TEXT NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_articles_slug ON public.articles(slug);
+CREATE INDEX IF NOT EXISTS idx_articles_category ON public.articles(category);
+
+-- 8. TABEL ULASAN PELANGGAN (TESTIMONIALS)
+CREATE TABLE IF NOT EXISTS public.reviews (
+    id SERIAL PRIMARY KEY,
+    user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+    name VARCHAR(150) NOT NULL,
+    avatar_url TEXT DEFAULT '/images/avatars/default-avatar.svg',
+    game VARCHAR(100) NOT NULL,
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT NOT NULL,
+    is_verified BOOLEAN DEFAULT true,
+    likes INT DEFAULT 0,
+    created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_reviews_rating ON public.reviews(rating);
+CREATE INDEX IF NOT EXISTS idx_reviews_created_at ON public.reviews(created_at DESC);
+
 -- ==============================================================================
 -- HELPER FUNCTIONS & TRIGGERS OTOMATIS
 -- ==============================================================================
@@ -174,6 +210,8 @@ ALTER TABLE public.products_sku ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.promos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.system_settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.reviews ENABLE ROW LEVEL SECURITY;
 
 -- 1. Policies for profiles (Hanya pemilik akun dan admin yang bisa melihat data sensitif)
 CREATE POLICY "Profiles are viewable by owner and admin" ON public.profiles 
@@ -221,6 +259,23 @@ CREATE POLICY "Settings are viewable by everyone" ON public.system_settings
 FOR SELECT USING (true);
 
 CREATE POLICY "Admins can manage settings" ON public.system_settings 
+FOR ALL USING (public.is_admin());
+
+-- 7. Policies for articles (Public read, Admin manage)
+CREATE POLICY "Articles are viewable by everyone" ON public.articles 
+FOR SELECT USING (true);
+
+CREATE POLICY "Admins can manage articles" ON public.articles 
+FOR ALL USING (public.is_admin());
+
+-- 8. Policies for reviews (Public read & insert, Admin manage)
+CREATE POLICY "Reviews are viewable by everyone" ON public.reviews 
+FOR SELECT USING (true);
+
+CREATE POLICY "Anyone can insert reviews" ON public.reviews 
+FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Admins can manage reviews" ON public.reviews 
 FOR ALL USING (public.is_admin());
 
 -- ==============================================================================

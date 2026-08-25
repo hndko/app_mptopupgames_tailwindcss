@@ -33,6 +33,14 @@ Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan 
 - 🔍 **Pencarian Real-Time**: Filter pencarian reaktif instan untuk menemukan game favorit dalam hitungan detik.
 - 🏷️ **Sistem Kupon Promo**: Validasi kode diskon langsung saat checkout (contoh: `NEWUSER20` diskon 20%, `BONUS10` diskon 10%).
 - 💳 **Metode Pembayaran Lengkap**: Mendukung QRIS (Semua E-Wallet & Mobile Banking), GoPay, DANA, OVO, BCA Virtual Account, dan Mandiri Virtual Account.
+- 🏆 **Leaderboard Top Spender**: Podium ranking Top 3 (*Juara 1 🥇, 2 🥈, 3 🥉*) dengan filter periode (Harian, Mingguan, Bulanan, Sepanjang Masa) dan privasi sensor nomor/nama.
+- 🧮 **Kalkulator Mobile Legends**:
+  - *Kalkulator Win Rate*: Menghitung target kemenangan beruntun (*win streak*) tanpa kalah.
+  - *Kalkulator Magic Wheel*: Estimasi sisa Magic Point, total Diamond/COA, dan nominal Rupiah skin Legend.
+  - *Kalkulator Zodiac*: Estimasi sisa Star Power dan jadwal rotasi 12 skin zodiak.
+- 📰 **Artikel & Panduan Gaming**: Portal berita, tips & trik hemat diamond, event promo, dan panduan meta hero dengan pembaca artikel detail.
+- ⭐ **Ulasan & Kepuasan Pelanggan**: Rekapitulasi rating bintang (4.9/5.0), distribusi bintang, dan formulir kirim ulasan interaktif.
+- 📞 **Layanan Bantuan & Hubungi Kami**: Akses direct chat WhatsApp 24 jam (`wa.me`), form pesan bantuan, dan FAQ interaktif.
 - 🕒 **Pelacakan Status Pesanan**: Lacak status pemrosesan item game secara real-time melalui halaman Riwayat lengkap dengan penomoran `#` otomatis dan tombol aksi icon invoice.
 - 🔐 **Autentikasi Pengguna & Google OAuth**: Mendukung login instan via **Google OAuth** dan pendaftaran manual dengan enkripsi aman, serta sinkronisasi otomatis ke profil Supabase.
 - 🗄️ **Database Cloud Supabase**: Terintegrasi dengan PostgreSQL Supabase + Row Level Security (RLS) dan panduan setup lengkap di [`docs/02_SUPABASE_SETUP.md`](docs/02_SUPABASE_SETUP.md).
@@ -100,9 +108,19 @@ npm run dev
    👉 **`http://localhost:3000/produk`**
 3. **Lacak Pesanan Real-Time**:
    👉 **`http://localhost:3000/riwayat`**
-4. **Masuk Akun (Email / Google OAuth)**:
+4. **Leaderboard Sultan Top Spender**:
+   👉 **`http://localhost:3000/leaderboard`**
+5. **Kalkulator Mobile Legends (Win Rate, Magic Wheel, Zodiac)**:
+   👉 **`http://localhost:3000/kalkulator`**
+6. **Artikel & Panduan Gaming**:
+   👉 **`http://localhost:3000/artikel`**
+7. **Ulasan & Testimoni Pelanggan**:
+   👉 **`http://localhost:3000/ulasan`**
+8. **Layanan Bantuan / Hubungi Kami**:
+   👉 **`http://localhost:3000/hubungi-kami`**
+9. **Masuk Akun (Email / Google OAuth)**:
    👉 **`http://localhost:3000/login`**
-5. **Portal Manajemen Administrator**:
+10. **Portal Manajemen Administrator**:
    👉 **`http://localhost:3000/modules`** *(URL khusus admin)*
 
 ---
@@ -144,7 +162,7 @@ tailwind-web-topup-games/
 │   │       └── main.css         # Tailwind directives & global dark gaming styling
 │   ├── components/              # Komponen Modular & Reusable
 │   │   ├── common/
-│   │   │   ├── Navbar.vue       # Header navigasi pelanggan dengan profil login & logout
+│   │   │   ├── Navbar.vue       # Header navigasi pelanggan dengan profil login & dropdown tools
 │   │   │   ├── Footer.vue       # Footer resmi beranda & customer support
 │   │   │   ├── Modal.vue        # Universal full-screen viewport modal dialog
 │   │   │   └── DragDropUpload.vue # Drag & Drop file uploader dengan live file card preview
@@ -165,14 +183,23 @@ tailwind-web-topup-games/
 │   │   ├── gamesStore.js        # Store Pinia: Katalog game, varian SKU, CRUD Admin
 │   │   ├── ordersStore.js       # Store Pinia: Checkout aktif, riwayat transaksi, filter
 │   │   ├── promoStore.js        # Store Pinia: Kupon diskon, validasi promo
-│   │   └── usersStore.js        # Store Pinia: Manajemen pengguna & admin
+│   │   ├── usersStore.js        # Store Pinia: Manajemen pengguna & admin
+│   │   ├── leaderboardStore.js  # Store Pinia: Peringkat Sultan Top Spender
+│   │   ├── articlesStore.js     # Store Pinia: Artikel & Panduan Gaming
+│   │   └── reviewsStore.js      # Store Pinia: Ulasan & Testimoni Pelanggan
 │   └── views/                   # Tampilan Rute Halaman
 │       ├── public/              # Halaman Landing & Area Pelanggan
 │       │   ├── HomeView.vue         # Halaman Beranda (Landing Page & Hero Slider)
 │       │   ├── CatalogView.vue      # Katalog Lengkap Game & Voucher Digital (/produk)
 │       │   ├── ProductDetailView.vue# Halaman Checkout & Varian Diamond 5-Langkah (/produk/:id)
 │       │   ├── ConfirmationView.vue # Bukti Pembayaran Digital (Invoice + Cetak Bukti)
-│       │   └── OrderHistoryView.vue # Halaman Lacak Pesanan & Riwayat Transaksi (# Auto-numbered)
+│       │   ├── OrderHistoryView.vue # Halaman Lacak Pesanan & Riwayat Transaksi (# Auto-numbered)
+│       │   ├── LeaderboardView.vue  # Halaman Peringkat Sultan Top Spender (/leaderboard)
+│       │   ├── ArticlesView.vue     # Katalog Artikel, Berita & Tips (/artikel)
+│       │   ├── ArticleDetailView.vue# Halaman Baca Artikel Detail (/artikel/:slug)
+│       │   ├── CalculatorView.vue   # Tools Kalkulator MLBB Win Rate, Magic Wheel & Zodiac (/kalkulator)
+│       │   ├── ContactView.vue      # Halaman Layanan Bantuan & Hubungi Kami (/hubungi-kami)
+│       │   └── ReviewsView.vue      # Halaman Ulasan & Testimoni Pelanggan (/ulasan)
 │       ├── auth/                # Modul Autentikasi Pengguna
 │       │   ├── LoginView.vue        # Halaman Masuk Akun
 │       │   ├── RegisterView.vue     # Halaman Registrasi Member Baru
