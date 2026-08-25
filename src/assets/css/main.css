@@ -26,6 +26,45 @@
   background: #0ea5e9;
 }
 
+/* Lightweight Page View Transitions (Opacity & subtle GPU translate) */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* Modal Smooth Entrance/Exit Transition */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.modal-fade-enter-active .modal-content,
+.modal-fade-leave-active .modal-content {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+.modal-fade-enter-from {
+  opacity: 0;
+}
+.modal-fade-enter-from .modal-content {
+  opacity: 0;
+  transform: scale(0.95) translateY(8px);
+}
+.modal-fade-leave-to {
+  opacity: 0;
+}
+.modal-fade-leave-to .modal-content {
+  opacity: 0;
+  transform: scale(0.95) translateY(8px);
+}
+
+/* Custom Utilities for Subtle Micro-interactions */
 @layer utilities {
   .scrollbar-none {
     -ms-overflow-style: none;
@@ -33,5 +72,17 @@
   }
   .scrollbar-none::-webkit-scrollbar {
     display: none;
+  }
+
+  .interactive-card {
+    @apply transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  .btn-press {
+    @apply active:scale-95 transition-transform duration-150;
+  }
+
+  .pulse-glow {
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.25);
   }
 }

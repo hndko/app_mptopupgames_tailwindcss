@@ -191,7 +191,7 @@
             v-for="deal in gamesStore.flashSales" 
             :key="deal.id"
             :to="`/produk?game=${deal.gameId}`"
-            class="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700/80 hover:border-rose-500/60 rounded-3xl p-4 sm:p-5 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-rose-600/10"
+            class="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700/80 hover:border-rose-500/60 rounded-3xl p-4 sm:p-5 interactive-card flex flex-col justify-between hover:shadow-rose-600/10"
           >
             <div class="space-y-3">
               <div class="relative rounded-2xl overflow-hidden aspect-[16/9] bg-slate-950 border border-slate-700/60">
@@ -225,7 +225,7 @@
                 <span class="text-[11px] text-slate-500 line-through block">Rp {{ deal.originalPrice.toLocaleString('id-ID') }}</span>
                 <span class="text-sm sm:text-base font-black text-rose-400">Rp {{ deal.salePrice.toLocaleString('id-ID') }}</span>
               </div>
-              <span class="px-3.5 py-1.5 rounded-xl bg-rose-600/20 text-rose-400 text-xs font-bold flex items-center gap-1.5 group-hover:bg-rose-600 group-hover:text-white transition-all shadow-sm">
+              <span class="px-3.5 py-1.5 rounded-xl bg-rose-600/20 text-rose-400 text-xs font-bold flex items-center gap-1.5 group-hover:bg-rose-600 group-hover:text-white transition-all shadow-sm btn-press">
                 <span>Beli</span> <i class="fas fa-arrow-right text-[10px]"></i>
               </span>
             </div>
@@ -252,7 +252,7 @@
           v-for="game in gamesStore.filteredGames" 
           :key="game.id"
           :to="`/produk?game=${game.id}`"
-          class="group relative bg-slate-900 border border-slate-800 hover:border-sky-500 rounded-3xl p-3.5 sm:p-5 shadow-xl hover:shadow-sky-500/10 transition-all duration-300 flex flex-col justify-between"
+          class="group relative bg-slate-900 border border-slate-800 hover:border-sky-500 rounded-3xl p-3.5 sm:p-5 shadow-xl hover:shadow-sky-500/10 interactive-card flex flex-col justify-between"
         >
           <div>
             <div class="relative aspect-video rounded-2xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-800">
@@ -302,7 +302,7 @@
           <div 
             v-for="p in promoStore.promos.filter(p => p.status === 'Aktif')" 
             :key="p.code"
-            class="p-5 rounded-3xl bg-slate-800/60 border border-slate-700/80 flex flex-col justify-between space-y-4 hover:border-sky-500/60 transition-colors group"
+            class="p-5 rounded-3xl bg-slate-800/60 border border-slate-700/80 flex flex-col justify-between space-y-4 hover:border-sky-500/60 interactive-card group"
           >
             <div class="space-y-2">
               <div class="flex items-center justify-between">
@@ -322,7 +322,7 @@
               <button 
                 type="button" 
                 @click="copyCode(p.code)"
-                class="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow"
+                class="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow btn-press"
               >
                 <i class="fas fa-copy text-xs"></i> <span>Salin Kode</span>
               </button>
@@ -341,7 +341,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 transition-colors">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 interactive-card">
           <div class="w-12 h-12 rounded-2xl bg-sky-950 border border-sky-800 text-sky-400 flex items-center justify-center text-lg font-black shadow-lg">
             1
           </div>
@@ -351,7 +351,7 @@
           </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 transition-colors">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 interactive-card">
           <div class="w-12 h-12 rounded-2xl bg-amber-950 border border-amber-800 text-amber-400 flex items-center justify-center text-lg font-black shadow-lg">
             2
           </div>
@@ -361,7 +361,7 @@
           </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 transition-colors">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 interactive-card">
           <div class="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-800 text-emerald-400 flex items-center justify-center text-lg font-black shadow-lg">
             3
           </div>
