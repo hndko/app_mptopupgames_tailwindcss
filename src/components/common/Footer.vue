@@ -104,43 +104,43 @@
           </h4>
           <ul class="space-y-2 text-xs">
             <li>
-              <router-link to="/produk?game=game1" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/produk/game1" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
                 <span>Mobile Legends: Bang Bang</span>
               </router-link>
             </li>
             <li>
-              <router-link to="/produk?game=game2" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/produk/game2" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
                 <span>Valorant Points (VP)</span>
               </router-link>
             </li>
             <li>
-              <router-link to="/produk?game=game3" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/produk/game3" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
                 <span>Free Fire Diamonds</span>
               </router-link>
             </li>
             <li>
-              <router-link to="/produk?game=game4" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/produk/game4" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
                 <span>PUBG Mobile Unknown Cash</span>
               </router-link>
             </li>
             <li>
-              <router-link to="/produk?game=game5" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/produk/game5" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
                 <span>Genshin Impact Genesis</span>
               </router-link>
             </li>
             <li>
-              <router-link to="/produk?game=game6" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/produk/game6" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
                 <span>Honor of Kings Tokens</span>
               </router-link>
             </li>
             <li>
-              <router-link to="/produk?game=game7" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/produk/game7" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
                 <span>Steam Wallet Code IDR</span>
               </router-link>

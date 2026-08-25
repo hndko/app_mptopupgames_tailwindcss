@@ -148,7 +148,8 @@ tailwind-web-topup-games/
 │   │   └── usersStore.js        # Store Pinia: Manajemen pengguna & admin
 │   └── views/                   # Tampilan Rute Halaman
 │       ├── HomeView.vue         # Halaman Beranda (Landing Page & Hero Slider)
-│       ├── ProductDetailView.vue# Halaman Checkout Game (5-Step Form, SKU, Pembayaran)
+│       ├── CatalogView.vue      # Katalog Lengkap Game & Voucher Digital (/produk)
+│       ├── ProductDetailView.vue# Halaman Checkout & Varian Diamond 5-Langkah (/produk/:id)
 │       ├── ConfirmationView.vue # Bukti Pembayaran Digital (Invoice + Cetak Bukti)
 │       ├── OrderHistoryView.vue # Halaman Lacak Pesanan & Riwayat Transaksi (# Auto-numbered)
 │       ├── auth/

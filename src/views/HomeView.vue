@@ -190,7 +190,7 @@
           <router-link 
             v-for="deal in gamesStore.flashSales" 
             :key="deal.id"
-            :to="`/produk?game=${deal.gameId}`"
+            :to="`/produk/${deal.gameId}`"
             class="group bg-slate-800/50 hover:bg-slate-800 border border-slate-700/80 hover:border-rose-500/60 rounded-3xl p-4 sm:p-5 interactive-card flex flex-col justify-between hover:shadow-rose-600/10"
           >
             <div class="space-y-3">
@@ -251,7 +251,7 @@
         <router-link 
           v-for="game in gamesStore.filteredGames" 
           :key="game.id"
-          :to="`/produk?game=${game.id}`"
+          :to="`/produk/${game.id}`"
           class="group relative bg-slate-900 border border-slate-800 hover:border-sky-500 rounded-3xl p-3.5 sm:p-5 shadow-xl hover:shadow-sky-500/10 interactive-card flex flex-col justify-between"
         >
           <div>

@@ -3,6 +3,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 
 import HomeView from '@/views/HomeView.vue';
+import CatalogView from '@/views/CatalogView.vue';
 import ProductDetailView from '@/views/ProductDetailView.vue';
 import OrderHistoryView from '@/views/OrderHistoryView.vue';
 import ConfirmationView from '@/views/ConfirmationView.vue';
@@ -24,7 +25,7 @@ const routes = [
     component: DefaultLayout,
     children: [
       { path: '', name: 'Home', component: HomeView },
-      { path: 'produk', name: 'ProductCatalog', component: ProductDetailView },
+      { path: 'produk', name: 'ProductCatalog', component: CatalogView },
       { path: 'produk/:id', name: 'ProductDetail', component: ProductDetailView },
       { path: 'riwayat', name: 'OrderHistory', component: OrderHistoryView },
       { path: 'konfirmasi', name: 'Confirmation', component: ConfirmationView },
