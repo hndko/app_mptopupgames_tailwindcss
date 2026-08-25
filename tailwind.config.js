@@ -23,6 +23,15 @@ module.exports = {
           900: '#0c4a6e',
           950: '#082f49',
         }
+      },
+      animation: {
+        'marquee': 'marquee 30s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        }
       }
     },
   },
