@@ -1,53 +1,64 @@
 <template>
-  <div class="space-y-10 sm:space-y-14 pb-12">
-    <!-- Live Transaction Activity Ticker Bar -->
-    <div class="bg-slate-900/90 border-b border-slate-800/80 py-2.5 px-4 overflow-hidden backdrop-blur-md">
-      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs">
-        <div class="flex items-center gap-2 shrink-0">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="font-bold text-slate-300 flex items-center gap-1">
-            <i class="fas fa-bolt text-amber-400 text-[11px]"></i> Transaksi Real-Time:
-          </span>
-        </div>
-
-        <div class="overflow-hidden whitespace-nowrap flex-1">
-          <div class="inline-flex items-center gap-6 animate-marquee text-slate-400 text-[11px]">
-            <span v-for="(tx, idx) in recentTransactions" :key="idx" class="inline-flex items-center gap-2">
-              <strong class="text-sky-400">{{ tx.user }}</strong>
-              <span>berhasil top up</span>
-              <strong class="text-white">{{ tx.item }}</strong>
-              <span class="text-slate-500">({{ tx.time }})</span>
-              <span class="text-slate-700">&bull;</span>
+  <div class="space-y-12 sm:space-y-16 pb-16">
+    <!-- Live Recent Transaction Activity Ticker Bar -->
+    <div class="bg-slate-900 border-y border-slate-800/80 py-2.5 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3">
+        <span class="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 shrink-0 bg-emerald-950/60 border border-emerald-800/60 px-2.5 py-0.5 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Transaksi Live</span>
+        </span>
+        <div class="overflow-hidden whitespace-nowrap flex-1 relative">
+          <div class="inline-flex gap-8 animate-marquee text-xs text-slate-300">
+            <span v-for="(tx, idx) in recentTransactions" :key="idx" class="inline-flex items-center gap-1.5">
+              <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
+              <strong class="text-white">{{ tx.user }}</strong> baru saja top up <span class="text-sky-400 font-semibold">{{ tx.item }}</span>
+              <span class="text-[10px] text-slate-500">({{ tx.time }})</span>
             </span>
           </div>
         </div>
-
-        <router-link to="/riwayat" class="hidden sm:flex items-center gap-1 text-sky-400 hover:text-sky-300 font-semibold shrink-0 text-[11px]">
-          <span>Lacak Pesanan</span> <i class="fas fa-arrow-right text-[10px]"></i>
-        </router-link>
       </div>
     </div>
 
-    <!-- Hero Carousel & Quick Jump Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2">
-      <div class="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl">
-        <div class="relative w-full aspect-[16/8] sm:aspect-[21/9] min-h-[240px]">
-          <!-- Carousel Slides -->
+    <!-- Hero Carousel Slider Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900">
+        <div class="relative h-64 sm:h-80 md:h-[400px] overflow-hidden">
           <div 
-            class="flex transition-transform duration-700 ease-in-out h-full w-full"
-            :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+            v-for="(slide, idx) in gamesStore.heroSlides" 
+            :key="slide.id"
+            :class="[idx === currentSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 pointer-events-none z-0', 'absolute inset-0 transition-all duration-700 ease-out flex items-center']"
           >
-            <div 
-              v-for="slide in gamesStore.heroSlides" 
-              :key="slide.id"
-              class="min-w-full h-full relative flex items-center justify-center overflow-hidden bg-slate-950"
-            >
-              <img :src="slide.banner" :alt="slide.title" class="w-full h-full object-cover">
-              <router-link :to="`/produk?game=${slide.gameId}`" class="absolute inset-0 z-10" :aria-label="slide.title"></router-link>
+            <!-- Background Image with Gradient Overlay -->
+            <img :src="slide.banner" :alt="slide.title" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
+
+            <!-- Content Over Slide -->
+            <div class="relative z-20 p-6 sm:p-12 md:p-16 max-w-xl space-y-3 sm:space-y-4">
+              <span class="inline-block px-3 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-[11px] font-bold tracking-wider uppercase">
+                {{ slide.badge }}
+              </span>
+              <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
+                {{ slide.title }} <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-amber-300">
+                  {{ slide.highlight }}
+                </span>
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-300 line-clamp-2">
+                {{ slide.description }}
+              </p>
+              <div class="pt-2">
+                <router-link 
+                  :to="`/produk/${slide.gameId}`" 
+                  class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white font-black text-xs sm:text-sm shadow-xl shadow-sky-600/30 transition-all transform hover:-translate-y-0.5 btn-press"
+                >
+                  <span>Top Up Sekarang</span>
+                  <i class="fas fa-bolt text-xs"></i>
+                </router-link>
+              </div>
             </div>
           </div>
 
-          <!-- Controls -->
+          <!-- Slider Navigation Controls -->
           <button 
             type="button" 
             @click="prevSlide" 
@@ -75,78 +86,6 @@
               :class="[idx === currentSlide ? 'w-7 bg-sky-400' : 'w-2.5 bg-slate-600 hover:bg-slate-500', 'h-2.5 rounded-full transition-all']" 
               :aria-label="'Slide ' + (idx + 1)"
             ></button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Search & Category Filter Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-xl space-y-4">
-        <div class="flex flex-col md:flex-row items-center gap-4">
-          <!-- Search Bar -->
-          <div class="relative flex-1 w-full">
-            <i class="fas fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i>
-            <input 
-              type="search" 
-              v-model="gamesStore.searchQuery" 
-              placeholder="Cari game favoritmu (Mobile Legends, Valorant, Free Fire, Genshin...)"
-              class="w-full h-12 pl-11 pr-10 rounded-2xl bg-slate-800 border border-slate-700 text-white placeholder-slate-400 text-xs sm:text-sm focus:ring-2 focus:ring-sky-500 transition-all"
-            >
-            <button 
-              v-if="gamesStore.searchQuery" 
-              type="button" 
-              @click="gamesStore.searchQuery = ''"
-              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs p-1"
-              title="Hapus pencarian"
-            >
-              <i class="fas fa-times-circle"></i>
-            </button>
-          </div>
-
-          <!-- Category Pills Filter -->
-          <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-none">
-            <button 
-              type="button" 
-              @click="gamesStore.selectedCategory = 'ALL'"
-              :class="[gamesStore.selectedCategory === 'ALL' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30' : 'bg-slate-800 hover:bg-slate-700 text-slate-300', 'px-4 py-3 rounded-2xl text-xs font-bold whitespace-nowrap border border-slate-700/80 transition-all flex items-center gap-1.5']"
-            >
-              <i class="fas fa-grip text-xs"></i> <span>Semua Game</span>
-              <span class="px-1.5 py-0.5 rounded-full bg-slate-950/40 text-[10px]">{{ gamesStore.games.length }}</span>
-            </button>
-
-            <button 
-              type="button" 
-              @click="gamesStore.selectedCategory = 'POPULAR'"
-              :class="[gamesStore.selectedCategory === 'POPULAR' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30' : 'bg-slate-800 hover:bg-slate-700 text-slate-300', 'px-4 py-3 rounded-2xl text-xs font-bold whitespace-nowrap border border-slate-700/80 transition-all flex items-center gap-1.5']"
-            >
-              <i class="fas fa-fire text-amber-400 text-xs"></i> <span>Populer</span>
-              <span class="px-1.5 py-0.5 rounded-full bg-slate-950/40 text-[10px]">{{ gamesStore.popularGames.length }}</span>
-            </button>
-
-            <button 
-              type="button" 
-              @click="gamesStore.selectedCategory = 'Mobile'"
-              :class="[gamesStore.selectedCategory === 'Mobile' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30' : 'bg-slate-800 hover:bg-slate-700 text-slate-300', 'px-4 py-3 rounded-2xl text-xs font-bold whitespace-nowrap border border-slate-700/80 transition-all flex items-center gap-1.5']"
-            >
-              <i class="fas fa-mobile-screen text-sky-400 text-xs"></i> <span>Mobile</span>
-            </button>
-
-            <button 
-              type="button" 
-              @click="gamesStore.selectedCategory = 'PC'"
-              :class="[gamesStore.selectedCategory === 'PC' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30' : 'bg-slate-800 hover:bg-slate-700 text-slate-300', 'px-4 py-3 rounded-2xl text-xs font-bold whitespace-nowrap border border-slate-700/80 transition-all flex items-center gap-1.5']"
-            >
-              <i class="fas fa-desktop text-emerald-400 text-xs"></i> <span>PC Game</span>
-            </button>
-
-            <button 
-              type="button" 
-              @click="gamesStore.selectedCategory = 'Voucher'"
-              :class="[gamesStore.selectedCategory === 'Voucher' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30' : 'bg-slate-800 hover:bg-slate-700 text-slate-300', 'px-4 py-3 rounded-2xl text-xs font-bold whitespace-nowrap border border-slate-700/80 transition-all flex items-center gap-1.5']"
-            >
-              <i class="fas fa-ticket text-purple-400 text-xs"></i> <span>Voucher</span>
-            </button>
           </div>
         </div>
       </div>
@@ -234,8 +173,8 @@
       </div>
     </section>
 
-    <!-- Main Game Catalog Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <!-- Main Game Catalog Section (With Search & Category Filter Header) -->
+    <section id="catalogSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div>
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
@@ -243,7 +182,61 @@
           </h2>
           <p class="text-xs sm:text-sm text-slate-400 mt-1">Pilih judul game favoritmu dan top up item resmi dalam hitungan detik.</p>
         </div>
-        <span class="text-xs text-slate-500">Menampilkan {{ gamesStore.filteredGames.length }} produk</span>
+        <span class="text-xs font-semibold text-slate-400">
+          Menampilkan <strong class="text-sky-400">{{ gamesStore.filteredGames.length }}</strong> dari {{ gamesStore.games.length }} produk
+        </span>
+      </div>
+
+      <!-- Quick Search & Category Filter Toolbar -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl space-y-3.5">
+        <div class="flex flex-col lg:flex-row items-center gap-3.5">
+          <!-- Live Search Bar -->
+          <div class="relative flex-1 w-full">
+            <i class="fas fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm pointer-events-none"></i>
+            <input 
+              type="search" 
+              v-model="gamesStore.searchQuery" 
+              placeholder="Cari game favoritmu (Mobile Legends, Valorant, Free Fire, Genshin...)"
+              class="w-full h-11 sm:h-12 pl-11 pr-10 rounded-2xl bg-slate-800 border border-slate-700 text-white placeholder-slate-400 text-xs sm:text-sm focus:ring-2 focus:ring-sky-500 transition-all"
+            />
+            <button 
+              v-if="gamesStore.searchQuery" 
+              type="button" 
+              @click="gamesStore.searchQuery = ''"
+              class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs p-1"
+              title="Hapus pencarian"
+            >
+              <i class="fas fa-times-circle"></i>
+            </button>
+          </div>
+
+          <!-- Category Pills Filter -->
+          <div class="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0 scrollbar-none">
+            <button 
+              type="button" 
+              v-for="cat in categoryList"
+              :key="cat.id"
+              @click="selectCategory(cat.id)"
+              :class="[
+                gamesStore.selectedCategory === cat.id 
+                  ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/30 border-sky-500 ring-2 ring-sky-400/50' 
+                  : 'bg-slate-800 hover:bg-slate-700 text-slate-300 border-slate-700/80',
+                'px-4 py-2.5 sm:py-3 rounded-2xl text-xs font-bold whitespace-nowrap border transition-all flex items-center gap-2 btn-press'
+              ]"
+            >
+              <i :class="cat.icon" class="text-xs"></i>
+              <span>{{ cat.label }}</span>
+              <span 
+                :class="[
+                  gamesStore.selectedCategory === cat.id ? 'bg-sky-950/80 text-sky-200' : 'bg-slate-950/60 text-slate-400',
+                  'px-2 py-0.5 rounded-full text-[10px] font-mono font-black'
+                ]"
+              >
+                {{ gamesStore.categoryCounts[cat.key] || 0 }}
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Game Cards Grid -->
@@ -260,6 +253,9 @@
               <span v-if="game.isPopular" class="absolute top-2.5 left-2.5 bg-amber-500 text-slate-950 font-black text-[9px] sm:text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow">
                 Populer
               </span>
+              <span class="absolute bottom-2 right-2 bg-slate-950/80 backdrop-blur-sm text-sky-400 text-[10px] font-bold px-2 py-0.5 rounded-lg border border-slate-800">
+                {{ game.category }}
+              </span>
             </div>
             <h3 class="font-bold text-white text-xs sm:text-sm group-hover:text-sky-400 transition-colors line-clamp-1">
               {{ game.title }}
@@ -268,7 +264,10 @@
           </div>
 
           <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-[11px]">
-            <span class="text-slate-400 font-semibold">{{ game.category }}</span>
+            <span class="text-slate-400 font-semibold">
+              <i class="fas fa-gem text-[10px] text-sky-400 mr-1"></i>
+              {{ (game.products || []).length }} Paket
+            </span>
             <span class="text-sky-400 font-bold flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
               <span>Top Up</span> <i class="fas fa-arrow-right text-[10px]"></i>
             </span>
@@ -277,126 +276,130 @@
       </div>
 
       <!-- Empty State -->
-      <div v-if="gamesStore.filteredGames.length === 0" class="py-14 text-center text-slate-400 bg-slate-900 border border-slate-800 rounded-3xl p-8">
-        <div class="w-16 h-16 rounded-3xl bg-slate-800 text-slate-500 flex items-center justify-center mx-auto text-2xl mb-3">
+      <div v-if="gamesStore.filteredGames.length === 0" class="py-14 text-center text-slate-400 bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-3">
+        <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center mx-auto text-xl">
           <i class="fas fa-inbox"></i>
         </div>
-        <p class="font-bold text-base text-white">Game tidak ditemukan</p>
-        <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto">Tidak ada game yang sesuai dengan kata kunci "{{ gamesStore.searchQuery }}". Coba cari judul lainnya.</p>
+        <p class="font-bold text-sm text-white">Tidak ada game yang sesuai kriteria filter</p>
+        <p class="text-xs text-slate-400 max-w-sm mx-auto">
+          Coba kata kunci lain atau klik tombol di bawah untuk mereset seluruh filter pencarian.
+        </p>
+        <button 
+          type="button" 
+          @click="gamesStore.resetFilters()" 
+          class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs inline-flex items-center gap-1.5 transition-colors btn-press shadow-md"
+        >
+          <i class="fas fa-rotate-left text-xs"></i> <span>Reset Filter</span>
+        </button>
       </div>
     </section>
 
-    <!-- Interactive Voucher Promo Program Showcase -->
+    <!-- Voucher / Promo Coupon Showcase Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+      <div class="bg-gradient-to-r from-slate-900 via-sky-950/20 to-slate-900 border border-sky-900/40 rounded-3xl p-5 sm:p-8 shadow-2xl space-y-6">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <div>
             <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
-              <i class="fas fa-tags text-sky-400"></i> Kupon &amp; Promo Pengguna
+              <i class="fas fa-tags text-sky-400"></i> Kupon Diskon Aktif
             </h2>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">Salin kode voucher di bawah dan gunakan langsung saat checkout pesanan.</p>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1">Salin dan gunakan kode kupon untuk potongan harga ekstra saat checkout.</p>
           </div>
+          <span class="text-xs font-bold text-sky-400 bg-sky-950/80 border border-sky-800/80 px-3 py-1.5 rounded-full">
+            {{ promoStore.coupons.length }} Promo Tersedia
+          </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <!-- Coupon Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div 
-            v-for="p in promoStore.promos.filter(p => p.status === 'Aktif')" 
-            :key="p.code"
-            class="p-5 rounded-3xl bg-slate-800/60 border border-slate-700/80 flex flex-col justify-between space-y-4 hover:border-sky-500/60 interactive-card group"
+            v-for="coupon in promoStore.coupons" 
+            :key="coupon.id"
+            class="bg-slate-800/60 border border-dashed border-sky-500/40 rounded-2xl p-4 flex items-center justify-between gap-4 interactive-card relative overflow-hidden"
           >
-            <div class="space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="px-2.5 py-0.5 rounded-full bg-sky-950 text-sky-400 border border-sky-800 text-[10px] font-bold">
-                  {{ p.type }}
-                </span>
-                <span class="text-[10px] text-slate-400 font-semibold">{{ p.period }}</span>
+            <div class="space-y-1">
+              <div class="inline-block font-mono font-black text-sm text-sky-400 bg-sky-950/90 px-2.5 py-0.5 rounded-lg border border-sky-800">
+                {{ coupon.code }}
               </div>
-              <h3 class="text-sm font-bold text-white">{{ p.name }}</h3>
-              <p class="text-xs text-slate-400">Potongan diskon senilai <strong class="text-emerald-400">{{ p.value }}</strong> untuk semua game.</p>
+              <p class="text-xs font-bold text-white">{{ coupon.title }}</p>
+              <p class="text-[10px] text-slate-400">Diskon {{ coupon.discountText }} &bull; Min. Rp {{ coupon.minSpend.toLocaleString('id-ID') }}</p>
             </div>
-
-            <div class="pt-3 border-t border-slate-700/60 flex items-center justify-between gap-3">
-              <span class="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-400 font-mono font-bold text-xs tracking-wider">
-                {{ p.code }}
-              </span>
-              <button 
-                type="button" 
-                @click="copyCode(p.code)"
-                class="px-3 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow btn-press"
-              >
-                <i class="fas fa-copy text-xs"></i> <span>Salin Kode</span>
-              </button>
-            </div>
+            <button 
+              type="button" 
+              @click="copyCode(coupon.code)" 
+              class="px-3 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shrink-0 transition-colors shadow-md btn-press"
+              title="Salin Kode Kupon"
+            >
+              <i class="fas fa-copy"></i>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3-Step Easy Order Flow Infographic -->
+    <!-- 3-Step Easy Order Infographic Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-xl mx-auto mb-8">
-        <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">Panduan Pemesanan</span>
-        <h2 class="text-2xl sm:text-3xl font-black text-white mt-1">Cara Mudah Top Up di MPTopUp</h2>
-        <p class="text-xs sm:text-sm text-slate-400 mt-1">Hanya butuh 3 langkah singkat tanpa perlu registrasi akun yang rumit.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 interactive-card">
-          <div class="w-12 h-12 rounded-2xl bg-sky-950 border border-sky-800 text-sky-400 flex items-center justify-center text-lg font-black shadow-lg">
-            1
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-white mb-1.5">Pilih Game &amp; Masukkan ID</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">Pilih game favoritmu dari katalog dan masukkan User ID serta Zone ID akun game kamu secara tepat.</p>
-          </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
+        <div class="text-center max-w-xl mx-auto space-y-1">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-400">Mudah &bull; Cepat &bull; Aman</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">Cara Top Up dalam 3 Langkah</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Cukup selesaikan pesanan Anda dalam hitungan detik tanpa registrasi rumit.</p>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 interactive-card">
-          <div class="w-12 h-12 rounded-2xl bg-amber-950 border border-amber-800 text-amber-400 flex items-center justify-center text-lg font-black shadow-lg">
-            2
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 relative interactive-card space-y-3">
+            <span class="absolute top-4 right-4 text-3xl font-black text-slate-800 font-mono">01</span>
+            <div class="w-12 h-12 rounded-2xl bg-sky-600/20 border border-sky-500/40 text-sky-400 flex items-center justify-center text-lg">
+              <i class="fas fa-user-tag"></i>
+            </div>
+            <h3 class="text-sm font-bold text-white">1. Masukkan ID Akun Game</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Pilih game favorit Anda dan masukkan User ID serta Zone ID akun target dengan tepat.</p>
           </div>
-          <div>
-            <h3 class="text-base font-bold text-white mb-1.5">Pilih Nominal &amp; Bayar</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">Pilih paket diamond/voucher yang kamu inginkan dan pilih metode pembayaran favoritmu (QRIS, E-Wallet, VA Bank).</p>
-          </div>
-        </div>
 
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl space-y-4 shadow-xl relative group hover:border-sky-500/50 interactive-card">
-          <div class="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-800 text-emerald-400 flex items-center justify-center text-lg font-black shadow-lg">
-            3
+          <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 relative interactive-card space-y-3">
+            <span class="absolute top-4 right-4 text-3xl font-black text-slate-800 font-mono">02</span>
+            <div class="w-12 h-12 rounded-2xl bg-cyan-600/20 border border-cyan-500/40 text-cyan-400 flex items-center justify-center text-lg">
+              <i class="fas fa-cubes"></i>
+            </div>
+            <h3 class="text-sm font-bold text-white">2. Pilih Nominal &amp; Pembayaran</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Tentukan jumlah diamond yang diinginkan dan pilih saluran pembayaran instan (QRIS, E-Wallet, VA Bank).</p>
           </div>
-          <div>
-            <h3 class="text-base font-bold text-white mb-1.5">Item Masuk Otomatis</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">Setelah pembayaran terverifikasi, sistem otomatis langsung mengirim diamond ke akunmu dalam 1-3 detik.</p>
+
+          <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 relative interactive-card space-y-3">
+            <span class="absolute top-4 right-4 text-3xl font-black text-slate-800 font-mono">03</span>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-lg">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="text-sm font-bold text-white">3. Item Masuk 1-3 Detik</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Setelah pembayaran terverifikasi otomatis, item game akan langsung terkirim ke inbox akun Anda.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us Features -->
+    <!-- Trust & Platform Guarantees Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl flex items-start gap-4 shadow-xl">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl flex items-start gap-4 shadow-xl interactive-card">
           <div class="w-12 h-12 rounded-2xl bg-sky-950 border border-sky-800/60 flex items-center justify-center text-sky-400 text-xl shrink-0">
             <i class="fas fa-bolt"></i>
           </div>
           <div class="space-y-1">
-            <h3 class="text-sm font-bold text-white">Pengiriman Instan 1-3 Detik</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">Didukung sistem API terotomatisasi yang memproses pesanan 24 jam nonstop tanpa jeda.</p>
+            <h3 class="text-sm font-bold text-white">Proses Kilat 1-3 Detik</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Sistem gateway otomatis terhubung langsung ke publisher resmi untuk kecepatan top up terbaik.</p>
           </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl flex items-start gap-4 shadow-xl">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl flex items-start gap-4 shadow-xl interactive-card">
           <div class="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-800/60 flex items-center justify-center text-emerald-400 text-xl shrink-0">
             <i class="fas fa-headset"></i>
           </div>
           <div class="space-y-1">
             <h3 class="text-sm font-bold text-white">Customer Support 24/7</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">Tim dukungan kami siap membantu Anda kapan saja melalui live WhatsApp Customer Service.</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Tim bantuan siap merespons pertanyaan dan kendala transaksi Anda via WhatsApp setiap saat.</p>
           </div>
         </div>
 
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl flex items-start gap-4 shadow-xl">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl flex items-start gap-4 shadow-xl interactive-card">
           <div class="w-12 h-12 rounded-2xl bg-purple-950 border border-purple-800/60 flex items-center justify-center text-purple-400 text-xl shrink-0">
             <i class="fas fa-shield-check"></i>
           </div>
@@ -449,6 +452,18 @@ const promoStore = usePromoStore();
 
 const currentSlide = ref(0);
 let slideTimer = null;
+
+const categoryList = [
+  { id: 'ALL', label: 'Semua Game', icon: 'fas fa-grip', key: 'ALL' },
+  { id: 'POPULAR', label: 'Populer', icon: 'fas fa-fire text-amber-400', key: 'POPULAR' },
+  { id: 'Mobile', label: 'Mobile', icon: 'fas fa-mobile-screen text-sky-400', key: 'Mobile' },
+  { id: 'PC', label: 'PC Game', icon: 'fas fa-desktop text-emerald-400', key: 'PC' },
+  { id: 'Voucher', label: 'Voucher', icon: 'fas fa-ticket text-purple-400', key: 'Voucher' }
+];
+
+function selectCategory(catId) {
+  gamesStore.setCategory(catId);
+}
 
 // Countdown Timer State
 const hours = ref('05');

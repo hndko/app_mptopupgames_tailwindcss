@@ -345,24 +345,63 @@ export const useGamesStore = defineStore('games', {
 
   getters: {
     filteredGames: (state) => {
+      const q = (state.searchQuery || '').trim().toLowerCase();
+      const cat = (state.selectedCategory || 'ALL').toUpperCase();
+
       return state.games.filter(g => {
-        const matchesCategory = state.selectedCategory === 'ALL' 
-          ? true 
-          : (state.selectedCategory === 'POPULAR' ? g.isPopular : g.category === state.selectedCategory);
-        const matchesQuery = !state.searchQuery 
-          ? true 
-          : (g.title.toLowerCase().includes(state.searchQuery.toLowerCase()) || 
-             g.developer.toLowerCase().includes(state.searchQuery.toLowerCase()));
-        return matchesCategory && matchesQuery && g.status === 'Aktif';
+        // 1. Status Check
+        if (g.status && g.status !== 'Aktif') return false;
+
+        // 2. Category Check
+        let matchesCategory = true;
+        if (cat === 'POPULAR') {
+          matchesCategory = !!g.isPopular;
+        } else if (cat !== 'ALL') {
+          matchesCategory = (g.category || '').toUpperCase() === cat;
+        }
+
+        // 3. Search Query Check
+        let matchesQuery = true;
+        if (q) {
+          matchesQuery = (g.title || '').toLowerCase().includes(q) || 
+                         (g.developer || '').toLowerCase().includes(q) ||
+                         (g.category || '').toLowerCase().includes(q);
+        }
+
+        return matchesCategory && matchesQuery;
       });
     },
 
     popularGames: (state) => {
-      return state.games.filter(g => g.isPopular && g.status === 'Aktif');
+      return state.games.filter(g => g.isPopular && (!g.status || g.status === 'Aktif'));
+    },
+
+    categoryCounts: (state) => {
+      const active = state.games.filter(g => !g.status || g.status === 'Aktif');
+      return {
+        ALL: active.length,
+        POPULAR: active.filter(g => g.isPopular).length,
+        Mobile: active.filter(g => (g.category || '').toUpperCase() === 'MOBILE').length,
+        PC: active.filter(g => (g.category || '').toUpperCase() === 'PC').length,
+        Voucher: active.filter(g => (g.category || '').toUpperCase() === 'VOUCHER').length,
+      };
     }
   },
 
   actions: {
+    setCategory(category) {
+      this.selectedCategory = category;
+    },
+
+    setSearchQuery(query) {
+      this.searchQuery = query;
+    },
+
+    resetFilters() {
+      this.selectedCategory = 'ALL';
+      this.searchQuery = '';
+    },
+
     saveToStorage() {
       localStorage.setItem('mptopup_games_catalog_v3', JSON.stringify(this.games));
     },
