@@ -202,10 +202,10 @@
     <script src="../assets/js/main.js"></script>
     <script>
         let adminPromos = [
-            { name: "Diskon Pengguna Baru", code: "NEWUSER20", type: "Persentase", value: "20% (Max 10K)", period: "01 Agu - 31 Agu 2026", status: "Aktif" },
-            { name: "Flash Promo Top Up", code: "BONUS10", type: "Persentase", value: "10%", period: "15 Agu - 30 Agu 2026", status: "Aktif" },
-            { name: "Cashback MLBB Weekend", code: "MLBB5K", type: "Nominal", value: "Rp 5.000", period: "01 Sep - 05 Sep 2026", status: "Dijadwalkan" },
-            { name: "Diskon Merdeka 17", code: "MERDEKA", type: "Persentase", value: "17%", period: "17 Agu - 18 Agu 2026", status: "Nonaktif" }
+            { name: "Diskon Pengguna Baru", code: "NEWUSER20", type: "Persentase", value: "20% (Max 10K)", period: "01 Agu - 31 Agu 2026", status: "Aktif", banner: "../assets/images/promo/promo-mlbb.svg" },
+            { name: "Flash Promo Top Up", code: "BONUS10", type: "Persentase", value: "10%", period: "15 Agu - 30 Agu 2026", status: "Aktif", banner: "../assets/images/promo/promo-valorant.svg" },
+            { name: "Cashback MLBB Weekend", code: "MLBB5K", type: "Nominal", value: "Rp 5.000", period: "01 Sep - 05 Sep 2026", status: "Dijadwalkan", banner: "../assets/images/promo/promo-cashback.svg" },
+            { name: "Diskon Merdeka 17", code: "MERDEKA", type: "Persentase", value: "17%", period: "17 Agu - 18 Agu 2026", status: "Nonaktif", banner: "../assets/images/promo/promo-valorant.svg" }
         ];
 
         const promoTable = document.getElementById('promoTableBody');
@@ -223,7 +223,12 @@
 
                 return `
                     <tr class="hover:bg-slate-800/40 transition-colors">
-                        <td class="py-3.5 px-4 sm:px-6 font-bold text-white">${p.name}</td>
+                        <td class="py-3.5 px-4 sm:px-6">
+                            <div class="flex items-center gap-3">
+                                <img src="${p.banner || '../assets/images/promo/promo-mlbb.svg'}" class="w-10 h-10 rounded-xl object-contain bg-slate-950 border border-slate-700" alt="Promo">
+                                <span class="font-bold text-white">${p.name}</span>
+                            </div>
+                        </td>
                         <td class="py-3.5 px-4 font-mono font-bold text-sky-400">${p.code || '-'}</td>
                         <td class="py-3.5 px-4 text-slate-300">${p.type}</td>
                         <td class="py-3.5 px-4 font-semibold text-emerald-400">${p.value}</td>

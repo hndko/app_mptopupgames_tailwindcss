@@ -221,13 +221,18 @@
                 return `
                     <tr class="hover:bg-slate-800/40 transition-colors">
                         <td class="py-3.5 px-4 sm:px-6 font-mono font-bold text-sky-400">${item.id}</td>
-                        <td class="py-3.5 px-4 text-slate-300 whitespace-nowrap">${item.date}</td>
+                        <td class="py-3.5 px-4 text-slate-300 whitespace-nowrap text-xs">${item.date}</td>
                         <td class="py-3.5 px-4">
-                            <p class="font-bold text-white">${item.game ? item.game.title : 'Game'}</p>
-                            <p class="text-xs text-slate-400">${item.product ? item.product.name : '-'}</p>
+                            <div class="flex items-center gap-2.5">
+                                <img src="../assets/images/games/${item.game && item.game.title && item.game.title.includes('Valorant') ? 'valorant.svg' : (item.game && item.game.title && item.game.title.includes('Free Fire') ? 'freefire.svg' : (item.game && item.game.title && item.game.title.includes('PUBG') ? 'pubg.svg' : (item.game && item.game.title && item.game.title.includes('Genshin') ? 'genshin.svg' : 'mlbb.svg')))}" class="w-8 h-8 rounded-lg object-cover bg-slate-950 border border-slate-700" alt="Game">
+                                <div>
+                                    <p class="font-bold text-white">${item.game ? item.game.title : 'Game'}</p>
+                                    <p class="text-[11px] text-slate-400">${item.product ? item.product.name : '-'}</p>
+                                </div>
+                            </div>
                         </td>
                         <td class="py-3.5 px-4 font-mono text-slate-300 text-xs">${item.userId}${item.zoneId ? ` (${item.zoneId})` : ''}</td>
-                        <td class="py-3.5 px-4 text-slate-300">${item.payment ? item.payment.name : 'QRIS'}</td>
+                        <td class="py-3.5 px-4 text-slate-300 text-xs">${item.payment ? item.payment.name : 'QRIS'}</td>
                         <td class="py-3.5 px-4 text-right font-extrabold text-white">Rp ${(item.total || 0).toLocaleString('id-ID')}</td>
                         <td class="py-3.5 px-4 text-center">${badge}</td>
                         <td class="py-3.5 px-4 sm:px-6 text-center">

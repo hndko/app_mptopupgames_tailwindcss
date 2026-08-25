@@ -179,28 +179,32 @@
     <script src="../assets/js/main.js"></script>
     <script>
         const reportData = [
-            { date: "25 Agu 2026", id: "#MP884912", gameSku: "Mobile Legends - 250 Diamonds", payment: "QRIS", amount: 69000, status: "Sukses" },
-            { date: "25 Agu 2026", id: "#MP723149", gameSku: "Valorant - 1000 VP", payment: "GoPay", amount: 100000, status: "Pending" },
-            { date: "24 Agu 2026", id: "#MP512903", gameSku: "Free Fire - Weekly Pass", payment: "DANA", amount: 28000, status: "Gagal" },
-            { date: "24 Agu 2026", id: "#MP419821", gameSku: "PUBG Mobile - 660 UC", payment: "BCA VA", amount: 135000, status: "Sukses" },
-            { date: "23 Agu 2026", id: "#MP310948", gameSku: "Genshin Impact - Blessing Welkin", payment: "QRIS", amount: 78000, status: "Sukses" }
+            { date: "25 Agu 2026", id: "#MP884912", gameSku: "Mobile Legends - 250 Diamonds", icon: "mlbb.svg", payment: "QRIS", amount: 69000, status: "Sukses" },
+            { date: "25 Agu 2026", id: "#MP723149", gameSku: "Valorant - 1000 VP", icon: "valorant.svg", payment: "GoPay", amount: 100000, status: "Pending" },
+            { date: "24 Agu 2026", id: "#MP512903", gameSku: "Free Fire - Weekly Pass", icon: "freefire.svg", payment: "DANA", amount: 28000, status: "Gagal" },
+            { date: "24 Agu 2026", id: "#MP419821", gameSku: "PUBG Mobile - 660 UC", icon: "pubg.svg", payment: "BCA VA", amount: 135000, status: "Sukses" },
+            { date: "23 Agu 2026", id: "#MP310948", gameSku: "Genshin Impact - Blessing Welkin", icon: "genshin.svg", payment: "QRIS", amount: 78000, status: "Sukses" }
         ];
 
         const reportTable = document.getElementById('reportTableBody');
         function renderReport() {
             reportTable.innerHTML = reportData.map(r => `
                 <tr class="hover:bg-slate-800/40 transition-colors">
-                    <td class="py-3 px-4 sm:px-6 text-slate-300">${r.date}</td>
+                    <td class="py-3 px-4 sm:px-6 text-slate-300 text-xs">${r.date}</td>
                     <td class="py-3 px-4 font-mono font-bold text-sky-400">${r.id}</td>
-                    <td class="py-3 px-4 font-semibold text-white">${r.gameSku}</td>
-                    <td class="py-3 px-4 text-slate-300">${r.payment}</td>
+                    <td class="py-3 px-4">
+                        <div class="flex items-center gap-2">
+                            <img src="../assets/images/games/${r.icon}" class="w-7 h-7 rounded-lg object-cover bg-slate-950 border border-slate-700" alt="Game">
+                            <span class="font-semibold text-white">${r.gameSku}</span>
+                        </div>
+                    </td>
+                    <td class="py-3 px-4 text-slate-300 text-xs">${r.payment}</td>
                     <td class="py-3 px-4 text-right font-extrabold text-white">Rp ${r.amount.toLocaleString('id-ID')}</td>
                     <td class="py-3 px-4 text-center">
                         <span class="px-2.5 py-0.5 rounded-full ${r.status === 'Sukses' ? 'bg-emerald-950 text-emerald-300' : (r.status === 'Pending' ? 'bg-amber-950 text-amber-300' : 'bg-rose-950 text-rose-300')} text-xs font-semibold">
                             ${r.status}
                         </span>
                     </td>
-                </tr>
             `).join('');
         }
 
