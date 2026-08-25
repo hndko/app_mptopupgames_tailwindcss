@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Pengguna - MPAdmin</title>
     <meta name="description" content="Kelola data akun pengguna, hak akses, dan status verifikasi.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
     <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -18,10 +20,8 @@
         class="w-64 bg-slate-900 border-r border-slate-800 p-5 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
         <div class="space-y-6">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
-                        <span class="font-black text-sm tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
-                    </div>
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="../assets/images/logo-icon.svg" alt="MPAdmin Logo" class="w-9 h-9 rounded-xl shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
                     <span class="text-lg font-extrabold tracking-tight text-white">MP<span class="text-sky-400">Admin</span></span>
                 </a>
                 <button id="closeSidebarBtn" class="md:hidden text-slate-400 hover:text-white" aria-label="Tutup Menu">
