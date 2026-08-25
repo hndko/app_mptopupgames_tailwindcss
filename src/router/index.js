@@ -21,6 +21,7 @@ import ReportsView from '@/views/modules/ReportsView.vue';
 import SettingsView from '@/views/modules/SettingsView.vue';
 
 import { useAuthStore } from '@/stores/authStore';
+import { auth, guest, admin, runMiddlewarePipeline } from '@/middleware';
 
 const routes = [
   // 1. Public / Customer Facing Pages (app-public layout)
@@ -41,9 +42,23 @@ const routes = [
     path: '/',
     component: AppAuth,
     children: [
-      { path: 'login', name: 'Login', component: LoginView },
-      { path: 'register', name: 'Register', component: RegisterView },
-      { path: 'auth/callback', name: 'AuthCallback', component: AuthCallbackView }
+      { 
+        path: 'login', 
+        name: 'Login', 
+        component: LoginView,
+        meta: { middleware: [guest] }
+      },
+      { 
+        path: 'register', 
+        name: 'Register', 
+        component: RegisterView,
+        meta: { middleware: [guest] }
+      },
+      { 
+        path: 'auth/callback', 
+        name: 'AuthCallback', 
+        component: AuthCallbackView 
+      }
     ]
   },
 
@@ -51,7 +66,7 @@ const routes = [
   {
     path: '/modules',
     component: AppModules,
-    meta: { requiresAdmin: true },
+    meta: { middleware: [auth, admin] },
     children: [
       { path: '', name: 'AdminRoot', component: DashboardView },
       { path: 'dashboard', name: 'AdminDashboard', component: DashboardView },
@@ -79,19 +94,25 @@ const router = createRouter({
   }
 });
 
-// Navigation Guard RBAC
+// Navigation Guard dengan Modular Middleware Pipeline
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  if (to.matched.some(record => record.meta.requiresAdmin)) {
-    if (!authStore.isAuthenticated || !authStore.isAdmin) {
-      // In development fallback, allow admin if logged in or default
-      if (authStore.user?.email && !authStore.isAdmin) {
-        alert('Akses Ditolak: Halaman ini khusus administrator.');
-        return next('/');
-      }
-    }
+
+  // Kumpulkan middleware dari seluruh route hierarchy (parent & child)
+  const middlewareList = to.matched.flatMap(record => record.meta.middleware || []);
+
+  if (middlewareList.length === 0) {
+    return next();
   }
-  next();
+
+  const context = {
+    to,
+    from,
+    next,
+    authStore
+  };
+
+  return runMiddlewarePipeline(context, middlewareList);
 });
 
 export default router;

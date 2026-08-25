@@ -139,12 +139,18 @@ tailwind-web-topup-games/
 │   │   │   ├── Footer.vue       # Footer resmi beranda & customer support
 │   │   │   ├── Modal.vue        # Universal full-screen viewport modal dialog
 │   │   │   └── DragDropUpload.vue # Drag & Drop file uploader dengan live file card preview
+│   ├── middleware/              # Route Middleware Pipeline
+│   │   ├── index.js             # Middleware barrel export
+│   │   ├── pipeline.js          # Sequential pipeline runner
+│   │   ├── auth.js              # Auth middleware (proteksi rute privat)
+│   │   ├── guest.js             # Guest middleware (khusus pengguna belum login)
+│   │   └── admin.js             # Admin RBAC middleware (proteksi rute /modules)
 │   ├── layouts/
 │   │   ├── app-public.vue       # Layout utama halaman publik (Navbar + Content + Footer)
 │   │   ├── app-auth.vue         # Layout modul autentikasi (Header + Centered Card + Footer)
 │   │   └── app-modules.vue      # Layout portal administrator (Sidebar + Topbar + Content)
 │   ├── router/
-│   │   └── index.js             # Definisi rute SPA, callback & RBAC guards
+│   │   └── index.js             # Definisi rute SPA, callback, & middleware pipeline
 │   ├── stores/
 │   │   ├── authStore.js         # Store Pinia: Autentikasi Google OAuth & Email
 │   │   ├── gamesStore.js        # Store Pinia: Katalog game, varian SKU, CRUD Admin
