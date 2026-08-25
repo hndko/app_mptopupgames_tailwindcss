@@ -13,7 +13,7 @@
             <span class="font-extrabold text-white text-base tracking-tight leading-none">
               MP<span class="text-sky-400">TopUp</span>
             </span>
-            <span class="text-[9px] uppercase tracking-wider text-sky-400 font-bold mt-0.5">Admin Portal</span>
+            <span class="text-[9px] uppercase tracking-wider text-sky-400 font-bold mt-0.5">Admin Modules</span>
           </div>
         </router-link>
         <button type="button" @click="sidebarOpen = false" class="lg:hidden text-slate-400 hover:text-white" aria-label="Tutup Sidebar">

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
-import AdminLayout from '@/layouts/AdminLayout.vue';
+import AppPublic from '@/layouts/app-public.vue';
+import AppAuth from '@/layouts/app-auth.vue';
+import AppModules from '@/layouts/app-modules.vue';
 
 import HomeView from '@/views/public/HomeView.vue';
 import CatalogView from '@/views/public/CatalogView.vue';
@@ -19,25 +20,33 @@ import ReportsView from '@/views/modules/ReportsView.vue';
 import SettingsView from '@/views/modules/SettingsView.vue';
 
 const routes = [
-  // Client & Public Pages
+  // 1. Public / Customer Facing Pages (app-public layout)
   {
     path: '/',
-    component: DefaultLayout,
+    component: AppPublic,
     children: [
       { path: '', name: 'Home', component: HomeView },
       { path: 'produk', name: 'ProductCatalog', component: CatalogView },
       { path: 'produk/:id', name: 'ProductDetail', component: ProductDetailView },
       { path: 'riwayat', name: 'OrderHistory', component: OrderHistoryView },
-      { path: 'konfirmasi', name: 'Confirmation', component: ConfirmationView },
+      { path: 'konfirmasi', name: 'Confirmation', component: ConfirmationView }
+    ]
+  },
+
+  // 2. Authentication Pages (app-auth layout)
+  {
+    path: '/',
+    component: AppAuth,
+    children: [
       { path: 'login', name: 'Login', component: LoginView },
       { path: 'register', name: 'Register', component: RegisterView }
     ]
   },
 
-  // Admin Portal (Obfuscated route: /modules)
+  // 3. Admin Modules (app-modules layout, URL: /modules)
   {
     path: '/modules',
-    component: AdminLayout,
+    component: AppModules,
     children: [
       { path: '', name: 'AdminRoot', component: DashboardView },
       { path: 'dashboard', name: 'AdminDashboard', component: DashboardView },

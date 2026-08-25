@@ -137,8 +137,9 @@ tailwind-web-topup-games/
 │   │   │   ├── Modal.vue        # Universal full-screen viewport modal dialog
 │   │   │   └── DragDropUpload.vue # Drag & Drop file uploader dengan live file card preview
 │   ├── layouts/
-│   │   ├── DefaultLayout.vue    # Layout utama pelanggan (Navbar + Content + Footer)
-│   │   └── AdminLayout.vue      # Layout portal administrator (Sidebar + Topbar + Content)
+│   │   ├── app-public.vue       # Layout utama halaman publik (Navbar + Content + Footer)
+│   │   ├── app-auth.vue         # Layout modul autentikasi (Header + Centered Card + Footer)
+│   │   └── app-modules.vue      # Layout portal administrator (Sidebar + Topbar + Content)
 │   ├── router/
 │   │   └── index.js             # Definisi rute SPA (Vue Router 4)
 │   ├── stores/
