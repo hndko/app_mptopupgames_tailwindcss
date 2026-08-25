@@ -13,12 +13,12 @@
 
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
 
-    <!-- Header -->
+    <!-- Header & Navigation -->
     <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 sm:h-20">
-                <a href="../index.html" class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                <a href="../index.html" class="flex items-center gap-3 group focus-visible:rounded-lg">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
                         <span class="font-black text-lg tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
                     </div>
                     <span class="text-xl font-extrabold tracking-tight text-white">MP<span class="text-sky-400">TopUp</span></span>
@@ -27,6 +27,8 @@
                 <nav class="hidden md:flex items-center gap-8" aria-label="Navigasi Utama">
                     <a href="../index.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Beranda</a>
                     <a href="produk.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Katalog Game</a>
+                    <a href="../index.html#promo" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Promo Spesial</a>
+                    <a href="../index.html#cara-topup" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Cara Top Up</a>
                     <a href="riwayat.html" class="text-sm font-semibold text-sky-400">Lacak Pesanan</a>
                 </nav>
 
@@ -34,22 +36,33 @@
                     <a href="../auth/login.html" class="px-4 py-2.5 text-sm font-semibold text-slate-200 hover:text-white transition-colors">
                         Masuk
                     </a>
+                    <a href="../auth/register.html" class="px-5 py-2.5 text-sm font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white shadow-sm shadow-sky-600/20 transition-all focus-visible:ring-2 focus-visible:ring-sky-400">
+                        Daftar Akun
+                    </a>
                 </div>
 
                 <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka Menu Navigasi"
-                    class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:text-white">
+                    class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:text-white focus-visible:ring-2 focus-visible:ring-sky-400">
                     <i class="fas fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
 
+        <!-- Mobile Drawer Menu -->
         <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-slate-900 px-4 py-4 space-y-3">
             <a href="../index.html" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Beranda</a>
             <a href="produk.html" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Katalog Game</a>
+            <a href="../index.html#promo" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Promo Spesial</a>
+            <a href="../index.html#cara-topup" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Cara Top Up</a>
             <a href="riwayat.html" class="block py-2 text-sm font-semibold text-sky-400">Lacak Pesanan</a>
-            <a href="../auth/login.html" class="block text-center py-2.5 text-sm font-semibold rounded-lg bg-sky-600 text-white">
-                Masuk
-            </a>
+            <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+                <a href="../auth/login.html" class="w-full text-center py-2.5 text-sm font-semibold rounded-lg border border-slate-700 bg-slate-800 text-slate-200">
+                    Masuk
+                </a>
+                <a href="../auth/register.html" class="w-full text-center py-2.5 text-sm font-semibold rounded-lg bg-sky-600 text-white">
+                    Daftar Akun
+                </a>
+            </div>
         </div>
     </header>
 
