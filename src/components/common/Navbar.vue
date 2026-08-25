@@ -72,24 +72,6 @@
               </div>
             </div>
           </div>
-
-          <router-link to="/artikel" 
-            :class="[$route.path.startsWith('/artikel') ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'hover:text-white hover:bg-slate-800']"
-            class="px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5">
-            <i class="fas fa-newspaper text-xs"></i> <span>Artikel</span>
-          </router-link>
-
-          <router-link to="/ulasan" 
-            :class="[$route.path === '/ulasan' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'hover:text-white hover:bg-slate-800']"
-            class="px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5">
-            <i class="fas fa-star text-amber-400 text-xs"></i> <span>Ulasan</span>
-          </router-link>
-
-          <router-link to="/hubungi-kami" 
-            :class="[$route.path === '/hubungi-kami' ? 'bg-sky-600 text-white shadow-md shadow-sky-600/20' : 'hover:text-white hover:bg-slate-800']"
-            class="px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5">
-            <i class="fas fa-headset text-emerald-400 text-xs"></i> <span>Bantuan</span>
-          </router-link>
         </nav>
 
         <!-- Desktop Auth Actions / User Profile -->
@@ -167,15 +149,6 @@
         </router-link>
         <router-link to="/kalkulator" @click="mobileMenuOpen = false" class="px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-200 flex items-center gap-2.5">
           <i class="fas fa-calculator text-sky-400 w-5"></i> <span>Kalkulator MLBB</span>
-        </router-link>
-        <router-link to="/artikel" @click="mobileMenuOpen = false" class="px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-200 flex items-center gap-2.5">
-          <i class="fas fa-newspaper text-sky-400 w-5"></i> <span>Artikel &amp; Berita</span>
-        </router-link>
-        <router-link to="/ulasan" @click="mobileMenuOpen = false" class="px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-200 flex items-center gap-2.5">
-          <i class="fas fa-star text-amber-400 w-5"></i> <span>Ulasan Pelanggan</span>
-        </router-link>
-        <router-link to="/hubungi-kami" @click="mobileMenuOpen = false" class="px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-200 flex items-center gap-2.5">
-          <i class="fas fa-headset text-emerald-400 w-5"></i> <span>Hubungi Kami</span>
         </router-link>
       </div>
 

@@ -148,42 +148,12 @@
           </ul>
         </div>
 
-        <!-- Column 3: Bantuan & Navigasi (2 cols on lg) -->
+        <!-- Column 3: Panduan & Komunitas (2.5 cols on lg) -->
         <div class="lg:col-span-2 space-y-3">
           <h4 class="text-white font-bold text-sm flex items-center gap-2">
-            <i class="fas fa-compass text-sky-400 text-xs"></i> <span>Informasi</span>
+            <i class="fas fa-book-open text-sky-400 text-xs"></i> <span>Panduan &amp; Info</span>
           </h4>
           <ul class="space-y-2 text-xs">
-            <li>
-              <router-link to="/" class="hover:text-sky-400 transition-colors flex items-center gap-2">
-                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Beranda Toko</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/produk" class="hover:text-sky-400 transition-colors flex items-center gap-2">
-                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Katalog Produk</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/riwayat" class="hover:text-sky-400 transition-colors flex items-center gap-2">
-                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Lacak Pesanan</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/leaderboard" class="hover:text-sky-400 transition-colors flex items-center gap-2">
-                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Leaderboard Sultan</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/kalkulator" class="hover:text-sky-400 transition-colors flex items-center gap-2">
-                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Kalkulator MLBB</span>
-              </router-link>
-            </li>
             <li>
               <router-link to="/artikel" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
@@ -197,9 +167,42 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/hubungi-kami" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+              <router-link to="/kalkulator" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Hubungi Kami</span>
+                <span>Kalkulator MLBB</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/leaderboard" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Leaderboard Sultan</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/produk" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Semua Katalog Game</span>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Customer Support & Legal (3 cols on lg) -->
+        <div class="lg:col-span-3 space-y-3.5">
+          <h4 class="text-white font-bold text-sm flex items-center gap-2">
+            <i class="fas fa-headset text-emerald-400 text-xs"></i> <span>Pusat Bantuan &amp; Legal</span>
+          </h4>
+          <ul class="space-y-1.5 text-xs pb-1">
+            <li>
+              <router-link to="/hubungi-kami" class="hover:text-emerald-400 transition-colors flex items-center gap-2 font-medium">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Hubungi Kami (Bantuan 24 Jam)</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/riwayat" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Lacak Status Pesanan</span>
               </router-link>
             </li>
             <li>
@@ -211,17 +214,10 @@
             <li>
               <router-link to="/kebijakan-privasi" class="hover:text-sky-400 transition-colors flex items-center gap-2">
                 <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Kebijakan Privasi</span>
+                <span>Kebijakan Privasi Data</span>
               </router-link>
             </li>
           </ul>
-        </div>
-
-        <!-- Column 4: Customer Support & Jam Operasional (3 cols on lg) -->
-        <div class="lg:col-span-3 space-y-3.5">
-          <h4 class="text-white font-bold text-sm flex items-center gap-2">
-            <i class="fas fa-headset text-emerald-400 text-xs"></i> <span>Layanan Bantuan</span>
-          </h4>
 
           <div class="space-y-2.5">
             <!-- WhatsApp CS Card -->
