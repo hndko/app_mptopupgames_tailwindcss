@@ -1,20 +1,48 @@
 <template>
   <div class="space-y-12 sm:space-y-16 pb-16">
     <!-- Live Recent Transaction Activity Ticker Bar -->
-    <div class="bg-slate-900 border-y border-slate-800/80 py-2.5 overflow-hidden">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3">
-        <span class="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 shrink-0 bg-emerald-950/60 border border-emerald-800/60 px-2.5 py-0.5 rounded-full">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Transaksi Live</span>
-        </span>
-        <div class="overflow-hidden whitespace-nowrap flex-1 relative">
-          <div class="inline-flex gap-8 animate-marquee text-xs text-slate-300">
-            <span v-for="(tx, idx) in recentTransactions" :key="idx" class="inline-flex items-center gap-1.5">
-              <i class="fas fa-circle-check text-emerald-400 text-[10px]"></i>
-              <strong class="text-white">{{ tx.user }}</strong> baru saja top up <span class="text-sky-400 font-semibold">{{ tx.item }}</span>
-              <span class="text-[10px] text-slate-500">({{ tx.time }})</span>
-            </span>
+    <div class="bg-slate-900/95 border-y border-slate-800/80 py-2.5 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-4">
+        <!-- Badge Indicator (Strict Centering & High Priority Z-Index) -->
+        <div class="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 shrink-0 bg-emerald-950/80 border border-emerald-700/60 px-3 py-1 rounded-full shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="leading-none">Transaksi Live</span>
+        </div>
+
+        <!-- Ticker Viewport with Left/Right Soft Fade Masks -->
+        <div class="relative flex-1 overflow-hidden flex items-center">
+          <!-- Left Soft Gradient Mask -->
+          <div class="absolute left-0 inset-y-0 w-6 sm:w-10 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
+
+          <!-- Infinite Scrolling Content Track (Double rendered for 100% seamless -50% loop) -->
+          <div class="flex gap-10 animate-marquee whitespace-nowrap text-xs text-slate-300 items-center select-none">
+            <!-- Set 1 -->
+            <div class="flex items-center gap-8 shrink-0">
+              <span v-for="(tx, idx) in recentTransactions" :key="'tx1-' + idx" class="inline-flex items-center gap-2 leading-none">
+                <i class="fas fa-circle-check text-emerald-400 text-[11px]"></i>
+                <strong class="text-white font-medium">{{ tx.user }}</strong>
+                <span class="text-slate-400">top up</span>
+                <span class="text-sky-400 font-bold">{{ tx.item }}</span>
+                <span class="text-[10px] text-slate-500 font-mono">({{ tx.time }})</span>
+              </span>
+            </div>
+            <!-- Set 2 (Duplicate for smooth infinite marquee) -->
+            <div class="flex items-center gap-8 shrink-0">
+              <span v-for="(tx, idx) in recentTransactions" :key="'tx2-' + idx" class="inline-flex items-center gap-2 leading-none">
+                <i class="fas fa-circle-check text-emerald-400 text-[11px]"></i>
+                <strong class="text-white font-medium">{{ tx.user }}</strong>
+                <span class="text-slate-400">top up</span>
+                <span class="text-sky-400 font-bold">{{ tx.item }}</span>
+                <span class="text-[10px] text-slate-500 font-mono">({{ tx.time }})</span>
+              </span>
+            </div>
           </div>
+
+          <!-- Right Soft Gradient Mask -->
+          <div class="absolute right-0 inset-y-0 w-6 sm:w-10 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
         </div>
       </div>
     </div>
