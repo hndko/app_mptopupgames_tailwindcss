@@ -178,12 +178,6 @@
                 <span>Tanya Jawab (FAQ)</span>
               </a>
             </li>
-            <li>
-              <router-link to="/modules" class="hover:text-sky-400 transition-colors flex items-center gap-2 text-slate-500">
-                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
-                <span>Portal Manajemen</span>
-              </router-link>
-            </li>
           </ul>
         </div>
 
