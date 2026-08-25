@@ -1,0 +1,64 @@
+# ==============================================================================
+# CONTOH KONFIGURASI NGINX UNTUK VUE 3 SPA (MPTOPUP)
+# File: /etc/nginx/sites-available/mptopup.conf
+# ==============================================================================
+
+server {
+    listen 80;
+    server_name mptopup.com www.mptopup.com;
+    
+    # Redirect HTTP ke HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name mptopup.com www.mptopup.com;
+
+    # SSL Certificate (Let's Encrypt / Certbot)
+    ssl_certificate /etc/letsencrypt/live/mptopup.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mptopup.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+    # Direktori root hasil build (dist)
+    root /var/www/mptopup/dist;
+    index index.html;
+
+    # Gzip Compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_proxied any;
+    gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;
+
+    # Security Headers
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # SPA Fallback Routing (Mengarahkan seluruh URL Vue ke index.html)
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Static Assets Caching (1 Tahun)
+    location ~* \.(?:ico|css|js|gif|jpe?g|png|svg|woff2?|ttf|eot)$ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cegah akses ke file tersembunyi (.env, .git, dsb)
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    # Error logging
+    error_log /var/log/nginx/mptopup_error.log;
+    access_log /var/log/nginx/mptopup_access.log;
+}

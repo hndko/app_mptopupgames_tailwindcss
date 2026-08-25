@@ -118,13 +118,22 @@ tailwind-web-topup-games/
 ├── postcss.config.js            # Plugin PostCSS (Tailwind & Autoprefixer)
 ├── .env.example                 # Template environment variables Supabase
 ├── docs/                        # Dokumentasi Proyek
-│   └── SUPABASE_SETUP.md        # Panduan Setup Supabase & Google OAuth Lengkap
+│   ├── SUPABASE_SETUP.md        # Panduan Setup Supabase & Google OAuth Lengkap
+│   ├── DEPLOYMENT_GUIDE.md      # Panduan Deploy Server (Vercel, Cloudflare, Nginx, cPanel)
+│   └── LOCAL_DEVELOPMENT_GUIDE.md # Panduan Deploy & Development Lokal (Laragon, Docker)
 ├── supabase/                    # Skema Database & Migrasi
 │   └── migrations/
 │       └── 20260825_initial_schema.sql # Skema PostgreSQL, RLS & Trigger
 ├── public/                      # Asset statis lokal (Zero-CDN)
+│   ├── .htaccess                # Konfigurasi Apache / cPanel / LiteSpeed
+│   ├── _redirects               # Konfigurasi SPA Cloudflare Pages / Netlify
+│   ├── _headers                 # Konfigurasi Security Headers Cloudflare
 │   ├── favicon.ico              # Favicon resmi
 │   └── images/                  # Aset gambar & ilustrasi
+├── vercel.json                  # Konfigurasi Deployment Vercel
+├── nginx.conf.example           # Contoh Konfigurasi Web Server Nginx Production
+├── Dockerfile                   # Multi-stage Docker Container
+├── docker-compose.yml           # Docker Compose Production/Local Orchestration
 ├── src/                         # Sumber Kode Aplikasi Vue 3
 │   ├── main.js                  # Inisialisasi Vue, Pinia & Router
 │   ├── App.vue                  # Root component dengan transition

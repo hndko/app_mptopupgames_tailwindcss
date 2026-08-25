@@ -1,5 +1,5 @@
 -- ==============================================================================
--- SKEMA DATABASE LENGKAP MPTOPUP (SUPABASE POSTGRESQL + RLS + GOOGLE OAUTH TRIGGER)
+-- SKEMA DATABASE LENGKAP MPTOPUP (SUPABASE POSTGRESQL + RLS + HARDENING KEAMANAN)
 -- File: supabase/migrations/20260825_initial_schema.sql
 -- ==============================================================================
 
@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS public.profiles (
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
--- Indexing profiles
 CREATE INDEX IF NOT EXISTS idx_profiles_email ON public.profiles(email);
 CREATE INDEX IF NOT EXISTS idx_profiles_role ON public.profiles(role);
 
@@ -77,6 +76,7 @@ CREATE INDEX IF NOT EXISTS idx_orders_user_id ON public.orders(user_id);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON public.orders(status);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at ON public.orders(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_orders_target_user ON public.orders(target_user_id);
+CREATE INDEX IF NOT EXISTS idx_orders_whatsapp ON public.orders(whatsapp);
 
 -- 5. TABEL PROMO & KUPON DISKON
 CREATE TABLE IF NOT EXISTS public.promos (
@@ -106,8 +106,21 @@ CREATE TABLE IF NOT EXISTS public.system_settings (
 );
 
 -- ==============================================================================
--- TRIGGER OTOMATIS SINKRONISASI PROFIL USER (GOOGLE OAUTH & MANUAL SIGNUP)
+-- HELPER FUNCTIONS & TRIGGERS OTOMATIS
 -- ==============================================================================
+
+-- Helper: Memeriksa apakah user saat ini adalah admin
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS BOOLEAN AS $$
+BEGIN
+    RETURN EXISTS (
+        SELECT 1 FROM public.profiles 
+        WHERE id = auth.uid() AND role = 'admin'
+    );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Trigger 1: Auto-sinkronisasi profil saat user baru mendaftar / Login Google OAuth
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -129,14 +142,31 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- Pasang trigger pada tabel auth.users
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
     AFTER INSERT OR UPDATE ON auth.users
     FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
+-- Trigger 2: Hardening Keamanan - Cegah user mengubah role dan saldo sendiri
+CREATE OR REPLACE FUNCTION public.protect_profile_fields()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT public.is_admin() THEN
+        NEW.role := OLD.role;
+        NEW.balance := OLD.balance;
+    END IF;
+    NEW.updated_at := NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+DROP TRIGGER IF EXISTS trg_protect_profile_fields ON public.profiles;
+CREATE TRIGGER trg_protect_profile_fields
+    BEFORE UPDATE ON public.profiles
+    FOR EACH ROW EXECUTE FUNCTION public.protect_profile_fields();
+
 -- ==============================================================================
--- KEBIJAKAN KEAMANAN ROW LEVEL SECURITY (RLS)
+-- KEBIJAKAN KEAMANAN ROW LEVEL SECURITY (RLS) TINGKAT TINGGI
 -- ==============================================================================
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.games ENABLE ROW LEVEL SECURITY;
@@ -145,42 +175,66 @@ ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.promos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.system_settings ENABLE ROW LEVEL SECURITY;
 
--- Helper function: Memeriksa apakah user saat ini adalah admin
-CREATE OR REPLACE FUNCTION public.is_admin()
-RETURNS BOOLEAN AS $$
+-- 1. Policies for profiles (Hanya pemilik akun dan admin yang bisa melihat data sensitif)
+CREATE POLICY "Profiles are viewable by owner and admin" ON public.profiles 
+FOR SELECT USING (auth.uid() = id OR public.is_admin());
+
+CREATE POLICY "Users can update their own profile" ON public.profiles 
+FOR UPDATE USING (auth.uid() = id);
+
+CREATE POLICY "Admins can manage all profiles" ON public.profiles 
+FOR ALL USING (public.is_admin());
+
+-- 2. Policies for games (Public read, Admin manage)
+CREATE POLICY "Games are viewable by everyone" ON public.games 
+FOR SELECT USING (true);
+
+CREATE POLICY "Admins can manage games" ON public.games 
+FOR ALL USING (public.is_admin());
+
+-- 3. Policies for products_sku (Public read, Admin manage)
+CREATE POLICY "SKUs are viewable by everyone" ON public.products_sku 
+FOR SELECT USING (true);
+
+CREATE POLICY "Admins can manage SKUs" ON public.products_sku 
+FOR ALL USING (public.is_admin());
+
+-- 4. Policies for orders (Publik buat order, Pemilik/Admin view)
+CREATE POLICY "Anyone can create an order" ON public.orders 
+FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Users can view their own orders" ON public.orders 
+FOR SELECT USING (auth.uid() = user_id OR public.is_admin());
+
+CREATE POLICY "Admins can manage all orders" ON public.orders 
+FOR ALL USING (public.is_admin());
+
+-- 5. Policies for promos (Public read, Admin manage)
+CREATE POLICY "Promos are viewable by everyone" ON public.promos 
+FOR SELECT USING (true);
+
+CREATE POLICY "Admins can manage promos" ON public.promos 
+FOR ALL USING (public.is_admin());
+
+-- 6. Policies for system_settings (Public read, Admin manage)
+CREATE POLICY "Settings are viewable by everyone" ON public.system_settings 
+FOR SELECT USING (true);
+
+CREATE POLICY "Admins can manage settings" ON public.system_settings 
+FOR ALL USING (public.is_admin());
+
+-- ==============================================================================
+-- RPC SECURE FUNCTION: PELACAKAN PESANAN TAMU (GUEST TRACKING TANPA EXPOSE DATA)
+-- ==============================================================================
+CREATE OR REPLACE FUNCTION public.get_order_by_invoice(p_order_id VARCHAR(30), p_whatsapp VARCHAR(30))
+RETURNS SETOF public.orders AS $$
 BEGIN
-    RETURN EXISTS (
-        SELECT 1 FROM public.profiles 
-        WHERE id = auth.uid() AND role = 'admin'
-    );
+    RETURN QUERY
+    SELECT * FROM public.orders
+    WHERE id = p_order_id AND whatsapp = p_whatsapp
+    LIMIT 1;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- Policies for profiles
-CREATE POLICY "Profiles are viewable by everyone" ON public.profiles FOR SELECT USING (true);
-CREATE POLICY "Users can update their own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
-CREATE POLICY "Admins can manage all profiles" ON public.profiles FOR ALL USING (public.is_admin());
-
--- Policies for games (Public read, Admin write)
-CREATE POLICY "Games are viewable by everyone" ON public.games FOR SELECT USING (true);
-CREATE POLICY "Admins can manage games" ON public.games FOR ALL USING (public.is_admin());
-
--- Policies for products_sku (Public read, Admin write)
-CREATE POLICY "SKUs are viewable by everyone" ON public.products_sku FOR SELECT USING (true);
-CREATE POLICY "Admins can manage SKUs" ON public.products_sku FOR ALL USING (public.is_admin());
-
--- Policies for orders (Public insert, Owner read, Admin all)
-CREATE POLICY "Anyone can create an order" ON public.orders FOR INSERT WITH CHECK (true);
-CREATE POLICY "Users can view their own orders" ON public.orders FOR SELECT USING (auth.uid() = user_id OR user_id IS NULL);
-CREATE POLICY "Admins can manage all orders" ON public.orders FOR ALL USING (public.is_admin());
-
--- Policies for promos (Public read, Admin write)
-CREATE POLICY "Promos are viewable by everyone" ON public.promos FOR SELECT USING (true);
-CREATE POLICY "Admins can manage promos" ON public.promos FOR ALL USING (public.is_admin());
-
--- Policies for system_settings (Public read, Admin write)
-CREATE POLICY "Settings are viewable by everyone" ON public.system_settings FOR SELECT USING (true);
-CREATE POLICY "Admins can manage settings" ON public.system_settings FOR ALL USING (public.is_admin());
 
 -- ==============================================================================
 -- INITIAL SEED DATA
