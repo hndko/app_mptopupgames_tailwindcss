@@ -66,8 +66,8 @@ Ikuti langkah-langkah berikut untuk mengunduh dan menyiapkan proyek di komputer 
 
 ### 1. Kloning Repositori
 ```bash
-git clone https://github.com/hndko/tailwind-web-topup-games.git
-cd tailwind-web-topup-games
+git clone https://github.com/hndko/app_mptopupgames_tailwindcss.git
+cd app_mptopupgames_tailwindcss
 ```
 
 ### 2. Pasang Dependensi Proyek
