@@ -114,14 +114,20 @@
 
                         <div>
                             <label for="userIdInput" class="block text-xs font-semibold text-slate-300 mb-1">User ID Game <span class="text-rose-400">*</span></label>
-                            <input type="text" id="userIdInput" name="userId" required placeholder="Contoh: 12345678"
-                                class="w-full h-11 px-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                            <div class="relative">
+                                <i class="fas fa-user-tag absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm pointer-events-none"></i>
+                                <input type="text" id="userIdInput" name="userId" required placeholder="Contoh: 12345678"
+                                    class="w-full h-11 pl-10 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                            </div>
                         </div>
 
                         <div id="zoneIdContainer">
                             <label for="zoneIdInput" class="block text-xs font-semibold text-slate-300 mb-1">Server / Zone ID <span class="text-rose-400">*</span></label>
-                            <input type="text" id="zoneIdInput" name="zoneId" placeholder="Contoh: 2024"
-                                class="w-full h-11 px-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                            <div class="relative">
+                                <i class="fas fa-server absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm pointer-events-none"></i>
+                                <input type="text" id="zoneIdInput" name="zoneId" placeholder="Contoh: 2024"
+                                    class="w-full h-11 pl-10 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                            </div>
                         </div>
 
                         <p class="text-[11px] text-slate-400 leading-normal pt-1">
@@ -315,11 +321,14 @@
                                 Kode Kupon Promo (Opsional)
                             </label>
                             <div class="flex gap-2">
-                                <input type="text" id="promoCodeInput" placeholder="NEWUSER20"
-                                    class="w-full h-11 px-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm uppercase focus:ring-2 focus:ring-sky-500">
+                                <div class="relative flex-1">
+                                    <i class="fas fa-tag absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm pointer-events-none"></i>
+                                    <input type="text" id="promoCodeInput" placeholder="Kode Promo (NEWUSER20)"
+                                        class="w-full h-11 pl-10 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm uppercase focus:ring-2 focus:ring-sky-500">
+                                </div>
                                 <button type="button" id="applyPromoBtn"
-                                    class="px-4 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-sky-400 whitespace-nowrap">
-                                    Pakai
+                                    class="px-4 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-sky-400 whitespace-nowrap flex items-center gap-1.5 transition-colors">
+                                    <i class="fas fa-check text-xs"></i> <span>Pakai</span>
                                 </button>
                             </div>
                             <p id="promoMessage" class="text-[11px] mt-1 hidden"></p>
@@ -364,7 +373,7 @@
                     <!-- Desktop Checkout CTA -->
                     <button type="submit" id="btnCheckout" disabled
                         class="hidden lg:flex w-full min-h-[50px] rounded-2xl bg-sky-600 hover:bg-sky-500 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold text-base items-center justify-center gap-2 shadow-xl shadow-sky-600/20 transition-all">
-                        <i class="fas fa-bolt text-sm"></i> Beli Sekarang &bull; Bayar Instan
+                        <i class="fas fa-bolt text-sm"></i> <span>Beli Sekarang &bull; Bayar Instan</span>
                     </button>
                 </section>
             </div>
@@ -380,19 +389,19 @@
             </div>
             <button type="submit" form="orderForm" id="btnMobileCheckout" disabled
                 class="flex-1 min-h-[44px] rounded-xl bg-sky-600 hover:bg-sky-500 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-lg shadow-sky-600/20 transition-all">
-                <i class="fas fa-bolt text-xs"></i> Beli Sekarang
+                <i class="fas fa-bolt text-xs"></i> <span>Beli Sekarang</span>
             </button>
         </div>
     </div>
 
-    <!-- ID Guide Modal -->
-    <div id="idGuideModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+    <!-- ID Guide Modal (Full Viewport Overlay) -->
+    <div id="idGuideModal" class="hidden fixed inset-0 w-full h-full min-h-screen z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto" aria-modal="true" role="dialog">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 my-auto">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                 <h3 class="text-base font-bold text-white flex items-center gap-2">
                     <i class="fas fa-circle-info text-sky-400"></i> Petunjuk Cek User ID &amp; Server
                 </h3>
-                <button type="button" id="closeIdGuideBtn" class="text-slate-400 hover:text-white p-1">
+                <button type="button" id="closeIdGuideBtn" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center" title="Tutup Modal">
                     <i class="fas fa-times text-base"></i>
                 </button>
             </div>
@@ -407,8 +416,8 @@
                 <li>Nomor utama adalah <strong>User ID</strong>, dan 4 digit di dalam tanda kurung adalah <strong>Zone/Server ID</strong>.</li>
             </ol>
 
-            <button type="button" id="closeIdGuideBtn2" class="w-full py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs">
-                Mengerti
+            <button type="button" id="closeIdGuideBtn2" class="w-full py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center justify-center gap-2">
+                <i class="fas fa-check text-xs"></i> <span>Saya Mengerti</span>
             </button>
         </div>
     </div>

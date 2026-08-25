@@ -94,8 +94,8 @@
             </div>
 
             <button type="button" onclick="openPromoModal()"
-                class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-sky-600/20">
-                <i class="fas fa-plus text-xs"></i> Buat Promo Baru
+                class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-sky-600/20 transition-colors">
+                <i class="fas fa-plus text-xs"></i> <span>Buat Promo Baru</span>
             </button>
         </header>
 
@@ -106,13 +106,14 @@
                     <table class="w-full text-left text-xs sm:text-sm">
                         <thead class="bg-slate-800/80 border-b border-slate-800 text-slate-300 font-semibold">
                             <tr>
+                                <th class="py-3.5 px-4 text-center w-12">#</th>
                                 <th class="py-3.5 px-4 sm:px-6">Nama Promo</th>
                                 <th class="py-3.5 px-4">Kode Kupon</th>
                                 <th class="py-3.5 px-4">Tipe Diskon</th>
                                 <th class="py-3.5 px-4">Nilai Potongan</th>
                                 <th class="py-3.5 px-4">Masa Berlaku</th>
                                 <th class="py-3.5 px-4 text-center">Status</th>
-                                <th class="py-3.5 px-4 sm:px-6 text-center">Aksi</th>
+                                <th class="py-3.5 px-4 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="promoTableBody" class="divide-y divide-slate-800/80">
@@ -124,12 +125,14 @@
         </main>
     </div>
 
-    <!-- Promo Modal -->
-    <div id="promoModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" aria-modal="true" role="dialog">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+    <!-- Promo Modal (Full Screen Overlay) -->
+    <div id="promoModal" class="hidden fixed inset-0 w-full h-full min-h-screen z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto" aria-modal="true" role="dialog">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto my-auto">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h3 id="promoModalTitle" class="text-base font-bold text-white">Buat Promo Baru</h3>
-                <button type="button" onclick="closePromoModal()" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <h3 id="promoModalTitle" class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-gift text-sky-400"></i> Buat Promo Baru
+                </h3>
+                <button type="button" onclick="closePromoModal()" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center" title="Tutup Modal">
                     <i class="fas fa-xmark text-lg"></i>
                 </button>
             </div>
@@ -137,62 +140,83 @@
             <form id="promoForm" class="space-y-4">
                 <input type="hidden" id="editPromoIndex">
                 <div>
-                    <label for="formPromoName" class="block text-xs font-semibold text-slate-300 mb-1">Nama Program Promo</label>
-                    <input type="text" id="formPromoName" required placeholder="Contoh: Diskon Pengguna Baru"
-                        class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                    <label for="formPromoName" class="block text-xs font-semibold text-slate-300 mb-1">Nama Program Promo <span class="text-rose-400">*</span></label>
+                    <div class="relative">
+                        <i class="fas fa-gift absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                        <input type="text" id="formPromoName" required placeholder="Contoh: Diskon Pengguna Baru"
+                            class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500">
+                    </div>
                 </div>
 
                 <div>
                     <label for="formPromoCode" class="block text-xs font-semibold text-slate-300 mb-1">Kode Kupon (Opsional)</label>
-                    <input type="text" id="formPromoCode" placeholder="Contoh: NEWUSER20"
-                        class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white uppercase font-mono focus:ring-2 focus:ring-sky-500">
+                    <div class="relative">
+                        <i class="fas fa-tag absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                        <input type="text" id="formPromoCode" placeholder="Contoh: NEWUSER20"
+                            class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white uppercase font-mono placeholder-slate-500 focus:ring-2 focus:ring-sky-500">
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="formPromoType" class="block text-xs font-semibold text-slate-300 mb-1">Jenis Diskon</label>
-                        <select id="formPromoType" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
-                            <option value="Persentase">Persentase (%)</option>
-                            <option value="Nominal">Nominal Tetap (Rp)</option>
-                        </select>
+                        <div class="relative">
+                            <i class="fas fa-percent absolute left-3 top-3 text-slate-500 text-xs pointer-events-none"></i>
+                            <select id="formPromoType" class="w-full h-10 pl-8 pr-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                                <option value="Persentase">Persentase (%)</option>
+                                <option value="Nominal">Nominal Tetap (Rp)</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div>
-                        <label for="formPromoValue" class="block text-xs font-semibold text-slate-300 mb-1">Nilai Potongan</label>
-                        <input type="number" id="formPromoValue" required placeholder="Contoh: 20 atau 10000"
-                            class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <label for="formPromoValue" class="block text-xs font-semibold text-slate-300 mb-1">Nilai Potongan <span class="text-rose-400">*</span></label>
+                        <div class="relative">
+                            <i class="fas fa-calculator absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                            <input type="number" id="formPromoValue" required placeholder="Contoh: 20 atau 10000"
+                                class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500">
+                        </div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label for="formPromoStart" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Mulai</label>
-                        <input type="date" id="formPromoStart" required
-                            class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <label for="formPromoStart" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Mulai <span class="text-rose-400">*</span></label>
+                        <div class="relative">
+                            <i class="fas fa-calendar absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                            <input type="date" id="formPromoStart" required
+                                class="w-full h-10 pl-9 pr-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        </div>
                     </div>
 
                     <div>
-                        <label for="formPromoEnd" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Selesai</label>
-                        <input type="date" id="formPromoEnd" required
-                            class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <label for="formPromoEnd" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Selesai <span class="text-rose-400">*</span></label>
+                        <div class="relative">
+                            <i class="fas fa-calendar-check absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                            <input type="date" id="formPromoEnd" required
+                                class="w-full h-10 pl-9 pr-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        </div>
                     </div>
                 </div>
 
                 <div>
                     <label for="formPromoStatus" class="block text-xs font-semibold text-slate-300 mb-1">Status Promo</label>
-                    <select id="formPromoStatus" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
-                        <option value="Aktif">Aktif</option>
-                        <option value="Dijadwalkan">Dijadwalkan</option>
-                        <option value="Nonaktif">Non-Aktif</option>
-                    </select>
+                    <div class="relative">
+                        <i class="fas fa-toggle-on absolute left-3 top-3 text-slate-500 text-xs pointer-events-none"></i>
+                        <select id="formPromoStatus" class="w-full h-10 pl-8 pr-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Dijadwalkan">Dijadwalkan</option>
+                            <option value="Nonaktif">Non-Aktif</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="flex justify-end gap-3 pt-3 border-t border-slate-800">
-                    <button type="button" onclick="closePromoModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white">
-                        Batal
+                    <button type="button" onclick="closePromoModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white flex items-center gap-1.5 transition-colors">
+                        <i class="fas fa-times text-xs"></i> <span>Batal</span>
                     </button>
-                    <button type="submit" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-xs font-semibold text-white">
-                        Simpan Promo
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-xs font-semibold text-white flex items-center gap-1.5 transition-colors shadow-md shadow-sky-600/20">
+                        <i class="fas fa-floppy-disk text-xs"></i> <span>Simpan Promo</span>
                     </button>
                 </div>
             </form>
@@ -223,6 +247,7 @@
 
                 return `
                     <tr class="hover:bg-slate-800/40 transition-colors">
+                        <td class="py-3.5 px-4 text-center font-mono text-xs text-slate-400">${idx + 1}</td>
                         <td class="py-3.5 px-4 sm:px-6">
                             <div class="flex items-center gap-3">
                                 <img src="${p.banner || '../assets/images/promo/promo-mlbb.svg'}" class="w-10 h-10 rounded-xl object-contain bg-slate-950 border border-slate-700" alt="Promo">
@@ -234,12 +259,10 @@
                         <td class="py-3.5 px-4 font-semibold text-emerald-400">${p.value}</td>
                         <td class="py-3.5 px-4 text-slate-400 text-xs">${p.period}</td>
                         <td class="py-3.5 px-4 text-center">${badge}</td>
-                        <td class="py-3.5 px-4 sm:px-6 text-center">
-                            <div class="flex items-center justify-center gap-2">
-                                <button type="button" onclick="deletePromo(${idx})" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 transition-colors" title="Hapus Promo">
-                                    <i class="fas fa-trash text-xs"></i>
-                                </button>
-                            </div>
+                        <td class="py-3.5 px-4 text-center">
+                            <button type="button" onclick="deletePromo(${idx})" class="w-8 h-8 rounded-lg bg-rose-950/60 hover:bg-rose-900 border border-rose-800 text-rose-400 hover:text-white inline-flex items-center justify-center transition-colors mx-auto" title="Hapus Promo">
+                                <i class="fas fa-trash text-xs"></i>
+                            </button>
                         </td>
                     </tr>
                 `;

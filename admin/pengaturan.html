@@ -123,17 +123,53 @@
                     <form class="space-y-4 max-w-xl settings-form">
                         <div>
                             <label for="siteName" class="block text-xs font-semibold text-slate-300 mb-1">Nama Website / Toko</label>
-                            <input type="text" id="siteName" value="MPTopUp" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <div class="relative">
+                                <i class="fas fa-globe absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                                <input type="text" id="siteName" value="MPTopUp" placeholder="MPTopUp" class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            </div>
                         </div>
 
                         <div>
                             <label for="siteContactEmail" class="block text-xs font-semibold text-slate-300 mb-1">Email Layanan Pelanggan</label>
-                            <input type="email" id="siteContactEmail" value="support@mptopup.com" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                                <input type="email" id="siteContactEmail" value="support@mptopup.com" placeholder="support@mptopup.com" class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            </div>
                         </div>
 
                         <div>
                             <label for="siteWhatsapp" class="block text-xs font-semibold text-slate-300 mb-1">Nomor WhatsApp CS</label>
-                            <input type="text" id="siteWhatsapp" value="081298765432" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <div class="relative">
+                                <i class="fab fa-whatsapp absolute left-3.5 top-1/2 -translate-y-1/2 text-emerald-400 text-xs pointer-events-none"></i>
+                                <input type="text" id="siteWhatsapp" value="081298765432" placeholder="081298765432" class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            </div>
+                        </div>
+
+                        <!-- Drag & Drop Logo & Favicon -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Logo Brand Website</label>
+                                <div data-drag-drop="true" data-preview-target="logoPreviewContainer"
+                                    class="border-2 border-dashed border-slate-700 hover:border-sky-500 rounded-2xl p-4 text-center cursor-pointer transition-colors bg-slate-800/50 relative group">
+                                    <input type="file" id="logoFileInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                                    <i class="fas fa-cloud-arrow-up text-xl text-sky-400 mb-1 block"></i>
+                                    <p class="text-xs font-semibold text-white">Tarik file atau <span class="text-sky-400">Pilih</span></p>
+                                    <p class="text-[10px] text-slate-400">SVG / PNG Logo</p>
+                                </div>
+                                <div id="logoPreviewContainer" class="mt-2 space-y-2"></div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Favicon Website</label>
+                                <div data-drag-drop="true" data-preview-target="faviconPreviewContainer"
+                                    class="border-2 border-dashed border-slate-700 hover:border-sky-500 rounded-2xl p-4 text-center cursor-pointer transition-colors bg-slate-800/50 relative group">
+                                    <input type="file" id="faviconFileInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                                    <i class="fas fa-cloud-arrow-up text-xl text-sky-400 mb-1 block"></i>
+                                    <p class="text-xs font-semibold text-white">Tarik file atau <span class="text-sky-400">Pilih</span></p>
+                                    <p class="text-[10px] text-slate-400">SVG / ICO Favicon</p>
+                                </div>
+                                <div id="faviconPreviewContainer" class="mt-2 space-y-2"></div>
+                            </div>
                         </div>
 
                         <div class="pt-2 flex items-center justify-between p-3.5 bg-slate-800/60 rounded-xl border border-slate-700/60">
@@ -144,8 +180,8 @@
                             <input type="checkbox" class="w-5 h-5 rounded border-slate-700 bg-slate-800 text-sky-600 focus:ring-sky-500">
                         </div>
 
-                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20">
-                            Simpan Pengaturan Umum
+                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20 flex items-center gap-2 transition-colors">
+                            <i class="fas fa-floppy-disk text-xs"></i> <span>Simpan Pengaturan Umum</span>
                         </button>
                     </form>
                 </div>
@@ -154,6 +190,23 @@
                 <div id="tabPembayaran" class="tab-pane hidden p-5 sm:p-8 space-y-5">
                     <form class="space-y-4 max-w-2xl settings-form">
                         <p class="text-xs text-slate-400">Aktifkan atau nonaktifkan channel pembayaran yang tampil pada checkout pelanggan.</p>
+
+                        <!-- Upload Static QRIS -->
+                        <div class="p-4 bg-slate-800/40 border border-slate-700/80 rounded-2xl space-y-3">
+                            <h4 class="text-xs font-bold text-white flex items-center gap-2">
+                                <i class="fas fa-qrcode text-sky-400"></i> Master Gambar Barcode QRIS
+                            </h4>
+                            <div data-drag-drop="true" data-preview-target="qrisPreviewContainer"
+                                class="border-2 border-dashed border-slate-700 hover:border-sky-500 rounded-2xl p-4 text-center cursor-pointer transition-colors bg-slate-900/60 relative group">
+                                <input type="file" id="qrisFileInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                                <div class="space-y-1">
+                                    <i class="fas fa-qrcode text-2xl text-sky-400 mb-1 block"></i>
+                                    <p class="text-xs font-semibold text-white">Tarik gambar QRIS di sini atau <span class="text-sky-400">Pilih File</span></p>
+                                    <p class="text-[10px] text-slate-400">Format PNG, JPG, SVG (Maks. 2 MB)</p>
+                                </div>
+                            </div>
+                            <div id="qrisPreviewContainer" class="mt-2 space-y-2"></div>
+                        </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <label class="p-3.5 bg-slate-800/60 border border-slate-700 rounded-xl flex items-center justify-between cursor-pointer">
@@ -205,8 +258,8 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20">
-                            Simpan Metode Pembayaran
+                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20 flex items-center gap-2 transition-colors">
+                            <i class="fas fa-floppy-disk text-xs"></i> <span>Simpan Metode Pembayaran</span>
                         </button>
                     </form>
                 </div>
@@ -232,8 +285,8 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20">
-                            Simpan Notifikasi
+                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20 flex items-center gap-2 transition-colors">
+                            <i class="fas fa-floppy-disk text-xs"></i> <span>Simpan Pengaturan Notifikasi</span>
                         </button>
                     </form>
                 </div>
@@ -252,11 +305,17 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1">Midtrans Client Key</label>
-                                <input type="text" value="SB-Mid-client-sample-key-12345" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white">
+                                <div class="relative">
+                                    <i class="fas fa-key absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                                    <input type="text" value="SB-Mid-client-sample-key-12345" placeholder="SB-Mid-client-..." class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white focus:ring-2 focus:ring-sky-500">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1">Midtrans Server Key</label>
-                                <input type="password" value="SB-Mid-server-secret-key-67890" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white">
+                                <div class="relative">
+                                    <i class="fas fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                                    <input type="password" value="SB-Mid-server-secret-key-67890" placeholder="SB-Mid-server-..." class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white focus:ring-2 focus:ring-sky-500">
+                                </div>
                             </div>
                         </div>
 
@@ -267,16 +326,22 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1">Digiflazz Username</label>
-                                <input type="text" value="mptopup_digi" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white">
+                                <div class="relative">
+                                    <i class="fas fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                                    <input type="text" value="mptopup_digi" placeholder="Username Digiflazz" class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white focus:ring-2 focus:ring-sky-500">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1">Digiflazz Production Key</label>
-                                <input type="password" value="dev-key-xxxxxxxxxxxxxxxx" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white">
+                                <div class="relative">
+                                    <i class="fas fa-shield-halved absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                                    <input type="password" value="dev-key-xxxxxxxxxxxxxxxx" placeholder="API Secret Key" class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 font-mono text-xs text-white focus:ring-2 focus:ring-sky-500">
+                                </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20">
-                            Simpan Kredensial API
+                        <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow-md shadow-sky-600/20 flex items-center gap-2 transition-colors">
+                            <i class="fas fa-floppy-disk text-xs"></i> <span>Simpan Kredensial API</span>
                         </button>
                     </form>
                 </div>

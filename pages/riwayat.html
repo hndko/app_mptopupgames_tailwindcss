@@ -96,6 +96,7 @@
                 <table class="w-full text-left text-xs sm:text-sm">
                     <thead class="bg-slate-800/80 text-slate-300 font-semibold border-b border-slate-800">
                         <tr>
+                            <th class="py-3.5 px-4 text-center w-12">#</th>
                             <th class="py-3.5 px-4">No. Pesanan</th>
                             <th class="py-3.5 px-4">Tanggal &amp; Waktu</th>
                             <th class="py-3.5 px-4">Game &amp; Nominal</th>
@@ -103,6 +104,7 @@
                             <th class="py-3.5 px-4">Total Biaya</th>
                             <th class="py-3.5 px-4">Metode Bayar</th>
                             <th class="py-3.5 px-4 text-center">Status</th>
+                            <th class="py-3.5 px-4 text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="ordersTableBody" class="divide-y divide-slate-800 text-slate-200">
@@ -134,7 +136,7 @@
             if (list.length === 0) {
                 tableBody.innerHTML = `
                     <tr>
-                        <td colspan="7" class="py-12 text-center text-slate-400">
+                        <td colspan="9" class="py-12 text-center text-slate-400">
                             <i class="fas fa-inbox text-3xl mb-2 text-slate-600 block"></i>
                             <p class="font-semibold text-xs sm:text-sm">Tidak ada transaksi yang cocok dengan pencarian.</p>
                         </td>
@@ -143,7 +145,7 @@
                 return;
             }
 
-            tableBody.innerHTML = list.map(o => {
+            tableBody.innerHTML = list.map((o, idx) => {
                 let statusBadge = '';
                 if (o.status === 'Selesai') {
                     statusBadge = '<span class="px-2.5 py-1 rounded-full bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold">Selesai</span>';
@@ -155,6 +157,7 @@
 
                 return `
                     <tr class="hover:bg-slate-800/40 transition-colors">
+                        <td class="py-3.5 px-4 text-center font-mono text-xs text-slate-400">${idx + 1}</td>
                         <td class="py-3.5 px-4 font-mono font-bold text-sky-400 whitespace-nowrap">${o.id}</td>
                         <td class="py-3.5 px-4 text-slate-400 text-xs whitespace-nowrap">${o.date}</td>
                         <td class="py-3.5 px-4">
@@ -172,6 +175,11 @@
                         </td>
                         <td class="py-3.5 px-4 text-center whitespace-nowrap">
                             ${statusBadge}
+                        </td>
+                        <td class="py-3.5 px-4 text-center whitespace-nowrap">
+                            <a href="konfirmasi.html?id=${encodeURIComponent(o.id)}" class="w-8 h-8 rounded-lg bg-sky-950/60 hover:bg-sky-900 border border-sky-800 text-sky-400 hover:text-white inline-flex items-center justify-center transition-colors" title="Lihat Invoice">
+                                <i class="fas fa-file-invoice text-xs"></i>
+                            </a>
                         </td>
                     </tr>
                 `;

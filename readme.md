@@ -33,18 +33,25 @@ Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan 
 - 🔍 **Pencarian Real-Time**: Fitur filter pencarian instan untuk menemukan game favorit dalam hitungan detik.
 - 🏷️ **Sistem Kupon Promo**: Validasi kode diskon langsung saat checkout (contoh: `NEWUSER20` diskon 20%, `BONUS10` diskon 10%).
 - 💳 **Metode Pembayaran Lengkap**: Mendukung QRIS (Semua E-Wallet), GoPay, DANA, OVO, BCA Virtual Account, dan Mandiri Virtual Account.
-- 🧾 **Tanda Terima Digital & Cetak Bukti**: Invoice transaksi resmi dengan nomor pesanan otomatis `#MPxxxxxx` dan tombol cetak receipt.
-- 🕒 **Pelacakan Status Pesanan**: Lacak status pemrosesan item game secara real-time melalui halaman Riwayat.
-- 🔐 **Autentikasi Pengguna**: Formulir Masuk dan Pendaftaran Member Baru dengan visibilitas kata sandi dan validasi data.
+- 🧾 **Tanda Terima Digital & Cetak Bukti**: Invoice transaksi resmi dengan nomor pesanan otomatis `#MPxxxxxx`, upload bukti transfer via drag & drop, dan tombol cetak receipt.
+- 🕒 **Pelacakan Status Pesanan**: Lacak status pemrosesan item game secara real-time melalui halaman Riwayat lengkap dengan penomoran `#` otomatis dan tombol aksi icon invoice.
+- 🔐 **Autentikasi Pengguna**: Formulir Masuk dan Pendaftaran Member Baru dengan input icon group, visibilitas kata sandi, dan validasi data.
 
 #### 2. Sisi Administrator (Admin Dashboard)
-- 📊 **Dashboard Analitik**: Ringkasan omzet bulanan, jumlah transaksi sukses, grafik tren penjualan 7 hari, dan peringkat game terlaris.
-- 📦 **Manajemen Pesanan**: Pengendalian dan pembaruan status pesanan (*Selesai, Pending, Gagal*) secara langsung.
-- 🎮 **Manajemen Game & Varian SKU**: Tambah/hapus game dan paket nominal diamond yang otomatis tersinkronisasi ke katalog pembeli via `localStorage`.
-- 👥 **Manajemen Pengguna**: Pengelolaan akun pelanggan dan administrator beserta status keaktifan.
+- 📊 **Dashboard Analitik**: Ringkasan omzet bulanan, jumlah transaksi sukses, grafik tren penjualan 7 hari, dan tabel transaksi terkini berpenomoran `#`.
+- 📦 **Manajemen Pesanan**: Pengendalian dan pembaruan status pesanan (*Selesai, Pending, Gagal*) secara langsung via modal full screen overlay.
+- 🎮 **Manajemen Game & Varian SKU**: Tambah/hapus game dengan area unggah banner drag & drop, serta manajemen varian SKU internal.
+- 👥 **Manajemen Pengguna**: Pengelolaan akun pelanggan dan administrator beserta status keaktifan melalui modal form ber-icon.
 - 🎟️ **Manajemen Promo & Kupon**: Pembuatan program diskon persentase maupun nominal potongan tetap.
 - 📥 **Laporan & Ekspor Data (CSV)**: Filter laporan berdasarkan periode tanggal dan unduh data ke format spreadsheet CSV.
-- ⚙️ **Pengaturan Sistem**: Konfigurasi nama toko, kontak bantuan, toggle channel bayar, notifikasi email, dan manajemen kunci API (*Midtrans* & *Digiflazz*).
+- ⚙️ **Pengaturan Sistem**: Konfigurasi nama toko, unggah logo brand & favicon via drag & drop, toggle channel bayar, notifikasi email, dan manajemen kunci API (*Midtrans* & *Digiflazz*).
+
+#### 3. Standar Desain & Interaksi (Design System Standards)
+- 🪟 **Modal Full-Screen Viewport**: Modal overlay responsif (`fixed inset-0 min-h-screen bg-slate-950/85 backdrop-blur-md`) menutup layar secara penuh dengan dialog box di tengah.
+- 🔤 **Form Input Icon Groups**: Seluruh input dan select form dilengkapi icon group pendukung dan teks placeholder yang informatif.
+- 📤 **Drag & Drop File Upload**: Komponen upload file interaktif yang menampilkan hasil kartu preview file (nama, ukuran file, icon tipe, dan tombol hapus).
+- 🔘 **Konsistensi Tombol & Aksi Tabel**: Tombol reguler memiliki icon + teks, sedangkan tombol aksi pada tabel (`<td>`) khusus hanya icon tooltip untuk kerapian visual.
+- 🔢 **Penomoran Tabel Otomatis**: Setiap baris tabel dilengkapi kolom nomor urut `#` yang terisi secara otomatis.
 
 ---
 

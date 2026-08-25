@@ -1,5 +1,5 @@
 /**
- * MPTopUp - Main Interactive Engine & OuraStore Components
+ * MPTopUp - Main Interactive Engine, Drag & Drop Uploads, and Modals
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. WhatsApp Floating Widget
     initWhatsAppWidget();
+
+    // 6. Global Drag & Drop File Upload Initializer
+    initAllDragAndDropUploads();
 });
 
 /**
@@ -40,7 +43,112 @@ function formatRupiah(number) {
 }
 
 /**
- * Countdown Timer for Flash Sale (Fixed End-of-Day or Dynamic Loop)
+ * Format File Size (KB/MB)
+ */
+function formatFileSize(bytes) {
+    if (!bytes || bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+}
+
+/**
+ * Universal Drag & Drop File Uploader
+ */
+function initAllDragAndDropUploads() {
+    document.querySelectorAll('[data-drag-drop="true"]').forEach(dropzone => {
+        const input = dropzone.querySelector('input[type="file"]');
+        const previewContainer = document.getElementById(dropzone.getAttribute('data-preview-target'));
+
+        if (!input) return;
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        // Highlight drop zone when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.classList.add('border-sky-500', 'bg-sky-950/20');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.classList.remove('border-sky-500', 'bg-sky-950/20');
+            }, false);
+        });
+
+        // Handle dropped files
+        dropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files && files.length > 0) {
+                input.files = files;
+                handleFiles(files, previewContainer, input);
+            }
+        });
+
+        // Handle manually selected files via input
+        input.addEventListener('change', () => {
+            if (input.files && input.files.length > 0) {
+                handleFiles(input.files, previewContainer, input);
+            }
+        });
+    });
+}
+
+function handleFiles(files, container, input) {
+    if (!container) return;
+    container.innerHTML = ''; // Clear previous
+
+    Array.from(files).forEach((file, idx) => {
+        const card = document.createElement('div');
+        card.className = 'flex items-center justify-between gap-3 p-3 bg-slate-900 border border-slate-700/80 rounded-xl shadow-md';
+
+        const isImage = file.type.startsWith('image/');
+        const previewSrc = isImage ? URL.createObjectURL(file) : '';
+
+        card.innerHTML = `
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center overflow-hidden shrink-0">
+                    ${isImage ? `<img src="${previewSrc}" alt="Preview" class="w-full h-full object-cover">` : `<i class="fas fa-file-lines text-sky-400"></i>`}
+                </div>
+                <div class="min-w-0">
+                    <p class="text-xs font-bold text-white truncate">${file.name}</p>
+                    <p class="text-[10px] text-slate-400">${formatFileSize(file.size)}</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <span class="text-emerald-400 text-[10px] font-semibold flex items-center gap-1">
+                    <i class="fas fa-circle-check"></i> Siap diunggah
+                </span>
+                <button type="button" class="w-7 h-7 rounded-lg bg-rose-950/60 hover:bg-rose-900 border border-rose-800 text-rose-400 hover:text-white flex items-center justify-center transition-colors" title="Hapus File">
+                    <i class="fas fa-trash text-xs"></i>
+                </button>
+            </div>
+        `;
+
+        const deleteBtn = card.querySelector('button');
+        deleteBtn.addEventListener('click', () => {
+            card.remove();
+            if (input) input.value = '';
+        });
+
+        container.appendChild(card);
+    });
+}
+
+/**
+ * Countdown Timer for Flash Sale
  */
 function initFlashSaleCountdown() {
     const hoursEl = document.getElementById('fs-hours');
@@ -71,12 +179,11 @@ function initFlashSaleCountdown() {
 }
 
 /**
- * Live Toast Simulation (OuraStore Trust Builder)
+ * Live Toast Simulation
  */
 function initLiveTransactionToast() {
     if (typeof LIVE_TRANSACTIONS === 'undefined' || !LIVE_TRANSACTIONS.length) return;
 
-    // Create Toast Container if not present
     let toastContainer = document.getElementById('liveToastContainer');
     if (!toastContainer) {
         toastContainer = document.createElement('div');
@@ -108,27 +215,24 @@ function initLiveTransactionToast() {
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Sukses Terkirim
                 </p>
             </div>
-            <button type="button" class="text-slate-500 hover:text-slate-300 p-1" onclick="this.parentElement.remove()">
+            <button type="button" class="text-slate-500 hover:text-slate-300 p-1" onclick="this.parentElement.remove()" title="Tutup Notifikasi">
                 <i class="fas fa-times text-xs"></i>
             </button>
         `;
 
         toastContainer.appendChild(toast);
 
-        // Animate In
         requestAnimationFrame(() => {
             toast.classList.remove('translate-y-6', 'opacity-0', 'scale-95');
             toast.classList.add('translate-y-0', 'opacity-100', 'scale-100');
         });
 
-        // Auto Dismiss after 4.5s
         setTimeout(() => {
             toast.classList.add('opacity-0', 'translate-y-4');
             setTimeout(() => toast.remove(), 500);
         }, 4500);
     }
 
-    // Initial Delay, then trigger every 8s
     setTimeout(showToast, 2500);
     setInterval(showToast, 8500);
 }
@@ -137,7 +241,6 @@ function initLiveTransactionToast() {
  * Floating WhatsApp CS Widget Modal
  */
 function initWhatsAppWidget() {
-    // Create WhatsApp Button if not exists
     let waContainer = document.getElementById('whatsappFloatingWidget');
     if (!waContainer) {
         waContainer = document.createElement('div');
@@ -163,7 +266,7 @@ function initWhatsAppWidget() {
                             </p>
                         </div>
                     </div>
-                    <button type="button" id="closeWaPopup" class="text-slate-400 hover:text-white text-sm">
+                    <button type="button" id="closeWaPopup" class="text-slate-400 hover:text-white text-sm" title="Tutup Bantuan">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>

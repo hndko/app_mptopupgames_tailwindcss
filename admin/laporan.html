@@ -94,8 +94,8 @@
             </div>
 
             <button type="button" id="btnExportCsv"
-                class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-emerald-600/20">
-                <i class="fas fa-file-csv text-sm"></i> Unduh Rekap (CSV)
+                class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-emerald-600/20 transition-colors">
+                <i class="fas fa-file-csv text-sm"></i> <span>Unduh Rekap (CSV)</span>
             </button>
         </header>
 
@@ -105,24 +105,33 @@
                 <form id="reportFilterForm" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
                     <div>
                         <label for="reportType" class="block text-xs font-semibold text-slate-300 mb-1">Jenis Laporan</label>
-                        <select id="reportType" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
-                            <option value="penjualan">Laporan Penjualan Transaksi</option>
-                            <option value="produk">Laporan Produk Terlaris</option>
-                        </select>
+                        <div class="relative">
+                            <i class="fas fa-chart-pie absolute left-3 top-3 text-slate-500 text-xs pointer-events-none"></i>
+                            <select id="reportType" class="w-full h-10 pl-8 pr-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                                <option value="penjualan">Laporan Penjualan Transaksi</option>
+                                <option value="produk">Laporan Produk Terlaris</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div>
                         <label for="dateStart" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Mulai</label>
-                        <input type="date" id="dateStart" value="2026-08-01" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <div class="relative">
+                            <i class="fas fa-calendar absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                            <input type="date" id="dateStart" value="2026-08-01" class="w-full h-10 pl-9 pr-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        </div>
                     </div>
 
                     <div>
                         <label for="dateEnd" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Selesai</label>
-                        <input type="date" id="dateEnd" value="2026-08-25" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <div class="relative">
+                            <i class="fas fa-calendar-check absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs pointer-events-none"></i>
+                            <input type="date" id="dateEnd" value="2026-08-25" class="w-full h-10 pl-9 pr-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        </div>
                     </div>
 
-                    <button type="submit" class="w-full h-10 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors">
-                        <i class="fas fa-filter text-xs"></i> Terapkan Periode
+                    <button type="submit" class="w-full h-10 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md shadow-sky-600/20 transition-colors">
+                        <i class="fas fa-filter text-xs"></i> <span>Terapkan Periode</span>
                     </button>
                 </form>
             </div>
@@ -159,9 +168,10 @@
                     <table class="w-full text-left text-xs sm:text-sm">
                         <thead class="bg-slate-800/80 border-b border-slate-800 text-slate-300 font-semibold">
                             <tr>
+                                <th class="py-3.5 px-4 text-center w-12">#</th>
                                 <th class="py-3.5 px-4 sm:px-6">Tanggal</th>
                                 <th class="py-3.5 px-4">ID Pesanan</th>
-                                <th class="py-3.5 px-4">Game & SKU</th>
+                                <th class="py-3.5 px-4">Game &amp; SKU</th>
                                 <th class="py-3.5 px-4">Metode Bayar</th>
                                 <th class="py-3.5 px-4 text-right">Nominal (Rp)</th>
                                 <th class="py-3.5 px-4 text-center">Status</th>
@@ -188,8 +198,9 @@
 
         const reportTable = document.getElementById('reportTableBody');
         function renderReport() {
-            reportTable.innerHTML = reportData.map(r => `
+            reportTable.innerHTML = reportData.map((r, idx) => `
                 <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="py-3 px-4 text-center font-mono text-slate-400 text-xs">${idx + 1}</td>
                     <td class="py-3 px-4 sm:px-6 text-slate-300 text-xs">${r.date}</td>
                     <td class="py-3 px-4 font-mono font-bold text-sky-400">${r.id}</td>
                     <td class="py-3 px-4">
