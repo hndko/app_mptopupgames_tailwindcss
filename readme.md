@@ -147,15 +147,16 @@ tailwind-web-topup-games/
 │   │   ├── promoStore.js        # Store Pinia: Kupon diskon, validasi promo
 │   │   └── usersStore.js        # Store Pinia: Manajemen pengguna & admin
 │   └── views/                   # Tampilan Rute Halaman
-│       ├── HomeView.vue         # Halaman Beranda (Landing Page & Hero Slider)
-│       ├── CatalogView.vue      # Katalog Lengkap Game & Voucher Digital (/produk)
-│       ├── ProductDetailView.vue# Halaman Checkout & Varian Diamond 5-Langkah (/produk/:id)
-│       ├── ConfirmationView.vue # Bukti Pembayaran Digital (Invoice + Cetak Bukti)
-│       ├── OrderHistoryView.vue # Halaman Lacak Pesanan & Riwayat Transaksi (# Auto-numbered)
-│       ├── auth/
-│       │   ├── LoginView.vue    # Halaman Masuk Akun
-│       │   └── RegisterView.vue # Halaman Registrasi Member Baru
-│       └── admin/                   # Tampilan Portal Manajemen (URL: /modules)
+│       ├── public/              # Halaman Landing & Area Pelanggan
+│       │   ├── HomeView.vue         # Halaman Beranda (Landing Page & Hero Slider)
+│       │   ├── CatalogView.vue      # Katalog Lengkap Game & Voucher Digital (/produk)
+│       │   ├── ProductDetailView.vue# Halaman Checkout & Varian Diamond 5-Langkah (/produk/:id)
+│       │   ├── ConfirmationView.vue # Bukti Pembayaran Digital (Invoice + Cetak Bukti)
+│       │   └── OrderHistoryView.vue # Halaman Lacak Pesanan & Riwayat Transaksi (# Auto-numbered)
+│       ├── auth/                # Modul Autentikasi Pengguna
+│       │   ├── LoginView.vue        # Halaman Masuk Akun
+│       │   └── RegisterView.vue     # Halaman Registrasi Member Baru
+│       └── modules/             # Halaman Portal Manajemen / Admin (URL: /modules)
 │           ├── DashboardView.vue    # Ringkasan KPI & Pesanan Masuk (/modules)
 │           ├── OrdersView.vue       # Kelola Status Pesanan & Modal Edit (/modules/pesanan)
 │           ├── ProductsView.vue     # Kelola Katalog Game & Modal Varian SKU (/modules/produk)
@@ -163,7 +164,7 @@ tailwind-web-topup-games/
 │           ├── PromoView.vue        # Kelola Program Promo & Modal Kupon (/modules/promo)
 │           ├── ReportsView.vue      # Laporan Analitik & Ekspor CSV (/modules/laporan)
 │           └── SettingsView.vue     # Tab Pengaturan Sistem (/modules/pengaturan)
-└── README.md                        # Dokumentasi Resmi Proyek
+└── README.md                    # Dokumentasi Resmi Proyek
 ```
 
 ---

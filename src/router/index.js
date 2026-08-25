@@ -2,21 +2,21 @@ import { createRouter, createWebHistory } from 'vue-router';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 
-import HomeView from '@/views/HomeView.vue';
-import CatalogView from '@/views/CatalogView.vue';
-import ProductDetailView from '@/views/ProductDetailView.vue';
-import OrderHistoryView from '@/views/OrderHistoryView.vue';
-import ConfirmationView from '@/views/ConfirmationView.vue';
+import HomeView from '@/views/public/HomeView.vue';
+import CatalogView from '@/views/public/CatalogView.vue';
+import ProductDetailView from '@/views/public/ProductDetailView.vue';
+import OrderHistoryView from '@/views/public/OrderHistoryView.vue';
+import ConfirmationView from '@/views/public/ConfirmationView.vue';
 import LoginView from '@/views/auth/LoginView.vue';
 import RegisterView from '@/views/auth/RegisterView.vue';
 
-import DashboardView from '@/views/admin/DashboardView.vue';
-import OrdersView from '@/views/admin/OrdersView.vue';
-import ProductsView from '@/views/admin/ProductsView.vue';
-import UsersView from '@/views/admin/UsersView.vue';
-import PromoView from '@/views/admin/PromoView.vue';
-import ReportsView from '@/views/admin/ReportsView.vue';
-import SettingsView from '@/views/admin/SettingsView.vue';
+import DashboardView from '@/views/modules/DashboardView.vue';
+import OrdersView from '@/views/modules/OrdersView.vue';
+import ProductsView from '@/views/modules/ProductsView.vue';
+import UsersView from '@/views/modules/UsersView.vue';
+import PromoView from '@/views/modules/PromoView.vue';
+import ReportsView from '@/views/modules/ReportsView.vue';
+import SettingsView from '@/views/modules/SettingsView.vue';
 
 const routes = [
   // Client & Public Pages
