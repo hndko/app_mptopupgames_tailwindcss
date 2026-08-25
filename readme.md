@@ -24,16 +24,16 @@ Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan 
 ## 📖 Deskripsi Proyek
 
 ### 🎯 Tujuan & Solusi
-**MPTopUp** hadir sebagai solusi platform top up game modern yang mengutamakan kecepatan, keamanan transaksi, dan kemudahan akses bagi para gamer di Indonesia. Dibangun menggunakan teknologi **Tailwind CSS Lokal** tanpa dependensi CDN, aplikasi ini ringan, cepat dimuat, dan responsif di berbagai perangkat seluler maupun desktop.
+**MPTopUp** adalah Single Page Application (SPA) modern berbasis **Vue 3** (`<script setup>`, Composition API) dan **Vite** yang mengutamakan kecepatan, reaktivitas instan, keamanan transaksi, dan kemudahan akses bagi para gamer di Indonesia. Menggunakan arsitektur terstruktur dengan **Vue Router 4**, **Pinia State Management**, dan **Tailwind CSS Lokal** tanpa dependensi CDN, aplikasi ini super cepat, ringan, responsif, dan mudah dikembangkan.
 
 ### ✨ Fitur Utama
 
 #### 1. Sisi Pelanggan (Customer Facing)
 - ⚡ **Katalog Game Populer**: Pilihan judul game seperti Mobile Legends, Valorant, Free Fire, PUBG Mobile, Genshin Impact, dan voucher digital.
-- 🔍 **Pencarian Real-Time**: Fitur filter pencarian instan untuk menemukan game favorit dalam hitungan detik.
+- 🔍 **Pencarian Real-Time**: Filter pencarian reaktif instan untuk menemukan game favorit dalam hitungan detik.
 - 🏷️ **Sistem Kupon Promo**: Validasi kode diskon langsung saat checkout (contoh: `NEWUSER20` diskon 20%, `BONUS10` diskon 10%).
-- 💳 **Metode Pembayaran Lengkap**: Mendukung QRIS (Semua E-Wallet), GoPay, DANA, OVO, BCA Virtual Account, dan Mandiri Virtual Account.
-- 🧾 **Tanda Terima Digital & Cetak Bukti**: Invoice transaksi resmi dengan nomor pesanan otomatis `#MPxxxxxx`, upload bukti transfer via drag & drop, dan tombol cetak receipt.
+- 💳 **Metode Pembayaran Lengkap**: Mendukung QRIS (Semua E-Wallet & Mobile Banking), GoPay, DANA, OVO, BCA Virtual Account, dan Mandiri Virtual Account.
+- 🧾 **Tanda Terima Digital & Cetak Bukti**: Invoice transaksi resmi dengan nomor pesanan otomatis `#MPxxxxxx`, upload bukti transfer via drag & drop, dan tombol cetak receipt (`window.print()`).
 - 🕒 **Pelacakan Status Pesanan**: Lacak status pemrosesan item game secara real-time melalui halaman Riwayat lengkap dengan penomoran `#` otomatis dan tombol aksi icon invoice.
 - 🔐 **Autentikasi Pengguna**: Formulir Masuk dan Pendaftaran Member Baru dengan input icon group, visibilitas kata sandi, dan validasi data.
 
@@ -44,12 +44,12 @@ Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan 
 - 👥 **Manajemen Pengguna**: Pengelolaan akun pelanggan dan administrator beserta status keaktifan melalui modal form ber-icon.
 - 🎟️ **Manajemen Promo & Kupon**: Pembuatan program diskon persentase maupun nominal potongan tetap.
 - 📥 **Laporan & Ekspor Data (CSV)**: Filter laporan berdasarkan periode tanggal dan unduh data ke format spreadsheet CSV.
-- ⚙️ **Pengaturan Sistem**: Konfigurasi nama toko, unggah logo brand & favicon via drag & drop, toggle channel bayar, notifikasi email, dan manajemen kunci API (*Midtrans* & *Digiflazz*).
+- ⚙️ **Pengaturan Sistem**: Konfigurasi nama toko, unggah logo brand & favicon via drag & drop, toggle channel bayar, notifikasi email/WA, dan manajemen kunci API (*Midtrans* & *Digiflazz*).
 
 #### 3. Standar Desain & Interaksi (Design System Standards)
 - 🪟 **Modal Full-Screen Viewport**: Modal overlay responsif (`fixed inset-0 min-h-screen bg-slate-950/85 backdrop-blur-md`) menutup layar secara penuh dengan dialog box di tengah.
 - 🔤 **Form Input Icon Groups**: Seluruh input dan select form dilengkapi icon group pendukung dan teks placeholder yang informatif.
-- 📤 **Drag & Drop File Upload**: Komponen upload file interaktif yang menampilkan hasil kartu preview file (nama, ukuran file, icon tipe, dan tombol hapus).
+- 📤 **Drag & Drop File Upload**: Komponen upload file interaktif yang menampilkan hasil kartu preview file (nama, ukuran file, thumbnail preview, dan tombol hapus).
 - 🔘 **Konsistensi Tombol & Aksi Tabel**: Tombol reguler memiliki icon + teks, sedangkan tombol aksi pada tabel (`<td>`) khusus hanya icon tooltip untuk kerapian visual.
 - 🔢 **Penomoran Tabel Otomatis**: Setiap baris tabel dilengkapi kolom nomor urut `#` yang terisi secara otomatis.
 
@@ -63,13 +63,12 @@ Sebelum memasang dan menjalankan proyek ini, pastikan sistem Anda telah memenuhi
 - **NPM**: Versi `9.x` atau lebih baru
 - **Git**: Versi `2.x` atau lebih baru
 - **Web Browser**: Google Chrome, Mozilla Firefox, Microsoft Edge, atau Safari versi modern
-- **Web Server Lokal (Opsional)**: Laragon, XAMPP, Live Server (VS Code), atau `npx serve`
 
 ---
 
-## 🚀 Panduan Instalasi
+## 🚀 Panduan Instalasi & Menjalankan Proyek
 
-Ikuti langkah-langkah berikut untuk mengunduh dan menyiapkan proyek di komputer lokal:
+Ikuti langkah-langkah berikut untuk mengunduh, memasang dependensi, dan menjalankan server secara manual di komputer lokal:
 
 ### 1. Kloning Repositori
 ```bash
@@ -82,38 +81,35 @@ cd app_mptopupgames_tailwindcss
 npm install
 ```
 
-### 3. Kompilasi Aset CSS Tailwind
+### 3. Jalankan Server Pengembangan (Vite Dev Server)
+Jalankan perintah berikut di terminal:
 ```bash
-npm run build:css
+npm run dev
+```
+Setelah dijalankan, buka browser di alamat yang tertera pada terminal:
+👉 **`http://localhost:3000`**
+
+### 4. Build untuk Lingkungan Produksi (Opsional)
+Untuk mengompilasi seluruh kode sumber menjadi bundle produksi terminifikasi:
+```bash
+npm run build
+```
+
+### 5. Preview Hasil Build Produksi (Opsional)
+Untuk menguji hasil build produksi secara lokal:
+```bash
+npm run preview
 ```
 
 ---
 
-## 💻 Penggunaan & Alur Kerja
-
-### 🛠️ Perintah Pengembangan
+## 💻 Rangkuman Perintah Terminal
 
 | Perintah Terminal | Deskripsi Fungsi |
 | :--- | :--- |
-| `npm run build:css` | Mengompilasi dan meminifikasi file CSS untuk kebutuhan produksi (`assets/css/style.css`). |
-| `npm run watch:css` | Memantau perubahan file HTML/JS secara otomatis dan me-rebuild CSS secara instan. |
-
-### 🌐 Menjalankan Aplikasi
-
-1. **Menggunakan Live Server / Localhost**:
-   - Buka direktori proyek di VS Code dan klik **Go Live** via ekstensi *Live Server*.
-   - Atau akses melalui virtual host lokal (contoh: `http://localhost/tailwind-web-topup-games` di Laragon/XAMPP).
-   - Atau gunakan modul statis Node.js:
-     ```bash
-     npx serve .
-     ```
-
-2. **Navigasi Halaman Utama**:
-   - **Beranda Toko**: Buka `index.html`
-   - **Katalog & Checkout**: Buka `pages/produk.html`
-   - **Riwayat Transaksi**: Buka `pages/riwayat.html`
-   - **Portal Admin**: Buka `admin/index.html`
-   - **Halaman Masuk**: Buka `auth/login.html`
+| `npm run dev` | Menjalankan server pengembangan lokal (Vite) dengan *Hot Module Replacement (HMR)* pada port 3000. |
+| `npm run build` | Mengompilasi dan membundle aplikasi Vue 3 ke dalam direktori `dist/` untuk deployment produksi. |
+| `npm run preview` | Menjalankan server lokal untuk menguji build produksi yang ada di direktori `dist/`. |
 
 ---
 
@@ -121,37 +117,52 @@ npm run build:css
 
 ```
 tailwind-web-topup-games/
-├── .gitignore                 # Daftar file & direktori yang diabaikan oleh Git
-├── package.json               # Konfigurasi dependensi npm & build scripts
-├── tailwind.config.js         # Konfigurasi Tailwind CSS (Color Palette & Content Paths)
+├── index.html                   # HTML Entrypoint Vite
+├── package.json                 # Dependensi Vue 3, Vite, Vue Router, Pinia & Tailwind
+├── vite.config.js               # Konfigurasi Vite & Alias path (@/ -> src/)
+├── tailwind.config.js           # Konfigurasi Tailwind CSS (Color Palette & Content Paths)
+├── postcss.config.js            # PostCSS plugin (Tailwind + Autoprefixer)
+├── public/                      # Aset Statis Publik (Favicon, Logo, Images)
+│   └── images/                  # Aset grafis SVG vektor & logo pembayaran
 ├── src/
-│   └── input.css              # Entrypoint CSS Tailwind & custom layer styling
-├── index.html                 # Halaman Beranda (Landing Page)
-├── pages/                     # Alur Transaksi & Pelanggan
-│   ├── produk.html            # Halaman Checkout & Pilihan SKU Diamond
-│   ├── konfirmasi.html        # Bukti Pembayaran Digital (+ Print Receipt)
-│   └── riwayat.html           # Riwayat & Pelacakan Status Pesanan
-├── auth/                      # Modul Autentikasi Pengguna
-│   ├── login.html             # Halaman Masuk Akun
-│   └── register.html          # Halaman Pendaftaran Member Baru
-├── admin/                     # Dashboard Pengelolaan Administrator
-│   ├── index.html             # Dashboard Ringkasan & Metrik Penjualan
-│   ├── pesanan.html           # Manajemen & Verifikasi Pesanan Masuk
-│   ├── produk.html            # Manajemen Katalog Game & Varian SKU
-│   ├── pengguna.html          # Manajemen Akun Pengguna & Role
-│   ├── promo.html             # Manajemen Kupon Diskon & Cashback
-│   ├── laporan.html           # Laporan Analitik & Ekspor CSV
-│   └── pengaturan.html        # Konfigurasi Sistem, Payment Channel & Kredensial API
-├── assets/                    # Aset Statis Bersama
-│   ├── css/
-│   │   └── style.css          # Output CSS terkompilasi & terminifikasi
-│   ├── js/
-│   │   ├── data.js            # Mock Database & Sinkronisasi LocalStorage
-│   │   └── main.js            # Format Angka Mata Uang & Navigasi Helper
-│   ├── vendor/
-│   │   └── fontawesome/       # Font Awesome 6 Offline (CSS & Webfonts)
-│   └── images/                # Asset Gambar & Logo
-└── readme.md                  # Dokumentasi Resmi Proyek
+│   ├── main.js                  # Entrypoint aplikasi (Inisialisasi Vue, Router, Pinia, CSS)
+│   ├── App.vue                  # Root Component Vue
+│   ├── assets/
+│   │   └── css/
+│   │       └── main.css         # Tailwind directives & global dark gaming styling
+│   ├── components/              # Komponen Modular & Reusable
+│   │   ├── common/
+│   │   │   ├── Navbar.vue       # Header navigasi pelanggan dengan pencarian & link
+│   │   │   ├── Footer.vue       # Footer resmi beranda & customer support
+│   │   │   ├── Modal.vue        # Universal full-screen viewport modal dialog
+│   │   │   └── DragDropUpload.vue # Drag & Drop file uploader dengan live file card preview
+│   ├── layouts/
+│   │   ├── DefaultLayout.vue    # Layout utama pelanggan (Navbar + Content + Footer)
+│   │   └── AdminLayout.vue      # Layout portal administrator (Sidebar + Topbar + Content)
+│   ├── router/
+│   │   └── index.js             # Definisi rute SPA (Vue Router 4)
+│   ├── stores/
+│   │   ├── gamesStore.js        # Store Pinia: Katalog game, varian SKU, CRUD Admin
+│   │   ├── ordersStore.js       # Store Pinia: Checkout aktif, riwayat transaksi, filter
+│   │   ├── promoStore.js        # Store Pinia: Kupon diskon, validasi promo
+│   │   └── usersStore.js        # Store Pinia: Manajemen pengguna & admin
+│   └── views/                   # Tampilan Rute Halaman
+│       ├── HomeView.vue         # Halaman Beranda (Landing Page & Hero Slider)
+│       ├── ProductDetailView.vue# Halaman Checkout Game (5-Step Form, SKU, Pembayaran)
+│       ├── ConfirmationView.vue # Bukti Pembayaran Digital (Invoice + Cetak Bukti)
+│       ├── OrderHistoryView.vue # Halaman Lacak Pesanan & Riwayat Transaksi (# Auto-numbered)
+│       ├── auth/
+│       │   ├── LoginView.vue    # Halaman Masuk Akun
+│       │   └── RegisterView.vue # Halaman Registrasi Member Baru
+│       └── admin/
+│           ├── DashboardView.vue# Ringkasan KPI & Pesanan Masuk
+│           ├── OrdersView.vue   # Kelola Status Pesanan & Modal Edit
+│           ├── ProductsView.vue # Kelola Katalog Game & Modal Varian SKU
+│           ├── UsersView.vue    # Kelola Data Pengguna & Modal Tambah/Edit
+│           ├── PromoView.vue    # Kelola Program Promo & Modal Kupon
+│           ├── ReportsView.vue  # Laporan Analitik & Ekspor CSV
+│           └── SettingsView.vue # Tab Pengaturan (Umum, Bayar, Notif, API Gateway)
+└── README.md                    # Dokumentasi Resmi Proyek
 ```
 
 ---

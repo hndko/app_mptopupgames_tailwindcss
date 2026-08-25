@@ -2,8 +2,12 @@
   "name": "mptopup-web",
   "version": "1.0.0",
   "description": "Platform Top Up Game Online Resmi, Cepat & Terpercaya",
+  "type": "module",
   "main": "index.html",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --minify",
     "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/style.css --watch"
   },
@@ -17,6 +21,15 @@
   "license": "ISC",
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",
-    "tailwindcss": "^3.4.1"
+    "@vitejs/plugin-vue": "^5.2.4",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.4.21"
+  },
+  "dependencies": {
+    "pinia": "^2.3.1",
+    "vue": "^3.5.41",
+    "vue-router": "^4.6.4"
   }
 }
