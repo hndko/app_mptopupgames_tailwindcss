@@ -208,6 +208,12 @@
                 <span>Syarat &amp; Ketentuan</span>
               </router-link>
             </li>
+            <li>
+              <router-link to="/kebijakan-privasi" class="hover:text-sky-400 transition-colors flex items-center gap-2">
+                <i class="fas fa-chevron-right text-[9px] text-slate-600"></i>
+                <span>Kebijakan Privasi</span>
+              </router-link>
+            </li>
           </ul>
         </div>
 
@@ -310,6 +316,10 @@
           <span class="hidden sm:inline text-slate-700">&bull;</span>
           <router-link to="/syarat-ketentuan" class="hover:text-sky-400 transition-colors">
             Syarat &amp; Ketentuan
+          </router-link>
+          <span class="hidden sm:inline text-slate-700">&bull;</span>
+          <router-link to="/kebijakan-privasi" class="hover:text-sky-400 transition-colors">
+            Kebijakan Privasi
           </router-link>
           <span class="hidden sm:inline text-slate-700">&bull;</span>
           <p>Didesain untuk Komunitas Gamers Indonesia</p>

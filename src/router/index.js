@@ -16,6 +16,7 @@ import CalculatorView from '@/views/public/CalculatorView.vue';
 import ContactView from '@/views/public/ContactView.vue';
 import ReviewsView from '@/views/public/ReviewsView.vue';
 import TermsView from '@/views/public/TermsView.vue';
+import PrivacyView from '@/views/public/PrivacyView.vue';
 
 // Auth Views
 import LoginView from '@/views/auth/LoginView.vue';
@@ -53,7 +54,9 @@ const routes = [
       { path: 'hubungi-kami', name: 'Contact', component: ContactView },
       { path: 'ulasan', name: 'Reviews', component: ReviewsView },
       { path: 'syarat-ketentuan', name: 'Terms', component: TermsView },
-      { path: 'terms', redirect: '/syarat-ketentuan' }
+      { path: 'terms', redirect: '/syarat-ketentuan' },
+      { path: 'kebijakan-privasi', name: 'Privacy', component: PrivacyView },
+      { path: 'privacy', redirect: '/kebijakan-privasi' }
     ]
   },
 
