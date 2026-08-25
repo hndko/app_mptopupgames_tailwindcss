@@ -49,6 +49,6 @@
     <!-- Main Title -->
     <text x="0" y="50" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="44" fill="#ffffff" letter-spacing="6">VALORANT</text>
     <text x="0" y="90" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="18" fill="#ece8e1" letter-spacing="3">POINTS (VP)</text>
-    <text x="0" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="14" fill="#94a3b8" letter-spacing="1">Riot Games &bull; Proses Instan IDR</text>
+    <text x="0" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="14" fill="#94a3b8" letter-spacing="1">Riot Games &#8226; Proses Instan IDR</text>
   </g>
 </svg>

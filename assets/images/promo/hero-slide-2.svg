@@ -35,7 +35,7 @@
     <g transform="translate(0, 240)">
       <rect x="0" y="0" width="220" height="52" rx="14" fill="url(#hvalRed)" filter="url(#hglow2)"/>
       <rect x="0" y="0" width="220" height="52" rx="14" fill="url(#hvalRed)"/>
-      <text x="110" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="15" fill="#ffffff" letter-spacing="1">BELI VP SEKARANG &rarr;</text>
+      <text x="110" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="15" fill="#ffffff" letter-spacing="1">BELI VP SEKARANG &#8594;</text>
     </g>
   </g>
 

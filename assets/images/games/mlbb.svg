@@ -52,6 +52,6 @@
     <!-- Main Title -->
     <text x="0" y="45" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="34" fill="#ffffff" letter-spacing="1">MOBILE LEGENDS</text>
     <text x="0" y="85" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="20" fill="url(#gold)" letter-spacing="4">BANG BANG</text>
-    <text x="0" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="14" fill="#94a3b8" letter-spacing="1">Moonton &bull; Top Up Diamond Instan</text>
+    <text x="0" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="14" fill="#94a3b8" letter-spacing="1">Moonton &#8226; Top Up Diamond Instan</text>
   </g>
 </svg>
