@@ -1,128 +1,209 @@
 # 🌐 Panduan Deployment Server Produksi: MPTopUp
 
-Dokumentasi ini menyediakan panduan langkah demi langkah untuk melakukan deploy aplikasi web **MPTopUp (Vue 3 + Vite + Tailwind CSS)** ke berbagai platform hosting modern: **Vercel**, **Cloudflare Pages**, **Nginx VPS (Ubuntu/Debian)**, dan **Shared Hosting (cPanel)**.
+Dokumentasi ini menyediakan panduan lengkap dan terstruktur untuk melakukan deployment aplikasi web **MPTopUp (Vue 3 + Vite + Tailwind CSS)** ke berbagai lingkungan server: **VPS dengan aaPanel**, **VPS Linux Murni (Ubuntu/Debian Nginx)**, **Vercel**, **Cloudflare Pages**, dan **Shared Hosting (cPanel)**.
 
 ---
 
 ## 📑 DAFTAR ISI
-1. [Deploy ke Vercel (Rekomendasi Terbaik)](#1-deploy-ke-vercel-rekomendasi-terbaik)
-2. [Deploy ke Cloudflare Pages (Gratis & Ultra Cepat)](#2-deploy-ke-cloudflare-pages-gratis--ultra-cepat)
-3. [Deploy ke Nginx VPS / Linux Server](#3-deploy-ke-nginx-vps--linux-server)
-4. [Deploy ke Shared Hosting / cPanel](#4-deploy-ke-shared-hosting--cpanel)
+1. [Deploy ke VPS dengan aaPanel (Rekomendasi Panel GUI)](#1-deploy-ke-vps-dengan-aapanel-rekomendasi-panel-gui)
+2. [Deploy ke VPS Linux Murni (Ubuntu/Debian Nginx)](#2-deploy-ke-vps-linux-murni-ubuntudebian-nginx)
+3. [Deploy ke Vercel (Edge Serverless)](#3-deploy-ke-vercel-edge-serverless)
+4. [Deploy ke Cloudflare Pages (Free Global CDN)](#4-deploy-ke-cloudflare-pages-free-global-cdn)
+5. [Deploy ke Shared Hosting / cPanel](#5-deploy-ke-shared-hosting--cpanel)
 
 ---
 
-## 1. Deploy ke Vercel (Rekomendasi Terbaik)
+## 1. Deploy ke VPS dengan aaPanel (Rekomendasi Panel GUI)
 
-Vercel sangat optimal untuk aplikasi Vue 3 Vite dengan dukungan otomatis HTTPS global, Edge Network, dan zero-config routing.
+aaPanel adalah web control panel gratis yang sangat populer untuk mengelola VPS dengan antarmuka grafis (GUI) yang ramah pengguna.
 
-### Langkah-langkah:
-1. Buka [https://vercel.com](https://vercel.com) dan login dengan akun GitHub Anda.
-2. Klik tombol **Add New...** -> **Project**.
-3. Pilih repositori GitHub Anda: `app_mptopupgames_tailwindcss`.
-4. Pada bagian **Configure Project**:
-   - **Framework Preset**: Pilih `Vite`.
-   - **Root Directory**: `./` (Default).
-   - **Build Command**: `npm run build` (Default).
-   - **Output Directory**: `dist` (Default).
-5. Pada bagian **Environment Variables**, tambahkan:
-   - `VITE_SUPABASE_URL`: *(URL Supabase Anda)*
-   - `VITE_SUPABASE_ANON_KEY`: *(Anon Key Supabase Anda)*
-6. Klik **Deploy**.
-7. Dalam waktu ~30 detik, website Anda akan live dengan domain `*.vercel.app` dan sertifikat SSL aktif otomatis.
-
-> File konfigurasi routing dan security headers telah disiapkan di [`vercel.json`](../vercel.json).
-
----
-
-## 2. Deploy ke Cloudflare Pages (Gratis & Ultra Cepat)
-
-Cloudflare Pages menyediakan hosting statis gratis tanpa batas bandwidth dengan jaringan CDN terluas di dunia.
-
-### Langkah-langkah:
-1. Buka [https://dash.cloudflare.com/](https://dash.cloudflare.com/) dan login.
-2. Pilih menu **Workers & Pages** -> Klik **Create application** -> Pilih tab **Pages**.
-3. Klik **Connect to Git** dan pilih repositori `app_mptopupgames_tailwindcss`.
-4. Pada **Build settings**:
-   - **Framework preset**: `Vue` atau `Vite`.
-   - **Build command**: `npm run build`.
-   - **Build output directory**: `dist`.
-5. Di bagian **Environment variables (production)**, tambahkan `VITE_SUPABASE_URL` dan `VITE_SUPABASE_ANON_KEY`.
-6. Klik **Save and Deploy**.
-
-> File SPA fallback [`public/_redirects`](../public/_redirects) dan headers [`public/_headers`](../public/_headers) akan otomatis disalin ke folder `dist` saat proses build.
-
----
-
-## 3. Deploy ke Nginx VPS / Linux Server
-
-Jika Anda menggunakan VPS Ubuntu/Debian di DigitalOcean, Linode, AWS EC2, atau Biznet:
-
-### A. Persiapan Server
+### Langkah 1: Pasang aaPanel & Web Server LNMP
+Jika VPS Anda masih baru:
 ```bash
-# Update server & pasang Node.js, Git, Nginx, Certbot
+# Untuk Ubuntu / Debian
+wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh aapanel
+```
+Setelah instalasi selesai, buka URL admin aaPanel di browser, lalu instal stack **LNMP (Nginx 1.22+, MySQL/MariaDB opsional, PHP opsional)**.
+
+---
+
+### Langkah 2: Tambahkan Website Baru di aaPanel
+1. Di dashboard aaPanel, buka menu **Website** -> Klik tombol **Add site**.
+2. Masukkan nama domain Anda (misalnya: `mptopup.com` dan `www.mptopup.com`).
+3. Pada **Site directory**, arahkan ke:
+   - `/www/wwwroot/mptopup.com/dist` *(Jika clone git langsung di server)*, ATAU
+   - `/www/wwwroot/mptopup.com` *(Jika mengunggah file zip hasil build `dist/`)*.
+4. Klik **Submit**.
+
+---
+
+### Langkah 3: Konfigurasi URL Rewrite (Wajib untuk Vue SPA)
+Agar tidak terjadi error `404 Not Found` saat halaman di-*refresh* di rute selain beranda (seperti `/produk`, `/riwayat`, `/modules`):
+1. Pada daftar website di aaPanel, klik nama website Anda untuk membuka **Site Settings**.
+2. Pilih tab menu **URL rewrite**.
+3. Masukkan konfigurasi Nginx berikut ke dalam editor teks:
+```nginx
+location / {
+    try_files $uri $uri/ /index.html;
+}
+```
+4. Klik **Save**.
+
+---
+
+### Langkah 4: Aktifkan SSL / HTTPS Gratis (Let's Encrypt)
+1. Masih di dalam menu **Site Settings**, pilih tab **SSL**.
+2. Pilih sub-tab **Let's Encrypt**.
+3. Centang semua domain Anda (`mptopup.com` dan `www.mptopup.com`).
+4. Klik **Apply**.
+5. Setelah sertifikat terbit, aktifkan sakelar **Force HTTPS** di pojok kanan atas.
+
+---
+
+### Langkah 5: Deployment Kode Proyek (2 Pilihan)
+
+#### Opsi A: Build Langsung di Server via aaPanel Terminal (Direkomendasikan)
+1. Buka menu **App Store** di aaPanel -> Cari dan pasang **Node.js Version Manager**.
+2. Di dalam Node.js Version Manager, pasang versi Node.js **v20.x LTS**.
+3. Buka menu **Terminal** di aaPanel (atau SSH):
+```bash
+cd /www/wwwroot/mptopup.com
+git clone https://github.com/hndko/app_mptopupgames_vue3.git .
+npm install
+cp .env.example .env
+nano .env # Isi VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY
+npm run build
+```
+4. Pastikan di **Site Settings** -> **Site directory**, `Running directory` diarahkan ke `/dist`.
+
+#### Opsi B: Upload Manual via File Manager aaPanel
+1. Di komputer lokal Anda, jalankan `npm run build`.
+2. Buka menu **Files** di aaPanel -> Masuk ke folder `/www/wwwroot/mptopup.com`.
+3. Unggah seluruh isi file yang ada di dalam folder `dist/` komputer lokal Anda (`index.html`, `.htaccess`, folder `assets/`, `images/`).
+4. Ekstrak file dan simpan.
+
+---
+
+## 2. Deploy ke VPS Linux Murni (Ubuntu/Debian Nginx)
+
+Untuk VPS standalone (DigitalOcean Droplet, Linode, AWS EC2, IDCloudHost, Biznet Gio) tanpa control panel:
+
+### A. Persiapan Sistem & Instalasi Nginx + Node.js
+```bash
+# Update sistem
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y git nginx curl certbot python3-certbot-nginx
+
+# Pasang Nginx, Git, Curl, dan Certbot SSL
+sudo apt install -y nginx git curl certbot python3-certbot-nginx
 
 # Pasang Node.js 20 LTS
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
-### B. Clone Proyek & Build
+### B. Clone Repositori & Build
 ```bash
-# Masuk ke direktori web server
+# Masuk ke direktori web
 cd /var/www
-sudo git clone https://github.com/hndko/app_mptopupgames_tailwindcss.git mptopup
+sudo git clone https://github.com/hndko/app_mptopupgames_vue3.git mptopup
 cd /var/www/mptopup
 
-# Pasang dependensi & setup .env
+# Pasang dependensi dan environment
 sudo npm install
 sudo cp .env.example .env
 sudo nano .env # Masukkan VITE_SUPABASE_URL & ANON KEY
 
-# Build aplikasi ke folder dist
+# Kompilasi aplikasi produksi
 sudo npm run build
 
-# Beri permission ke www-data
+# Atur kepemilikan direktori ke user web server
 sudo chown -R www-data:www-data /var/www/mptopup/dist
 sudo chmod -R 755 /var/www/mptopup/dist
 ```
 
-### C. Konfigurasi Nginx
-Buat file konfigurasi baru di `/etc/nginx/sites-available/mptopup.conf`:
+### C. Konfigurasi Server Block Nginx
+Buat file konfigurasi baru:
 ```bash
 sudo nano /etc/nginx/sites-available/mptopup.conf
 ```
-Salin template konfigurasi dari [`nginx.conf.example`](../nginx.conf.example) yang sudah disediakan.
+Salin template konfigurasi dari [`nginx.conf.example`](../nginx.conf.example):
+```nginx
+server {
+    listen 80;
+    server_name domainanda.com www.domainanda.com;
 
-Aktifkan konfigurasi dan restart Nginx:
+    root /var/www/mptopup/dist;
+    index index.html;
+
+    # Gzip Compression
+    gzip on;
+    gzip_types text/plain text/css text/xml application/json application/javascript image/svg+xml;
+
+    # Security Headers
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+    # SPA History Mode Fallback
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Static Assets Caching
+    location ~* \.(?:ico|css|js|gif|jpe?g|png|svg|woff2?|ttf)$ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+}
+```
+
+Aktifkan konfigurasi Nginx:
 ```bash
 sudo ln -s /etc/nginx/sites-available/mptopup.conf /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-### D. Pasang SSL Gratis (Let's Encrypt)
+### D. Pasang Sertifikat SSL Gratis (Let's Encrypt)
 ```bash
 sudo certbot --nginx -d domainanda.com -d www.domainanda.com
 ```
 
 ---
 
-## 4. Deploy ke Shared Hosting / cPanel
+## 3. Deploy ke Vercel (Edge Serverless)
 
-Untuk hosting berbasis Apache / cPanel (Niagahoster, Hostinger, DomaiNesia, dll.):
+1. Buka [https://vercel.com](https://vercel.com) dan login via GitHub.
+2. Klik **Add New...** -> **Project** -> Impor `app_mptopupgames_vue3`.
+3. Pada **Configure Project**:
+   - Framework Preset: `Vite`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+4. Tambahkan **Environment Variables**:
+   - `VITE_SUPABASE_URL`: *(URL Supabase)*
+   - `VITE_SUPABASE_ANON_KEY`: *(Anon Key)*
+5. Klik **Deploy**. Selesai!
 
-### Langkah-langkah:
-1. **Lakukan Build Lokal**:
-   Di komputer lokal Anda, jalankan:
-   ```bash
-   npm run build
-   ```
-2. Buka folder `d:\laragon\www\tailwind-web-topup-games\dist`.
-3. Kompres seluruh isi di dalam folder `dist/` menjadi file `mptopup-dist.zip` (pastikan file `.htaccess` di dalam folder `dist` ikut terkompres).
-4. Buka **cPanel** -> **File Manager** -> masuk ke direktori `public_html` (atau folder subdomain Anda).
-5. Unggah file `mptopup-dist.zip`, lalu klik kanan dan pilih **Extract**.
-6. Pastikan file `index.html`, `.htaccess`, dan folder `assets/` berada langsung di dalam `public_html`.
-7. Buka domain Anda di browser. Semua routing SPA dan refresh halaman akan berjalan lancar berkat aturan di `.htaccess`.
+---
+
+## 4. Deploy ke Cloudflare Pages (Free Global CDN)
+
+1. Buka [https://dash.cloudflare.com/](https://dash.cloudflare.com/) -> **Workers & Pages** -> **Create application** -> **Pages**.
+2. Hubungkan ke GitHub dan pilih repositori `app_mptopupgames_vue3`.
+3. Build Settings:
+   - Build command: `npm run build`
+   - Build output directory: `dist`
+4. Masukkan Environment Variables `VITE_SUPABASE_URL` dan `VITE_SUPABASE_ANON_KEY`.
+5. Klik **Save and Deploy**.
+
+---
+
+## 5. Deploy ke Shared Hosting / cPanel
+
+1. Di komputer lokal, jalankan `npm run build`.
+2. Buka folder `dist/` dan kompres semua file di dalamnya menjadi `dist.zip` (pastikan file `.htaccess` di dalam `dist` ikut terkompres).
+3. Buka **cPanel** -> **File Manager** -> masuk ke folder `public_html`.
+4. Unggah `dist.zip` dan klik **Extract**.
+5. Pastikan `index.html` dan `.htaccess` berada langsung di root `public_html`.
+6. Website siap diakses secara live.
