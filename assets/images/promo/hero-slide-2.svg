@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hbg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#190d12"/>
+      <stop offset="50%" stop-color="#2a121d"/>
+      <stop offset="100%" stop-color="#0a0508"/>
+    </linearGradient>
+    <linearGradient id="hvalRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4655"/>
+      <stop offset="100%" stop-color="#e11d48"/>
+    </linearGradient>
+    <filter id="hglow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="25" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="480" rx="28" fill="url(#hbg2)"/>
+  
+  <circle cx="950" cy="240" r="280" fill="#ff4655" opacity="0.18" filter="url(#hglow2)"/>
+  <circle cx="200" cy="400" r="200" fill="#e11d48" opacity="0.1" filter="url(#hglow2)"/>
+
+  <!-- Left Content Info -->
+  <g transform="translate(80, 110)">
+    <rect x="0" y="0" width="220" height="34" rx="17" fill="#ff4655" fill-opacity="0.2" stroke="#ff4655" stroke-width="1.5"/>
+    <text x="22" y="22" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="13" fill="#ff4655" letter-spacing="2">🎯 VALORANT NIGHT MARKET</text>
+
+    <text x="0" y="90" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="44" fill="#ffffff">TOP UP VALORANT POINTS</text>
+    <text x="0" y="145" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="44" fill="#ff4655">BONUS +10% EKSTRA VP</text>
+
+    <text x="0" y="200" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="500" font-size="18" fill="#94a3b8">
+      Selesaikan pesananmu dalam hitungan detik via Riot ID server Indonesia.
+    </text>
+
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="220" height="52" rx="14" fill="url(#hvalRed)" filter="url(#hglow2)"/>
+      <rect x="0" y="0" width="220" height="52" rx="14" fill="url(#hvalRed)"/>
+      <text x="110" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="15" fill="#ffffff" letter-spacing="1">BELI VP SEKARANG &rarr;</text>
+    </g>
+  </g>
+
+  <!-- Right Graphic Illustration (Valorant Tactical Shield) -->
+  <g transform="translate(950, 240) scale(1.4)">
+    <path d="M -80,-80 L -10,-80 L -30,40 L -80,-30 Z" fill="url(#hvalRed)" filter="url(#hglow2)"/>
+    <path d="M -80,-80 L -10,-80 L -30,40 L -80,-30 Z" fill="url(#hvalRed)"/>
+    <path d="M 80,-80 L 15,40 L -5,75 L 5,30 L 45,-80 Z" fill="#ece8e1"/>
+    <rect x="-8" y="-70" width="16" height="16" fill="#ff4655" transform="rotate(45)"/>
+  </g>
+</svg>
