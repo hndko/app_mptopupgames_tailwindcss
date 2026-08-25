@@ -19,71 +19,66 @@
       </div>
     </div>
 
-    <!-- Hero Carousel Slider Section -->
+    <!-- Hero Carousel Slider Section (Fully Responsive Proportional Banner) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900">
-        <div class="relative h-64 sm:h-80 md:h-[400px] overflow-hidden">
+      <div 
+        class="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 group select-none"
+        @mouseenter="pauseSlideTimer"
+        @mouseleave="resumeSlideTimer"
+      >
+        <!-- Responsive Proportional Aspect Ratio Container (1200x480 ratio) -->
+        <div class="relative w-full aspect-[16/8] sm:aspect-[2.5/1] overflow-hidden">
           <div 
             v-for="(slide, idx) in gamesStore.heroSlides" 
             :key="slide.id"
-            :class="[idx === currentSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 pointer-events-none z-0', 'absolute inset-0 transition-all duration-700 ease-out flex items-center']"
+            :class="[
+              idx === currentSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-98 pointer-events-none z-0', 
+              'absolute inset-0 transition-all duration-700 ease-out'
+            ]"
           >
-            <!-- Background Image with Gradient Overlay -->
-            <img :src="slide.banner" :alt="slide.title" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
-
-            <!-- Content Over Slide -->
-            <div class="relative z-20 p-6 sm:p-12 md:p-16 max-w-xl space-y-3 sm:space-y-4">
-              <span class="inline-block px-3 py-1 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 text-[11px] font-bold tracking-wider uppercase">
-                {{ slide.badge }}
-              </span>
-              <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
-                {{ slide.title }} <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-amber-300">
-                  {{ slide.highlight }}
-                </span>
-              </h1>
-              <p class="text-xs sm:text-sm text-slate-300 line-clamp-2">
-                {{ slide.description }}
-              </p>
-              <div class="pt-2">
-                <router-link 
-                  :to="`/produk/${slide.gameId}`" 
-                  class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white font-black text-xs sm:text-sm shadow-xl shadow-sky-600/30 transition-all transform hover:-translate-y-0.5 btn-press"
-                >
-                  <span>Top Up Sekarang</span>
-                  <i class="fas fa-bolt text-xs"></i>
-                </router-link>
-              </div>
-            </div>
+            <router-link 
+              :to="`/produk/${slide.gameId}`" 
+              class="block w-full h-full cursor-pointer focus:outline-none"
+              :title="slide.title"
+            >
+              <img 
+                :src="slide.banner" 
+                :alt="slide.title" 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+                loading="eager"
+              />
+            </router-link>
           </div>
 
-          <!-- Slider Navigation Controls -->
+          <!-- Slider Arrow Controls (Sleek Glassmorphic) -->
           <button 
             type="button" 
-            @click="prevSlide" 
+            @click.stop="prevSlide" 
             aria-label="Slide Sebelumnya"
-            class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-slate-950/75 hover:bg-sky-600 border border-slate-700/80 hover:border-sky-500 text-white flex items-center justify-center backdrop-blur transition-all z-20 shadow-lg"
+            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-slate-950/80 hover:bg-sky-600 border border-slate-700/80 hover:border-sky-500 text-white flex items-center justify-center backdrop-blur-md transition-all z-20 shadow-xl opacity-80 sm:opacity-0 group-hover:opacity-100 btn-press"
           >
-            <i class="fas fa-chevron-left text-sm sm:text-base"></i>
+            <i class="fas fa-chevron-left text-xs sm:text-sm"></i>
           </button>
           <button 
             type="button" 
-            @click="nextSlide" 
+            @click.stop="nextSlide" 
             aria-label="Slide Selanjutnya"
-            class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-slate-950/75 hover:bg-sky-600 border border-slate-700/80 hover:border-sky-500 text-white flex items-center justify-center backdrop-blur transition-all z-20 shadow-lg"
+            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-slate-950/80 hover:bg-sky-600 border border-slate-700/80 hover:border-sky-500 text-white flex items-center justify-center backdrop-blur-md transition-all z-20 shadow-xl opacity-80 sm:opacity-0 group-hover:opacity-100 btn-press"
           >
-            <i class="fas fa-chevron-right text-sm sm:text-base"></i>
+            <i class="fas fa-chevron-right text-xs sm:text-sm"></i>
           </button>
 
-          <!-- Dots Indicator -->
-          <div class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20 bg-slate-950/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-800">
+          <!-- Interactive Dots Indicator -->
+          <div class="absolute bottom-2.5 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 z-20 bg-slate-950/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-800/80 shadow-lg">
             <button 
               v-for="(_, idx) in gamesStore.heroSlides" 
               :key="idx"
               type="button" 
-              @click="goToSlide(idx)"
-              :class="[idx === currentSlide ? 'w-7 bg-sky-400' : 'w-2.5 bg-slate-600 hover:bg-slate-500', 'h-2.5 rounded-full transition-all']" 
+              @click.stop="goToSlide(idx)"
+              :class="[
+                idx === currentSlide ? 'w-6 sm:w-7 bg-sky-400 shadow-md shadow-sky-400/50' : 'w-2 sm:w-2.5 bg-slate-600/80 hover:bg-slate-400', 
+                'h-2 sm:h-2.5 rounded-full transition-all duration-300'
+              ]" 
               :aria-label="'Slide ' + (idx + 1)"
             ></button>
           </div>
@@ -492,6 +487,19 @@ function goToSlide(idx) {
   currentSlide.value = idx;
 }
 
+function pauseSlideTimer() {
+  if (slideTimer) {
+    clearInterval(slideTimer);
+    slideTimer = null;
+  }
+}
+
+function resumeSlideTimer() {
+  if (!slideTimer) {
+    slideTimer = setInterval(nextSlide, 5000);
+  }
+}
+
 function copyCode(code) {
   navigator.clipboard.writeText(code);
   alert(`Kode kupon "${code}" berhasil disalin!`);
@@ -506,7 +514,7 @@ const faqs = [
 ];
 
 onMounted(() => {
-  slideTimer = setInterval(nextSlide, 5000);
+  resumeSlideTimer();
 
   let totalSeconds = 5 * 3600 + 42 * 60 + 19;
   countdownInterval = setInterval(() => {
@@ -522,7 +530,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if (slideTimer) clearInterval(slideTimer);
+  pauseSlideTimer();
   if (countdownInterval) clearInterval(countdownInterval);
 });
 </script>
