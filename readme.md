@@ -1,14 +1,17 @@
-# 🎮 MPTopUp - Platform Top Up Game Online Cepat, Aman & Resmi
-
-Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan transaksi instan, multi-channel pembayaran, dan sistem manajemen admin terpadu.
+> [!IMPORTANT]
+> **Status Integrasi Backend & API (Untuk Pengembang / Developer Notice)**:  
+> Aplikasi **MPTopUp** saat ini telah mengimplementasikan seluruh antarmuka pengguna (*Frontend UI/UX*), alur checkout 5-langkah, manajemen state (*Pinia*), skema database PostgreSQL Supabase, kalkulator gaming, serta panel administrasi secara lengkap.  
+> **Integrasi langsung ke Server Payment Gateway (Midtrans/Tripay/Xendit) dan Server Provider Game H2H (Digiflazz/VIP Reseller) sengaja belum dihubungkan secara live** agar Anda atau pengembang lain dapat secara bebas mengintegrasikan backend webhook dan API key masing-masing. Panduan integrasi teknis lengkap tersedia di [**`docs/04_INTEGRATION_GUIDE.md`**](docs/04_INTEGRATION_GUIDE.md).
 
 ---
 
 ## 📑 Daftar Isi
 
+- [⚠️ Status Integrasi Backend & API](#-status-integrasi-backend--api-untuk-pengembang--developer-notice)
 - [📖 Deskripsi Proyek](#-deskripsi-proyek)
   - [🎯 Tujuan & Solusi](#-tujuan--solusi)
   - [✨ Fitur Utama](#-fitur-utama)
+- [🔌 Panduan Integrasi Payment & Game Provider](#-panduan-integrasi-payment--game-provider)
 - [⚙️ Prasyarat Sistem](#️-prasyarat-sistem)
 - [🚀 Panduan Instalasi](#-panduan-instalasi)
 - [💻 Penggunaan & Alur Kerja](#-penggunaan--alur-kerja)
@@ -138,7 +141,8 @@ tailwind-web-topup-games/
 ├── docs/                        # Dokumentasi Proyek
 │   ├── 01_LOCAL_DEVELOPMENT_GUIDE.md # Panduan Deploy & Development Lokal (Laragon, Docker)
 │   ├── 02_SUPABASE_SETUP.md          # Panduan Setup Supabase & Google OAuth Lengkap
-│   └── 03_DEPLOYMENT_GUIDE.md        # Panduan Deploy Server (VPS, aaPanel, Vercel, Cloudflare, cPanel)
+│   ├── 03_DEPLOYMENT_GUIDE.md        # Panduan Deploy Server (VPS, aaPanel, Vercel, Cloudflare, cPanel)
+│   └── 04_INTEGRATION_GUIDE.md       # Panduan Integrasi Payment Gateway & Provider API Game
 ├── supabase/                    # Skema Database & Migrasi
 │   └── migrations/
 │       └── 20260825_initial_schema.sql # Skema PostgreSQL, RLS & Trigger
