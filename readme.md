@@ -35,7 +35,7 @@ Platform web top up voucher dan diamond game online resmi 24 jam nonstop dengan 
 - 💳 **Metode Pembayaran Lengkap**: Mendukung QRIS (Semua E-Wallet & Mobile Banking), GoPay, DANA, OVO, BCA Virtual Account, dan Mandiri Virtual Account.
 - 🕒 **Pelacakan Status Pesanan**: Lacak status pemrosesan item game secara real-time melalui halaman Riwayat lengkap dengan penomoran `#` otomatis dan tombol aksi icon invoice.
 - 🔐 **Autentikasi Pengguna & Google OAuth**: Mendukung login instan via **Google OAuth** dan pendaftaran manual dengan enkripsi aman, serta sinkronisasi otomatis ke profil Supabase.
-- 🗄️ **Database Cloud Supabase**: Terintegrasi dengan PostgreSQL Supabase + Row Level Security (RLS) dan panduan setup lengkap di [`docs/SUPABASE_SETUP.md`](docs/SUPABASE_SETUP.md).
+- 🗄️ **Database Cloud Supabase**: Terintegrasi dengan PostgreSQL Supabase + Row Level Security (RLS) dan panduan setup lengkap di [`docs/02_SUPABASE_SETUP.md`](docs/02_SUPABASE_SETUP.md).
 
 #### 2. Sisi Administrator (Admin Dashboard)
 - 📊 **Dashboard Analitik**: Ringkasan omzet bulanan, jumlah transaksi sukses, grafik tren penjualan 7 hari, dan tabel transaksi terkini berpenomoran `#`.
@@ -74,7 +74,7 @@ npm install
 
 # 3. Buat file konfigurasi lingkungan (.env)
 cp .env.example .env
-# (Opsional) Isi VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY sesuai panduan di docs/SUPABASE_SETUP.md
+# (Opsional) Isi VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY sesuai panduan di docs/02_SUPABASE_SETUP.md
 
 # 4. Jalankan server pengembangan lokal
 npm run dev
@@ -118,9 +118,9 @@ tailwind-web-topup-games/
 ├── postcss.config.js            # Plugin PostCSS (Tailwind & Autoprefixer)
 ├── .env.example                 # Template environment variables Supabase
 ├── docs/                        # Dokumentasi Proyek
-│   ├── SUPABASE_SETUP.md        # Panduan Setup Supabase & Google OAuth Lengkap
-│   ├── DEPLOYMENT_GUIDE.md      # Panduan Deploy Server (Vercel, Cloudflare, Nginx, cPanel)
-│   └── LOCAL_DEVELOPMENT_GUIDE.md # Panduan Deploy & Development Lokal (Laragon, Docker)
+│   ├── 01_LOCAL_DEVELOPMENT_GUIDE.md # Panduan Deploy & Development Lokal (Laragon, Docker)
+│   ├── 02_SUPABASE_SETUP.md          # Panduan Setup Supabase & Google OAuth Lengkap
+│   └── 03_DEPLOYMENT_GUIDE.md        # Panduan Deploy Server (VPS, aaPanel, Vercel, Cloudflare, cPanel)
 ├── supabase/                    # Skema Database & Migrasi
 │   └── migrations/
 │       └── 20260825_initial_schema.sql # Skema PostgreSQL, RLS & Trigger

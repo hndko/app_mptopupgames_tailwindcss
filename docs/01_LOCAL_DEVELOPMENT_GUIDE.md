@@ -120,6 +120,6 @@ server: {
 - Lakukan *Hard Refresh* di browser dengan menekan `Ctrl + Shift + R` (atau `Ctrl + F5`) untuk membersihkan cache browser lokal.
 
 ### Q3: Ingin mengaktifkan database Supabase asli?
-1. Ikuti panduan di [`docs/SUPABASE_SETUP.md`](SUPABASE_SETUP.md).
+1. Ikuti panduan di [`02_SUPABASE_SETUP.md`](02_SUPABASE_SETUP.md).
 2. Masukkan URL dan Anon Key ke file `.env`.
 3. Restart Vite (`npm run dev`) agar environment variables baru terbaca.
