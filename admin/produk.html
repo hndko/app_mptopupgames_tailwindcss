@@ -4,456 +4,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Game & Produk - Admin TopUpKuy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #4a5568;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #718096;
-        }
-
-        .sidebar-menu-item.active {
-            background-color: #7c3aed;
-            color: white;
-        }
-
-        .sidebar-menu-item.active i {
-            color: white;
-        }
-
-        .modal {
-            display: none;
-        }
-
-        .modal.open {
-            display: flex;
-        }
-    </style>
+    <title>Game & Varian SKU - MPAdmin</title>
+    <meta name="description" content="Manajemen katalog game dan varian produk diamond atau voucher.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="bg-slate-900 text-slate-200 flex">
+<body class="bg-slate-950 text-slate-100 flex min-h-screen antialiased selection:bg-sky-500 selection:text-white">
 
+    <!-- Sidebar -->
     <aside id="sidebar"
-        class="w-64 bg-slate-800 min-h-screen p-4 space-y-6 fixed md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30">
-        <a href="index.html" class="flex items-center space-x-2 px-2">
-            <i class="fas fa-gem fa-2x text-purple-400"></i>
-            <span
-                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">TopUpKuy</span>
-        </a>
-        <nav class="space-y-2">
-            <a href="index.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tachometer-alt fa-fw text-slate-400"></i>
-                <span>Dashboard</span>
+        class="w-64 bg-slate-900 border-r border-slate-800 p-5 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="space-y-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                        <span class="font-black text-sm tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-tight text-white">MP<span class="text-sky-400">Admin</span></span>
+                </a>
+                <button id="closeSidebarBtn" class="md:hidden text-slate-400 hover:text-white" aria-label="Tutup Menu">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <nav class="space-y-1.5" aria-label="Menu Admin">
+                <a href="index.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gauge-high w-5 text-center text-slate-400"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="pesanan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-receipt w-5 text-center text-slate-400"></i>
+                    <span>Manajemen Pesanan</span>
+                </a>
+                <a href="produk.html"
+                    class="sidebar-menu-item active flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 text-white shadow-sm shadow-sky-600/20 transition-colors">
+                    <i class="fas fa-gamepad w-5 text-center"></i>
+                    <span>Game & Varian SKU</span>
+                </a>
+                <a href="pengguna.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-users w-5 text-center text-slate-400"></i>
+                    <span>Pengguna</span>
+                </a>
+                <a href="promo.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-tags w-5 text-center text-slate-400"></i>
+                    <span>Promo & Kupon</span>
+                </a>
+                <a href="laporan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-chart-line w-5 text-center text-slate-400"></i>
+                    <span>Laporan Analitik</span>
+                </a>
+                <a href="pengaturan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-sliders w-5 text-center text-slate-400"></i>
+                    <span>Pengaturan Sistem</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 space-y-2">
+            <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                <i class="fas fa-arrow-up-right-from-square w-5 text-center"></i>
+                <span>Lihat Website Toko</span>
             </a>
-            <a href="pesanan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-shopping-cart fa-fw text-slate-400"></i>
-                <span>Manajemen Pesanan</span>
-            </a>
-            <a href="produk.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 active">
-                <i class="fas fa-gamepad fa-fw text-slate-400"></i>
-                <span>Manajemen Game & Produk</span>
-            </a>
-            <a href="pengguna.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-users fa-fw text-slate-400"></i>
-                <span>Manajemen Pengguna</span>
-            </a>
-            <a href="promo.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tags fa-fw text-slate-400"></i>
-                <span>Manajemen Promo</span>
-            </a>
-            <a href="laporan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-chart-line fa-fw text-slate-400"></i>
-                <span>Laporan</span>
-            </a>
-            <a href="pengaturan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-cog fa-fw text-slate-400"></i>
-                <span>Pengaturan</span>
-            </a>
-        </nav>
-        <div class="absolute bottom-4 left-4 right-4">
-            <a href="../login.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-red-600 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 bg-slate-700">
-                <i class="fas fa-sign-out-alt fa-fw text-slate-400"></i>
-                <span>Keluar</span>
+            <a href="../auth/login.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/40 transition-colors">
+                <i class="fas fa-right-from-bracket w-5 text-center"></i>
+                <span>Keluar Akun</span>
             </a>
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col">
-        <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-20">
-            <button id="sidebar-toggle" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
-                <i class="fas fa-bars fa-lg"></i>
-            </button>
-            <div class="hidden md:block text-xl font-semibold">
-                Manajemen Game & Produk
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-slate-300 hover:text-white relative">
-                    <i class="fas fa-bell fa-lg"></i>
-                    <span
-                        class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col min-w-0">
+        <header class="bg-slate-900 border-b border-slate-800 h-16 sm:h-20 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40">
+            <div class="flex items-center gap-3">
+                <button id="sidebarToggleBtn" class="md:hidden w-10 h-10 rounded-lg border border-slate-800 bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="relative">
-                    <button id="user-menu-button" class="flex items-center space-x-2 text-slate-300 hover:text-white">
-                        <img src="https://via.placeholder.com/40/FFFFFF/000000/?text=A" alt="Admin Avatar"
-                            class="w-8 h-8 rounded-full object-cover border-2 border-slate-600">
-                        <span>Admin Ganteng</span>
-                        <i class="fas fa-chevron-down fa-xs"></i>
-                    </button>
-                    <div id="user-menu"
-                        class="hidden absolute right-0 mt-2 w-48 bg-slate-700 rounded-md shadow-lg py-1 z-50">
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-600">Profil Saya</a>
-                        <a href="../login.html"
-                            class="block px-4 py-2 text-sm text-red-400 hover:bg-slate-600">Keluar</a>
-                    </div>
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold text-white">Katalog Game & Produk</h2>
+                    <p class="text-xs text-slate-400">Kelola daftar game aktif dan varian SKU nominal top up.</p>
                 </div>
             </div>
+
+            <button type="button" onclick="openAddGameModal()"
+                class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-sky-600/20">
+                <i class="fas fa-plus text-xs"></i> Tambah Game
+            </button>
         </header>
 
-        <main class="flex-1 p-6 space-y-6">
-            <div class="text-sm text-slate-400">
-                <a href="index.html" class="hover:text-purple-400">Admin</a>
-                <span class="mx-2">/</span>
-                <span>Manajemen Game & Produk</span>
-            </div>
-
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-semibold text-white">Daftar Game</h1>
-                <button id="openAddGameModal"
-                    class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center">
-                    <i class="fas fa-plus mr-2"></i> Tambah Game Baru
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-slate-800 shadow-xl rounded-xl p-5">
-                    <img src="https://via.placeholder.com/300x150/7F00FF/FFFFFF/?text=Mobile+Legends"
-                        alt="Mobile Legends" class="w-full h-32 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold mb-1">Mobile Legends</h3>
-                    <p class="text-sm text-slate-400 mb-3">Moonton</p>
-                    <div class="flex justify-between items-center text-sm mb-3">
-                        <span class="text-slate-400">Total Produk: <span
-                                class="font-semibold text-white">12</span></span>
-                        <span class="px-2 py-0.5 text-xs rounded-full bg-green-500 text-green-900">Aktif</span>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button class="flex-1 bg-sky-600 hover:bg-sky-700 text-white text-sm py-2 px-3 rounded-md"
-                            onclick="openManageVariantsModal('Mobile Legends')">
-                            <i class="fas fa-tasks mr-1"></i> Kelola Varian
-                        </button>
-                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm py-2 px-3 rounded-md"
-                            title="Edit Game"><i class="fas fa-edit"></i></button>
-                        <button class="bg-red-600 hover:bg-red-700 text-white text-sm py-2 px-3 rounded-md"
-                            title="Hapus Game"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800 shadow-xl rounded-xl p-5">
-                    <img src="https://via.placeholder.com/300x150/FF69B4/FFFFFF/?text=Valorant" alt="Valorant"
-                        class="w-full h-32 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold mb-1">Valorant</h3>
-                    <p class="text-sm text-slate-400 mb-3">Riot Games</p>
-                    <div class="flex justify-between items-center text-sm mb-3">
-                        <span class="text-slate-400">Total Produk: <span
-                                class="font-semibold text-white">8</span></span>
-                        <span class="px-2 py-0.5 text-xs rounded-full bg-green-500 text-green-900">Aktif</span>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button class="flex-1 bg-sky-600 hover:bg-sky-700 text-white text-sm py-2 px-3 rounded-md"
-                            onclick="openManageVariantsModal('Valorant')">
-                            <i class="fas fa-tasks mr-1"></i> Kelola Varian
-                        </button>
-                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm py-2 px-3 rounded-md"
-                            title="Edit Game"><i class="fas fa-edit"></i></button>
-                        <button class="bg-red-600 hover:bg-red-700 text-white text-sm py-2 px-3 rounded-md"
-                            title="Hapus Game"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-                <div
-                    class="bg-slate-800 shadow-xl rounded-xl p-5 border-2 border-dashed border-slate-700 flex flex-col items-center justify-center hover:border-purple-500 transition">
-                    <button id="openAddGameModal2" class="text-slate-400 hover:text-purple-400">
-                        <i class="fas fa-plus-circle fa-3x mb-2"></i>
-                        <p>Tambah Game Baru</p>
-                    </button>
-                </div>
+        <main class="flex-1 p-4 sm:p-8 space-y-6 overflow-y-auto">
+            <!-- Game Grid -->
+            <div id="adminGameGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Populated dynamically via JS -->
             </div>
         </main>
     </div>
 
-    <div id="addGameModal" class="modal fixed inset-0 bg-slate-900 bg-opacity-75 items-center justify-center p-4 z-40">
-        <div class="bg-slate-800 p-6 rounded-xl shadow-2xl w-full max-w-lg">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold">Tambah Game Baru</h3>
-                <button id="closeAddGameModal" class="text-slate-400 hover:text-white"><i
-                        class="fas fa-times fa-lg"></i></button>
+    <!-- Add Game Modal -->
+    <div id="addGameModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" aria-modal="true" role="dialog">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-white">Tambah Game Baru</h3>
+                <button type="button" onclick="closeAddGameModal()" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
             </div>
-            <form>
-                <div class="mb-4">
-                    <label for="gameName" class="block text-sm font-medium text-slate-300 mb-1">Nama Game</label>
-                    <input type="text" id="gameName"
-                        class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5 focus:ring-purple-500 focus:border-purple-500 placeholder-slate-400"
-                        placeholder="Contoh: Mobile Legends">
+
+            <form id="addGameForm" class="space-y-4">
+                <div>
+                    <label for="newGameTitle" class="block text-xs font-semibold text-slate-300 mb-1">Nama Game</label>
+                    <input type="text" id="newGameTitle" required placeholder="Contoh: EA Sports FC Mobile"
+                        class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
                 </div>
-                <div class="mb-4">
-                    <label for="gameDeveloper" class="block text-sm font-medium text-slate-300 mb-1">Developer</label>
-                    <input type="text" id="gameDeveloper"
-                        class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5"
-                        placeholder="Contoh: Moonton">
+
+                <div>
+                    <label for="newGameDeveloper" class="block text-xs font-semibold text-slate-300 mb-1">Publisher / Developer</label>
+                    <input type="text" id="newGameDeveloper" required placeholder="Contoh: Electronic Arts"
+                        class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
                 </div>
-                <div class="mb-4">
-                    <label for="gameBanner" class="block text-sm font-medium text-slate-300 mb-1">URL Banner
-                        Game</label>
-                    <input type="url" id="gameBanner"
-                        class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5" placeholder="https://...">
+
+                <div>
+                    <label for="newGameBanner" class="block text-xs font-semibold text-slate-300 mb-1">URL Gambar Banner</label>
+                    <input type="url" id="newGameBanner" required placeholder="https://images.unsplash.com/..."
+                        class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
                 </div>
-                <div class="mb-4">
-                    <label for="gameStatus" class="block text-sm font-medium text-slate-300 mb-1">Status</label>
-                    <select id="gameStatus"
-                        class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5 focus:ring-purple-500 focus:border-purple-500">
-                        <option value="aktif">Aktif</option>
-                        <option value="nonaktif">Non-Aktif</option>
-                    </select>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="newGameCategory" class="block text-xs font-semibold text-slate-300 mb-1">Kategori</label>
+                        <select id="newGameCategory" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <option value="Mobile">Mobile Game</option>
+                            <option value="PC">PC Game</option>
+                            <option value="Voucher">Voucher / Gift Card</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="newGameStatus" class="block text-xs font-semibold text-slate-300 mb-1">Status Game</label>
+                        <select id="newGameStatus" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Nonaktif">Non-Aktif</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancelAddGameModal"
-                        class="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded-lg">Batal</button>
-                    <button type="submit"
-                        class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg">Simpan Game</button>
+
+                <div class="flex justify-end gap-3 pt-3 border-t border-slate-800">
+                    <button type="button" onclick="closeAddGameModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-xs font-semibold text-white">
+                        Simpan Game
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="manageVariantsModal"
-        class="modal fixed inset-0 bg-slate-900 bg-opacity-75 items-center justify-center p-4 z-40">
-        <div class="bg-slate-800 p-6 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center mb-4">
-                <h3 id="variantsModalTitle" class="text-xl font-semibold">Kelola Varian Produk untuk [Nama Game]</h3>
-                <button id="closeManageVariantsModal" class="text-slate-400 hover:text-white"><i
-                        class="fas fa-times fa-lg"></i></button>
-            </div>
-            <div class="flex justify-end mb-4">
-                <button id="openAddVariantModal"
-                    class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center text-sm">
-                    <i class="fas fa-plus mr-2"></i> Tambah Varian Produk
+    <!-- Manage SKU Variants Modal -->
+    <div id="variantsModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" aria-modal="true" role="dialog">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div>
+                    <h3 id="variantModalTitle" class="text-base font-bold text-white">Kelola Varian SKU</h3>
+                    <p id="variantModalSubtitle" class="text-xs text-slate-400">Daftar nominal harga dan kode SKU internal.</p>
+                </div>
+                <button type="button" onclick="closeVariantsModal()" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-xmark text-lg"></i>
                 </button>
             </div>
-            <div class="overflow-y-auto flex-grow">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-slate-700 sticky top-0">
+
+            <!-- Quick Add SKU Bar -->
+            <form id="quickAddSkuForm" class="grid grid-cols-1 sm:grid-cols-4 gap-2 bg-slate-800/80 p-3 rounded-xl border border-slate-700/80">
+                <input type="text" id="quickSkuName" required placeholder="Nama Varian (ex: 50 Diamonds)"
+                    class="h-9 px-3 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-500 focus:ring-1 focus:ring-sky-500">
+                <input type="number" id="quickSkuPrice" required placeholder="Harga Rp (ex: 15000)"
+                    class="h-9 px-3 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-500 focus:ring-1 focus:ring-sky-500">
+                <input type="text" id="quickSkuCode" required placeholder="SKU (ex: MLBB_50DM)"
+                    class="h-9 px-3 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-500 focus:ring-1 focus:ring-sky-500 uppercase">
+                <button type="submit" class="h-9 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-1">
+                    <i class="fas fa-plus text-[10px]"></i> Tambah
+                </button>
+            </form>
+
+            <div class="overflow-y-auto flex-1 border border-slate-800 rounded-xl">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-800/80 sticky top-0 text-slate-300 font-semibold border-b border-slate-800">
                         <tr>
-                            <th class="p-2.5 font-semibold">Nama Varian</th>
-                            <th class="p-2.5 font-semibold">Harga (Rp)</th>
-                            <th class="p-2.5 font-semibold">SKU/ID</th>
-                            <th class="p-2.5 font-semibold text-center">Status</th>
-                            <th class="p-2.5 font-semibold text-center">Aksi</th>
+                            <th class="py-2.5 px-3">Nama Varian</th>
+                            <th class="py-2.5 px-3">Harga</th>
+                            <th class="py-2.5 px-3">SKU Internal</th>
+                            <th class="py-2.5 px-3 text-center">Status</th>
+                            <th class="py-2.5 px-3 text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-700">
-                        <tr>
-                            <td class="p-2.5">100 Diamonds</td>
-                            <td class="p-2.5">28.000</td>
-                            <td class="p-2.5">MLBB_100DM</td>
-                            <td class="p-2.5 text-center"><span
-                                    class="px-2 py-0.5 text-xs rounded-full bg-green-500 text-green-900">Aktif</span>
-                            </td>
-                            <td class="p-2.5 text-center space-x-1">
-                                <button class="text-yellow-400 hover:text-yellow-300" title="Edit Varian"><i
-                                        class="fas fa-edit"></i></button>
-                                <button class="text-red-400 hover:text-red-300" title="Hapus Varian"><i
-                                        class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-2.5">Weekly Diamond Pass</td>
-                            <td class="p-2.5">30.000</td>
-                            <td class="p-2.5">MLBB_WEEKLY</td>
-                            <td class="p-2.5 text-center"><span
-                                    class="px-2 py-0.5 text-xs rounded-full bg-green-500 text-green-900">Aktif</span>
-                            </td>
-                            <td class="p-2.5 text-center space-x-1">
-                                <button class="text-yellow-400 hover:text-yellow-300" title="Edit Varian"><i
-                                        class="fas fa-edit"></i></button>
-                                <button class="text-red-400 hover:text-red-300" title="Hapus Varian"><i
-                                        class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-2.5">500 Valorant Points</td>
-                            <td class="p-2.5">50.000</td>
-                            <td class="p-2.5">VAL_500VP</td>
-                            <td class="p-2.5 text-center"><span
-                                    class="px-2 py-0.5 text-xs rounded-full bg-red-500 text-red-900">Non-Aktif</span>
-                            </td>
-                            <td class="p-2.5 text-center space-x-1">
-                                <button class="text-yellow-400 hover:text-yellow-300" title="Edit Varian"><i
-                                        class="fas fa-edit"></i></button>
-                                <button class="text-red-400 hover:text-red-300" title="Hapus Varian"><i
-                                        class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
+                    <tbody id="variantTableBody" class="divide-y divide-slate-800">
+                        <!-- Populated by JS -->
                     </tbody>
                 </table>
             </div>
-            <div class="mt-4 text-right">
-                <button id="doneManageVariantsModal"
-                    class="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded-lg">Selesai</button>
+
+            <div class="pt-3 border-t border-slate-800 text-right">
+                <button type="button" onclick="closeVariantsModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white">
+                    Selesai
+                </button>
             </div>
         </div>
     </div>
 
-    <div id="addVariantModal"
-        class="modal fixed inset-0 bg-slate-900 bg-opacity-80 items-center justify-center p-4 z-50">
-        <div class="bg-slate-800 p-6 rounded-xl shadow-2xl w-full max-w-md">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold">Tambah Varian Produk Baru</h3>
-                <button id="closeAddVariantModal" class="text-slate-400 hover:text-white"><i
-                        class="fas fa-times fa-lg"></i></button>
-            </div>
-            <form>
-                <div class="mb-3">
-                    <label for="variantName" class="block text-sm font-medium text-slate-300 mb-1">Nama Varian</label>
-                    <input type="text" id="variantName"
-                        class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5"
-                        placeholder="Contoh: 100 Diamonds">
-                </div>
-                <div class="mb-3">
-                    <label for="variantPrice" class="block text-sm font-medium text-slate-300 mb-1">Harga (Rp)</label>
-                    <input type="number" id="variantPrice"
-                        class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5"
-                        placeholder="Contoh: 28000">
-                </div>
-                <div class="mb-3">
-                    <label for="variantSku" class="block text-sm font-medium text-slate-300 mb-1">SKU / ID
-                        Internal</label>
-                    <input type="text" id="variantSku"
-                        class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5"
-                        placeholder="Contoh: MLBB_100DM">
-                </div>
-                <div class="mb-4">
-                    <label for="variantStatus" class="block text-sm font-medium text-slate-300 mb-1">Status</label>
-                    <select id="variantStatus" class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5">
-                        <option value="aktif">Aktif</option>
-                        <option value="nonaktif">Non-Aktif</option>
-                    </select>
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancelAddVariantModal"
-                        class="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded-lg">Batal</button>
-                    <button type="submit"
-                        class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg">Simpan Varian</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script>
-        // Script untuk toggle sidebar & user menu (Sama seperti di admin/index.html)
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userMenu = document.getElementById('user-menu');
+        let adminGames = TopUpStorage.getGames();
+        const gameGrid = document.getElementById('adminGameGrid');
 
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-        });
-        userMenuButton.addEventListener('click', (e) => {
-            e.stopPropagation(); userMenu.classList.toggle('hidden');
-        });
-        document.addEventListener('click', (e) => {
-            if (!userMenu.contains(e.target) && e.target !== userMenuButton && !userMenuButton.contains(e.target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
+        function renderGameCards() {
+            gameGrid.innerHTML = adminGames.map((g, idx) => `
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl p-5 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
+                            <img src="${g.banner}" alt="${g.title}" class="w-full h-full object-cover">
+                            <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full ${g.status === 'Aktif' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60' : 'bg-slate-800 text-slate-400'} text-[11px] font-bold">
+                                ${g.status}
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-base text-white">${g.title}</h3>
+                            <p class="text-xs text-slate-400">${g.developer}</p>
+                            <p class="text-xs text-slate-300 mt-2">Total SKU: <span class="font-bold text-sky-400">${(g.products || []).length} Varian</span></p>
+                        </div>
+                    </div>
 
-        // Active sidebar menu item (Sama seperti di admin/index.html, sesuaikan 'active' class)
-        const currentPath = window.location.pathname.split("/").pop();
-        const menuItems = document.querySelectorAll('.sidebar-menu-item');
-        menuItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === currentPath) {
-                item.classList.add('active');
-                const pageTitle = item.querySelector('span').textContent;
-                document.querySelector('header .hidden.md\\:block.text-xl.font-semibold').textContent = pageTitle;
-                const breadcrumbContainer = document.querySelector('main .text-sm.text-slate-400');
-                if (breadcrumbContainer) {
-                    breadcrumbContainer.innerHTML = `<a href="index.html" class="hover:text-purple-400">Admin</a> <span class="mx-2">/</span> <span>${pageTitle}</span>`;
-                }
-            }
-        });
+                    <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+                        <button type="button" onclick="openVariantsModal(${idx})" class="flex-1 h-9 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors">
+                            <i class="fas fa-layer-group text-xs"></i> Kelola SKU
+                        </button>
+                        <button type="button" onclick="deleteGame(${idx})" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 border border-slate-700 flex items-center justify-center transition-colors" title="Hapus Game">
+                            <i class="fas fa-trash text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-        // Modal Logic
+        // Add Game Modal
         const addGameModal = document.getElementById('addGameModal');
-        const openAddGameModalBtn = document.getElementById('openAddGameModal');
-        const openAddGameModalBtn2 = document.getElementById('openAddGameModal2');
-        const closeAddGameModalBtn = document.getElementById('closeAddGameModal');
-        const cancelAddGameModalBtn = document.getElementById('cancelAddGameModal');
+        window.openAddGameModal = function () {
+            addGameModal.classList.remove('hidden');
+        };
+        window.closeAddGameModal = function () {
+            addGameModal.classList.add('hidden');
+        };
 
-        const manageVariantsModal = document.getElementById('manageVariantsModal');
-        const closeManageVariantsModalBtn = document.getElementById('closeManageVariantsModal');
-        const doneManageVariantsModalBtn = document.getElementById('doneManageVariantsModal');
-        const variantsModalTitle = document.getElementById('variantsModalTitle');
-
-        const addVariantModal = document.getElementById('addVariantModal');
-        const openAddVariantModalBtn = document.getElementById('openAddVariantModal');
-        const closeAddVariantModalBtn = document.getElementById('closeAddVariantModal');
-        const cancelAddVariantModalBtn = document.getElementById('cancelAddVariantModal');
-
-        function toggleModal(modal, open) {
-            if (open) modal.classList.add('open');
-            else modal.classList.remove('open');
-        }
-
-        openAddGameModalBtn.addEventListener('click', () => toggleModal(addGameModal, true));
-        if (openAddGameModalBtn2) openAddGameModalBtn2.addEventListener('click', () => toggleModal(addGameModal, true));
-        closeAddGameModalBtn.addEventListener('click', () => toggleModal(addGameModal, false));
-        cancelAddGameModalBtn.addEventListener('click', () => toggleModal(addGameModal, false));
-
-        window.openManageVariantsModal = function (gameName) {
-            variantsModalTitle.textContent = `Kelola Varian Produk untuk ${gameName}`;
-            toggleModal(manageVariantsModal, true);
-        }
-        closeManageVariantsModalBtn.addEventListener('click', () => toggleModal(manageVariantsModal, false));
-        doneManageVariantsModalBtn.addEventListener('click', () => toggleModal(manageVariantsModal, false));
-
-        openAddVariantModalBtn.addEventListener('click', () => toggleModal(addVariantModal, true));
-        closeAddVariantModalBtn.addEventListener('click', () => toggleModal(addVariantModal, false));
-        cancelAddVariantModalBtn.addEventListener('click', () => toggleModal(addVariantModal, false));
-
-        // Close modal on escape key
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                toggleModal(addGameModal, false);
-                toggleModal(manageVariantsModal, false);
-                toggleModal(addVariantModal, false);
-            }
+        document.getElementById('addGameForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newG = {
+                id: 'game_' + Date.now(),
+                title: document.getElementById('newGameTitle').value.trim(),
+                developer: document.getElementById('newGameDeveloper').value.trim(),
+                category: document.getElementById('newGameCategory').value,
+                banner: document.getElementById('newGameBanner').value.trim(),
+                description: `Top up ${document.getElementById('newGameTitle').value.trim()} resmi dan instan.`,
+                status: document.getElementById('newGameStatus').value,
+                products: []
+            };
+            adminGames.unshift(newG);
+            TopUpStorage.saveGames(adminGames);
+            renderGameCards();
+            closeAddGameModal();
+            document.getElementById('addGameForm').reset();
         });
+
+        window.deleteGame = function (idx) {
+            if (confirm("Apakah Anda yakin ingin menghapus game ini dari katalog?")) {
+                adminGames.splice(idx, 1);
+                TopUpStorage.saveGames(adminGames);
+                renderGameCards();
+            }
+        };
+
+        // Manage Variants Modal
+        let activeVariantGameIdx = null;
+        const variantsModal = document.getElementById('variantsModal');
+        const variantModalTitle = document.getElementById('variantModalTitle');
+        const variantTableBody = document.getElementById('variantTableBody');
+
+        window.openVariantsModal = function (idx) {
+            activeVariantGameIdx = idx;
+            const g = adminGames[idx];
+            variantModalTitle.textContent = `Kelola Varian SKU: ${g.title}`;
+            renderVariantTable();
+            variantsModal.classList.remove('hidden');
+        };
+
+        window.closeVariantsModal = function () {
+            variantsModal.classList.add('hidden');
+            TopUpStorage.saveGames(adminGames);
+            renderGameCards();
+        };
+
+        function renderVariantTable() {
+            const g = adminGames[activeVariantGameIdx];
+            if (!g) return;
+
+            if (!g.products || g.products.length === 0) {
+                variantTableBody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500">Belum ada varian SKU. Tambahkan varian di atas.</td></tr>`;
+                return;
+            }
+
+            variantTableBody.innerHTML = g.products.map((v, vIdx) => `
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="py-2.5 px-3 font-semibold text-white">${v.name}</td>
+                    <td class="py-2.5 px-3 font-bold text-sky-400">Rp ${v.price.toLocaleString('id-ID')}</td>
+                    <td class="py-2.5 px-3 font-mono text-slate-300">${v.sku || '-'}</td>
+                    <td class="py-2.5 px-3 text-center">
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 text-[10px] font-bold">Aktif</span>
+                    </td>
+                    <td class="py-2.5 px-3 text-center">
+                        <button type="button" onclick="deleteVariant(${vIdx})" class="text-rose-400 hover:text-rose-300" title="Hapus Varian">
+                            <i class="fas fa-trash text-xs"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        document.getElementById('quickAddSkuForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (activeVariantGameIdx === null) return;
+
+            const name = document.getElementById('quickSkuName').value.trim();
+            const price = parseInt(document.getElementById('quickSkuPrice').value);
+            const sku = document.getElementById('quickSkuCode').value.trim().toUpperCase();
+
+            if (!adminGames[activeVariantGameIdx].products) {
+                adminGames[activeVariantGameIdx].products = [];
+            }
+
+            adminGames[activeVariantGameIdx].products.push({
+                id: 'sku_' + Date.now(),
+                name,
+                price,
+                sku,
+                bonus: ""
+            });
+
+            TopUpStorage.saveGames(adminGames);
+            renderVariantTable();
+            document.getElementById('quickAddSkuForm').reset();
+        });
+
+        window.deleteVariant = function (vIdx) {
+            if (activeVariantGameIdx !== null) {
+                adminGames[activeVariantGameIdx].products.splice(vIdx, 1);
+                TopUpStorage.saveGames(adminGames);
+                renderVariantTable();
+            }
+        };
+
+        renderGameCards();
     </script>
 </body>
 

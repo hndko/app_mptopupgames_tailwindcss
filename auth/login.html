@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk Akun - MPTopUp</title>
+    <meta name="description" content="Masuk ke akun MPTopUp untuk mempermudah riwayat dan promo top up game.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden selection:bg-sky-500 selection:text-white">
+    <!-- Gaming Background with Scrim -->
+    <div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="absolute inset-0 z-0 bg-slate-950/90"></div>
+
+    <div class="relative z-10 w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+        <!-- Logo & Header -->
+        <div class="text-center space-y-2">
+            <a href="../index.html" class="inline-flex items-center gap-2.5 group focus-visible:rounded-lg">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                    <span class="font-black text-lg tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                </div>
+                <span class="text-2xl font-black tracking-tight text-white">MP<span class="text-sky-400">TopUp</span></span>
+            </a>
+            <h1 class="text-xl font-bold text-white pt-2">Selamat Datang Kembali</h1>
+            <p class="text-xs sm:text-sm text-slate-400">Masuk ke akun Anda untuk melihat riwayat dan promo member.</p>
+        </div>
+
+        <!-- Form -->
+        <form action="../index.html" method="GET" class="space-y-4">
+            <div>
+                <label for="email" class="block text-xs font-semibold text-slate-300 mb-1">Alamat Email</label>
+                <div class="relative">
+                    <i class="fas fa-envelope absolute left-3.5 top-3.5 text-slate-500 text-sm pointer-events-none"></i>
+                    <input type="email" id="email" name="email" required placeholder="nama@email.com"
+                        class="w-full h-11 pl-10 pr-4 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                </div>
+            </div>
+
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <label for="password" class="block text-xs font-semibold text-slate-300">Kata Sandi</label>
+                    <a href="mailto:support@mptopup.com?subject=Bantuan%20Reset%20Password" class="text-xs font-semibold text-sky-400 hover:text-sky-300">Lupa sandi?</a>
+                </div>
+                <div class="relative">
+                    <i class="fas fa-lock absolute left-3.5 top-3.5 text-slate-500 text-sm pointer-events-none"></i>
+                    <input type="password" id="password" name="password" required placeholder="••••••••"
+                        class="w-full h-11 pl-10 pr-10 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    <button type="button" id="togglePassword" class="absolute right-3 top-3 text-slate-400 hover:text-slate-200" aria-label="Tampilkan sandi">
+                        <i class="fas fa-eye text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit"
+                class="w-full h-11 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 transition-colors">
+                <i class="fas fa-right-to-bracket text-xs"></i> Masuk Sekarang
+            </button>
+        </form>
+
+        <div class="relative flex items-center justify-center">
+            <hr class="w-full border-slate-800">
+            <span class="absolute bg-slate-900 px-3 text-xs text-slate-500 font-medium">atau masuk dengan</span>
+        </div>
+
+        <button type="button" class="w-full h-11 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 text-slate-200 font-semibold text-xs sm:text-sm flex items-center justify-center gap-3 transition-colors">
+            <i class="fab fa-google text-red-400"></i> Akun Google
+        </button>
+
+        <p class="text-center text-xs text-slate-400">
+            Belum memiliki akun? <a href="register.html" class="font-bold text-sky-400 hover:text-sky-300">Daftar Akun Baru</a>
+        </p>
+    </div>
+
+    <script>
+        const pwdInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('togglePassword');
+        if (pwdInput && toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const isPassword = pwdInput.type === 'password';
+                pwdInput.type = isPassword ? 'text' : 'password';
+                toggleBtn.innerHTML = isPassword ? '<i class="fas fa-eye-slash text-sm"></i>' : '<i class="fas fa-eye text-sm"></i>';
+            });
+        }
+    </script>
+</body>
+
+</html>

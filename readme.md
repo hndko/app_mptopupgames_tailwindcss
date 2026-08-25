@@ -1,79 +1,96 @@
-# TopUpKuy - Platform Top Up Game Kekinian
+# MPTopUp - Platform Top Up Game Online
 
-TopUpKuy adalah platform web untuk pembelian top up game online dengan proses cepat, mudah, dan harga terjangkau. Project ini terdiri dari halaman utama untuk pelanggan dan halaman admin untuk manajemen produk, pesanan, pengguna, promo, laporan, dan pengaturan sistem.
+**MPTopUp** adalah platform web top up voucher dan diamond game online resmi, berkecepatan tinggi, aman, dan beroperasi 24 jam nonstop dengan dukungan berbagai saluran pembayaran.
 
-## Fitur Utama
-
-### Untuk Pelanggan
-
-- **Beranda**: Pilih game populer dan lihat promo menarik.
-- **Top Up Produk**: Pilih nominal, metode pembayaran, dan lakukan checkout.
-- **Konfirmasi**: Lihat detail pesanan setelah pembayaran berhasil.
-- **Riwayat**: Cek riwayat transaksi yang pernah dilakukan.
-- **Autentikasi**: Halaman login dan register.
-
-### Untuk Admin
-
-- **Dashboard**: Statistik ringkas dan aktivitas terbaru.
-- **Manajemen Pesanan**: Lihat, filter, dan kelola semua pesanan.
-- **Manajemen Game & Produk**: Tambah/edit/hapus game dan varian produk.
-- **Manajemen Pengguna**: Kelola data pengguna, status, dan peran.
-- **Manajemen Promo**: Atur promo diskon/top up.
-- **Laporan**: Analitik penjualan, pengguna, produk terlaris, dan ekspor laporan.
-- **Pengaturan**: Konfigurasi situs, pembayaran, notifikasi, dan API key.
-
-## Struktur Folder
-
-```
-.
-├── index.html
-├── produk.html
-├── konfirmasi.html
-├── riwayat.html
-├── login.html
-├── register.html
-├── admin/
-│   ├── index.html
-│   ├── pesanan.html
-│   ├── produk.html
-│   ├── pengguna.html
-│   ├── promo.html
-│   ├── laporan.html
-│   └── pengaturan.html
-└── assets/
-    ├── css/
-    │   └── style.css
-    ├── js/
-    │   └── script.js
-    └── images/
-```
-
-## Cara Menjalankan
-
-1. **Clone repository ini** ke folder web server lokal Anda (misal: `htdocs` untuk XAMPP atau `www` untuk Laragon).
-2. **Buka file HTML** di browser, misal: `http://localhost/tailwind-web-topup-games/index.html`.
-3. **Akses halaman admin** melalui `admin/index.html`.
-
-> Project ini berbasis statis (HTML, CSS, JS) dan dapat dikembangkan lebih lanjut dengan backend sesuai kebutuhan.
-
-## Teknologi yang Digunakan
-
-- [Tailwind CSS](https://tailwindcss.com/) untuk styling.
-- [Font Awesome](https://fontawesome.com/) untuk ikon.
-- Vanilla JavaScript untuk interaktivitas dasar.
-- Struktur HTML5 yang responsif.
-
-## Catatan Pengembangan
-
-- Data produk, pesanan, dan pengguna saat ini masih statis/dummy.
-- Untuk produksi, integrasikan dengan backend (PHP, Node.js, dsb) dan database.
-- Fitur checkout, login, register, dan riwayat dapat dihubungkan ke API sesuai kebutuhan.
-- Halaman admin dapat dikembangkan untuk CRUD dinamis.
-
-## Lisensi
-
-Project ini untuk keperluan pembelajaran dan pengembangan. Silakan modifikasi sesuai kebutuhan Anda.
+Project ini telah dikonfigurasi secara **100% lokal tanpa ketergantungan CDN** (menggunakan Tailwind CSS & Font Awesome lokal yang di-bundle via npm).
 
 ---
 
-**TopUpKuy** - Platform top up game termurah, tercepat, dan terpercaya di Indonesia.
+## Palet Warna & Identitas Brand (Berdasarkan Logo MP)
+- **Primary Accent**: Electric Cyan / Vibrant Sky Blue (`#0EA5E9` / `#1BA0D7`)
+- **Dark Neutral**: Midnight Dark / Jet Black (`#030712` / `#090D16` / `#0F172A`)
+- **Accent Contrasts**: Emerald Green (`#10B981`) & Amber Gold (`#F59E0B`)
+
+---
+
+## Rekomendasi Repository GitHub
+- **Nama Repo Utama**: `mptopup-web`
+- **Alternatif**: `mp-gaming-store` atau `mptopup-games`
+
+---
+
+## Menjalankan & Mengembangkan Project (NPM & Tailwind CSS)
+
+### 1. Instalasi Dependensi
+```bash
+npm install
+```
+
+### 2. Kompilasi Tailwind CSS
+- **Build CSS (Produksi & Minifikasi)**:
+  ```bash
+  npm run build:css
+  ```
+- **Watch CSS (Live reload saat proses pengembangan)**:
+  ```bash
+  npm run watch:css
+  ```
+
+---
+
+## Struktur Folder Project
+
+```
+mptopup-web/
+├── .gitignore                 # Filter file Git (node_modules, logs, dll)
+├── package.json               # Konfigurasi npm scripts & dependensi lokal
+├── tailwind.config.js         # Konfigurasi tema Tailwind CSS & path content
+├── src/
+│   └── input.css              # Entrypoint CSS (Tailwind directives & custom styles)
+├── index.html                 # Halaman Utama (Landing Page / Beranda)
+├── pages/                     # Alur Pemesanan & Transaksi Pelanggan
+│   ├── produk.html            # Halaman Checkout & Katalog Nominal Top Up
+│   ├── konfirmasi.html        # Bukti Pembayaran / Invoice Digital (+ Cetak Bukti)
+│   └── riwayat.html           # Riwayat & Pelacakan Status Transaksi Pelanggan
+├── auth/                      # Autentikasi Pengguna
+│   ├── login.html             # Halaman Masuk Akun
+│   └── register.html          # Halaman Pendaftaran Member Baru
+├── admin/                     # Portal Dashboard Administrator
+│   ├── index.html             # Ringkasan KPI, Omzet & Tren Penjualan
+│   ├── pesanan.html           # Manajemen & Pembaruan Status Pesanan Masuk
+│   ├── produk.html            # Manajemen Game & Varian SKU Terintegrasi
+│   ├── pengguna.html          # Manajemen Pengguna & Hak Akses
+│   ├── promo.html             # Manajemen Kupon Promo & Cashback
+│   ├── laporan.html           # Laporan Analitik & Ekspor Data CSV
+│   └── pengaturan.html        # Konfigurasi Sistem, Saluran Bayar & Kredensial API
+├── assets/                    # Aset Bersama
+│   ├── css/
+│   │   └── style.css          # CSS hasil kompilasi lokal Tailwind CSS (Minified)
+│   ├── js/
+│   │   ├── data.js            # Mock Database Terpusat & Sinkronisasi LocalStorage
+│   │   └── main.js            # Format Rupiah & Helper Navigasi
+│   ├── vendor/
+│   │   └── fontawesome/       # Font Awesome 6 Offline (CSS & Webfonts)
+│   └── images/                # Folder Aset Banner & Ikon
+└── readme.md                  # Dokumentasi Project
+```
+
+---
+
+## Fitur & Modul
+
+### 1. Sisi Pelanggan (Client Side)
+- **Beranda & Pencarian**: Banner hero, filter pencarian game instan, klaim voucher promo langsung, dan katalog game terpopuler.
+- **Checkout Pemesanan**: Validasi input ID Akun & Server, pemilihan nominal produk dengan kalkulasi harga real-time, kode voucher diskon (*NEWUSER20* & *BONUS10*), dan multi-channel bayar (QRIS, E-Wallet, VA Bank).
+- **Invoice Digital**: Tanda terima digital dengan nomor pesanan `#MP...` dan fungsi cetak receipt.
+- **Pelacakan Transaksi**: Cari status pesanan secara real-time berdasarkan ID Pesanan atau nama game.
+- **Autentikasi**: Form login & registrasi responsif dengan toggle visibilitas kata sandi dan validasi data.
+
+### 2. Sisi Admin (Admin Panel)
+- **Dashboard Analitik**: Metrik omzet, jumlah order sukses, chart aktivitas mingguan, dan ranking produk terlaris.
+- **Manajemen Pesanan**: Tabel kontrol status pesanan (*Selesai, Pending, Gagal*) secara langsung.
+- **Katalog Game & SKU**: Tambah/hapus game dan varian paket diamond yang otomatis tersinkronisasi ke katalog pelanggan via `localStorage`.
+- **Pengguna & Akses**: Pengelolaan data user, role admin/pelanggan, dan status keaktifan.
+- **Promo & Kupon**: Pembuatan kupon diskon persentase maupun potongan nominal tetap.
+- **Laporan & Ekspor CSV**: Rekap transaksi per rentang tanggal dan tombol download file CSV.
+- **Pengaturan Lengkap**: Konfigurasi umum, toggle channel pembayaran, notifikasi email, dan API keys (Midtrans & Digiflazz).

@@ -4,300 +4,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan - Admin TopUpKuy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #4a5568;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #718096;
-        }
-
-        .sidebar-menu-item.active {
-            background-color: #7c3aed;
-            color: white;
-        }
-
-        .sidebar-menu-item.active i {
-            color: white;
-        }
-    </style>
+    <title>Laporan & Analitik - MPAdmin</title>
+    <meta name="description" content="Laporan rekap penjualan dan ekspor data transaksi.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="bg-slate-900 text-slate-200 flex">
+<body class="bg-slate-950 text-slate-100 flex min-h-screen antialiased selection:bg-sky-500 selection:text-white">
 
+    <!-- Sidebar -->
     <aside id="sidebar"
-        class="w-64 bg-slate-800 min-h-screen p-4 space-y-6 fixed md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30">
-        <a href="index.html" class="flex items-center space-x-2 px-2">
-            <i class="fas fa-gem fa-2x text-purple-400"></i>
-            <span
-                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">TopUpKuy</span>
-        </a>
-        <nav class="space-y-2">
-            <a href="index.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tachometer-alt fa-fw text-slate-400"></i>
-                <span>Dashboard</span>
+        class="w-64 bg-slate-900 border-r border-slate-800 p-5 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="space-y-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                        <span class="font-black text-sm tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-tight text-white">MP<span class="text-sky-400">Admin</span></span>
+                </a>
+                <button id="closeSidebarBtn" class="md:hidden text-slate-400 hover:text-white" aria-label="Tutup Menu">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <nav class="space-y-1.5" aria-label="Menu Admin">
+                <a href="index.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gauge-high w-5 text-center text-slate-400"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="pesanan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-receipt w-5 text-center text-slate-400"></i>
+                    <span>Manajemen Pesanan</span>
+                </a>
+                <a href="produk.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gamepad w-5 text-center text-slate-400"></i>
+                    <span>Game & Varian SKU</span>
+                </a>
+                <a href="pengguna.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-users w-5 text-center text-slate-400"></i>
+                    <span>Pengguna</span>
+                </a>
+                <a href="promo.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-tags w-5 text-center text-slate-400"></i>
+                    <span>Promo & Kupon</span>
+                </a>
+                <a href="laporan.html"
+                    class="sidebar-menu-item active flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 text-white shadow-sm shadow-sky-600/20 transition-colors">
+                    <i class="fas fa-chart-line w-5 text-center"></i>
+                    <span>Laporan Analitik</span>
+                </a>
+                <a href="pengaturan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-sliders w-5 text-center text-slate-400"></i>
+                    <span>Pengaturan Sistem</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 space-y-2">
+            <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                <i class="fas fa-arrow-up-right-from-square w-5 text-center"></i>
+                <span>Lihat Website Toko</span>
             </a>
-            <a href="pesanan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-shopping-cart fa-fw text-slate-400"></i>
-                <span>Manajemen Pesanan</span>
-            </a>
-            <a href="produk.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-gamepad fa-fw text-slate-400"></i>
-                <span>Manajemen Game & Produk</span>
-            </a>
-            <a href="pengguna.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-users fa-fw text-slate-400"></i>
-                <span>Manajemen Pengguna</span>
-            </a>
-            <a href="promo.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tags fa-fw text-slate-400"></i>
-                <span>Manajemen Promo</span>
-            </a>
-            <a href="laporan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 active">
-                <i class="fas fa-chart-line fa-fw text-slate-400"></i>
-                <span>Laporan</span>
-            </a>
-            <a href="pengaturan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-cog fa-fw text-slate-400"></i>
-                <span>Pengaturan</span>
-            </a>
-        </nav>
-        <div class="absolute bottom-4 left-4 right-4">
-            <a href="../login.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-red-600 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 bg-slate-700">
-                <i class="fas fa-sign-out-alt fa-fw text-slate-400"></i>
-                <span>Keluar</span>
+            <a href="../auth/login.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/40 transition-colors">
+                <i class="fas fa-right-from-bracket w-5 text-center"></i>
+                <span>Keluar Akun</span>
             </a>
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col">
-        <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-20">
-            <button id="sidebar-toggle" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
-                <i class="fas fa-bars fa-lg"></i>
-            </button>
-            <div class="hidden md:block text-xl font-semibold">
-                Laporan
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-slate-300 hover:text-white relative">
-                    <i class="fas fa-bell fa-lg"></i>
-                    <span
-                        class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col min-w-0">
+        <header class="bg-slate-900 border-b border-slate-800 h-16 sm:h-20 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40">
+            <div class="flex items-center gap-3">
+                <button id="sidebarToggleBtn" class="md:hidden w-10 h-10 rounded-lg border border-slate-800 bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="relative">
-                    <button id="user-menu-button" class="flex items-center space-x-2 text-slate-300 hover:text-white">
-                        <img src="https://via.placeholder.com/40/FFFFFF/000000/?text=A" alt="Admin Avatar"
-                            class="w-8 h-8 rounded-full object-cover border-2 border-slate-600">
-                        <span>Admin Ganteng</span>
-                        <i class="fas fa-chevron-down fa-xs"></i>
-                    </button>
-                    <div id="user-menu"
-                        class="hidden absolute right-0 mt-2 w-48 bg-slate-700 rounded-md shadow-lg py-1 z-50">
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-600">Profil Saya</a>
-                        <a href="../login.html"
-                            class="block px-4 py-2 text-sm text-red-400 hover:bg-slate-600">Keluar</a>
-                    </div>
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold text-white">Laporan & Analitik Penjualan</h2>
+                    <p class="text-xs text-slate-400">Pantau omzet dan unduh rekap data transaksi.</p>
                 </div>
             </div>
+
+            <button type="button" id="btnExportCsv"
+                class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-emerald-600/20">
+                <i class="fas fa-file-csv text-sm"></i> Unduh Rekap (CSV)
+            </button>
         </header>
 
-        <main class="flex-1 p-6 space-y-6">
-            <div class="text-sm text-slate-400">
-                <a href="index.html" class="hover:text-purple-400">Admin</a>
-                <span class="mx-2">/</span>
-                <span>Laporan</span>
-            </div>
-            <h1 class="text-2xl font-semibold text-white">Analitik dan Laporan</h1>
-
-            <div class="bg-slate-800 p-4 rounded-xl shadow-lg">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+        <main class="flex-1 p-4 sm:p-8 space-y-6 overflow-y-auto">
+            <!-- Filter Bar -->
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                <form id="reportFilterForm" class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
                     <div>
-                        <label for="reportType" class="block text-sm font-medium text-slate-300 mb-1">Jenis
-                            Laporan</label>
-                        <select id="reportType"
-                            class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5 focus:ring-purple-500 focus:border-purple-500">
-                            <option value="penjualan">Laporan Penjualan</option>
-                            <option value="pengguna">Laporan Pengguna</option>
-                            <option value="produk_laris">Laporan Produk Terlaris</option>
+                        <label for="reportType" class="block text-xs font-semibold text-slate-300 mb-1">Jenis Laporan</label>
+                        <select id="reportType" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <option value="penjualan">Laporan Penjualan Transaksi</option>
+                            <option value="produk">Laporan Produk Terlaris</option>
                         </select>
                     </div>
+
                     <div>
-                        <label for="dateRange" class="block text-sm font-medium text-slate-300 mb-1">Rentang
-                            Tanggal</label>
-                        <div class="flex space-x-2">
-                            <input type="date" id="startDate"
-                                class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2 text-slate-300"
-                                style="color-scheme: dark;">
-                            <span class="self-center">-</span>
-                            <input type="date" id="endDate"
-                                class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2 text-slate-300"
-                                style="color-scheme: dark;">
-                        </div>
+                        <label for="dateStart" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Mulai</label>
+                        <input type="date" id="dateStart" value="2026-08-01" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
                     </div>
-                    <button
-                        class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2.5 px-4 rounded-lg h-fit">
-                        <i class="fas fa-filter mr-2"></i> Terapkan Filter
+
+                    <div>
+                        <label for="dateEnd" class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Selesai</label>
+                        <input type="date" id="dateEnd" value="2026-08-25" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                    </div>
+
+                    <button type="submit" class="w-full h-10 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors">
+                        <i class="fas fa-filter text-xs"></i> Terapkan Periode
                     </button>
+                </form>
+            </div>
+
+            <!-- KPI Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                    <p class="text-xs text-slate-400">Total Akumulasi Omzet</p>
+                    <p class="text-2xl font-extrabold text-white mt-1">Rp 18.450.000</p>
+                    <span class="text-[11px] text-emerald-400 font-semibold mt-1 inline-block"><i class="fas fa-arrow-trend-up"></i> +8.4% vs periode lalu</span>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                    <p class="text-xs text-slate-400">Total Transaksi Sukses</p>
+                    <p class="text-2xl font-extrabold text-white mt-1">342 Pesanan</p>
+                    <span class="text-[11px] text-slate-400 mt-1 inline-block">100% diproses instan</span>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
+                    <p class="text-xs text-slate-400">Rata-Rata Nilai Transaksi</p>
+                    <p class="text-2xl font-extrabold text-white mt-1">Rp 53.947</p>
+                    <span class="text-[11px] text-sky-400 font-semibold mt-1 inline-block">Nominal paling laris: Rp 69.000</span>
                 </div>
             </div>
 
-            <div id="penjualanReportSummary" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                    <div class="flex items-center justify-between mb-2">
-                        <p class="text-slate-400 text-sm">Total Pendapatan Kotor</p>
-                        <i class="fas fa-coins text-yellow-400 fa-lg"></i>
-                    </div>
-                    <p class="text-3xl font-semibold">Rp 8.750.000</p>
-                    <p class="text-xs text-green-400 mt-1">+5.2% vs periode lalu</p>
+            <!-- Report Table -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="p-4 sm:p-5 border-b border-slate-800 flex justify-between items-center">
+                    <h3 class="text-sm font-bold text-white">Rincian Data Penjualan Periode Terpilih</h3>
+                    <span class="text-xs text-slate-400">Menampilkan data ringkasan</span>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                    <div class="flex items-center justify-between mb-2">
-                        <p class="text-slate-400 text-sm">Total Transaksi Sukses</p>
-                        <i class="fas fa-check-circle text-green-400 fa-lg"></i>
-                    </div>
-                    <p class="text-3xl font-semibold">350</p>
-                    <p class="text-xs text-slate-400 mt-1">Rata-rata Rp 25.000 / transaksi</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                    <div class="flex items-center justify-between mb-2">
-                        <p class="text-slate-400 text-sm">Pelanggan Baru Bertransaksi</p>
-                        <i class="fas fa-user-plus text-sky-400 fa-lg"></i>
-                    </div>
-                    <p class="text-3xl font-semibold">45</p>
-                    <p class="text-xs text-green-400 mt-1">+10 dari periode lalu</p>
-                </div>
-            </div>
 
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                <h3 class="text-xl font-semibold mb-4">Grafik Tren Penjualan Harian</h3>
-                <div class="h-80 bg-slate-700 rounded-md flex items-center justify-center text-slate-500">
-                    [Placeholder untuk Grafik - misal: menggunakan Chart.js]
-                    <canvas id="salesChart"></canvas>
-                </div>
-            </div>
-
-            <div class="bg-slate-800 shadow-xl rounded-xl overflow-hidden">
-                <h3 class="text-xl font-semibold mb-0 p-4 border-b border-slate-700">Detail Laporan Penjualan</h3>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-slate-700/50">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-slate-800/80 border-b border-slate-800 text-slate-300 font-semibold">
                             <tr>
-                                <th class="p-3 font-semibold text-slate-300">Tanggal</th>
-                                <th class="p-3 font-semibold text-slate-300">ID Pesanan</th>
-                                <th class="p-3 font-semibold text-slate-300">Pelanggan</th>
-                                <th class="p-3 font-semibold text-slate-300">Produk</th>
-                                <th class="p-3 font-semibold text-slate-300 text-right">Nominal (Rp)</th>
+                                <th class="py-3.5 px-4 sm:px-6">Tanggal</th>
+                                <th class="py-3.5 px-4">ID Pesanan</th>
+                                <th class="py-3.5 px-4">Game & SKU</th>
+                                <th class="py-3.5 px-4">Metode Bayar</th>
+                                <th class="py-3.5 px-4 text-right">Nominal (Rp)</th>
+                                <th class="py-3.5 px-4 text-center">Status</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-700">
-                            <tr class="hover:bg-slate-700/30">
-                                <td class="p-3">29 Mei 2025</td>
-                                <td class="p-3">#TPK12345</td>
-                                <td class="p-3">Budi Santoso</td>
-                                <td class="p-3">MLBB - 100 Diamonds</td>
-                                <td class="p-3 text-right">28.000</td>
-                            </tr>
-                            <tr class="hover:bg-slate-700/30">
-                                <td class="p-3">29 Mei 2025</td>
-                                <td class="p-3">#TPK12346</td>
-                                <td class="p-3">Siti Aminah</td>
-                                <td class="p-3">Valorant - 500 Points</td>
-                                <td class="p-3 text-right">50.000</td>
-                            </tr>
+                        <tbody id="reportTableBody" class="divide-y divide-slate-800">
+                            <!-- Injected by JS -->
                         </tbody>
                     </table>
                 </div>
-                <div class="p-4 text-right">
-                    <button class="bg-sky-600 hover:bg-sky-700 text-white text-sm py-2 px-3 rounded-md">
-                        <i class="fas fa-download mr-1"></i> Unduh Laporan (CSV)
-                    </button>
-                </div>
             </div>
-
         </main>
     </div>
 
+    <script src="../assets/js/main.js"></script>
     <script>
-        // Script untuk toggle sidebar & user menu (Sama seperti di admin/index.html)
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userMenu = document.getElementById('user-menu');
+        const reportData = [
+            { date: "25 Agu 2026", id: "#MP884912", gameSku: "Mobile Legends - 250 Diamonds", payment: "QRIS", amount: 69000, status: "Sukses" },
+            { date: "25 Agu 2026", id: "#MP723149", gameSku: "Valorant - 1000 VP", payment: "GoPay", amount: 100000, status: "Pending" },
+            { date: "24 Agu 2026", id: "#MP512903", gameSku: "Free Fire - Weekly Pass", payment: "DANA", amount: 28000, status: "Gagal" },
+            { date: "24 Agu 2026", id: "#MP419821", gameSku: "PUBG Mobile - 660 UC", payment: "BCA VA", amount: 135000, status: "Sukses" },
+            { date: "23 Agu 2026", id: "#MP310948", gameSku: "Genshin Impact - Blessing Welkin", payment: "QRIS", amount: 78000, status: "Sukses" }
+        ];
 
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-        });
-        userMenuButton.addEventListener('click', (e) => {
-            e.stopPropagation(); userMenu.classList.toggle('hidden');
-        });
-        document.addEventListener('click', (e) => {
-            if (!userMenu.contains(e.target) && e.target !== userMenuButton && !userMenuButton.contains(e.target)) {
-                userMenu.classList.add('hidden');
-            }
+        const reportTable = document.getElementById('reportTableBody');
+        function renderReport() {
+            reportTable.innerHTML = reportData.map(r => `
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="py-3 px-4 sm:px-6 text-slate-300">${r.date}</td>
+                    <td class="py-3 px-4 font-mono font-bold text-sky-400">${r.id}</td>
+                    <td class="py-3 px-4 font-semibold text-white">${r.gameSku}</td>
+                    <td class="py-3 px-4 text-slate-300">${r.payment}</td>
+                    <td class="py-3 px-4 text-right font-extrabold text-white">Rp ${r.amount.toLocaleString('id-ID')}</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="px-2.5 py-0.5 rounded-full ${r.status === 'Sukses' ? 'bg-emerald-950 text-emerald-300' : (r.status === 'Pending' ? 'bg-amber-950 text-amber-300' : 'bg-rose-950 text-rose-300')} text-xs font-semibold">
+                            ${r.status}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // CSV Export Functionality
+        document.getElementById('btnExportCsv').addEventListener('click', () => {
+            let csvContent = "data:text/csv;charset=utf-8,Tanggal,ID Pesanan,Game dan Produk,Metode Pembayaran,Nominal,Status\n";
+            reportData.forEach(r => {
+                csvContent += `${r.date},${r.id},"${r.gameSku}",${r.payment},${r.amount},${r.status}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Laporan_MPTopUp_${new Date().toISOString().slice(0, 10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         });
 
-        const currentPath = window.location.pathname.split("/").pop();
-        const menuItems = document.querySelectorAll('.sidebar-menu-item');
-        menuItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === currentPath) {
-                item.classList.add('active');
-                const pageTitle = item.querySelector('span').textContent;
-                document.querySelector('header .hidden.md\\:block.text-xl.font-semibold').textContent = pageTitle;
-                const breadcrumbContainer = document.querySelector('main .text-sm.text-slate-400');
-                if (breadcrumbContainer) {
-                    breadcrumbContainer.innerHTML = `<a href="index.html" class="hover:text-purple-400">Admin</a> <span class="mx-2">/</span> <span>${pageTitle}</span>`;
-                }
-            }
-        });
-
-        // Placeholder untuk Chart.js - Anda perlu implementasi ini lebih lanjut
-        // const ctx = document.getElementById('salesChart');
-        // if (ctx) {
-        //   new Chart(ctx, {
-        //     type: 'line', // atau 'bar', dll.
-        //     data: {
-        //       labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'], // Contoh label
-        //       datasets: [{
-        //         label: 'Penjualan Minggu Ini',
-        //         data: [120000, 190000, 100000, 250000, 180000, 300000, 220000], // Contoh data
-        //         borderColor: 'rgb(168, 85, 247)', // purple-500
-        //         tension: 0.1
-        //       }]
-        //     },
-        //     options: { // Sesuaikan options chart di sini
-        //         scales: { y: { beginAtZero: true } },
-        //         plugins: { legend: { labels: { color: '#cbd5e1' } } },
-        //         // ... opsi lainnya
-        //     }
-        //   });
-        // }
+        renderReport();
     </script>
 </body>
 

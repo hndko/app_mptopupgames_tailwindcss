@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beli Top Up Game - MPTopUp</title>
+    <meta name="description" content="Pilih nominal diamond dan selesaikan pembayaran top up game dengan cepat dan aman.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="../index.html" class="flex items-center gap-3 group focus-visible:rounded-lg">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                        <span class="font-black text-lg tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                    </div>
+                    <span class="text-xl font-extrabold tracking-tight text-white">MP<span class="text-sky-400">TopUp</span></span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8" aria-label="Navigasi Utama">
+                    <a href="../index.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Beranda</a>
+                    <a href="produk.html" class="text-sm font-semibold text-sky-400">Katalog Game</a>
+                    <a href="../index.html#promo" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Promo Spesial</a>
+                    <a href="riwayat.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Lacak Pesanan</a>
+                </nav>
+
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="../auth/login.html" class="px-4 py-2.5 text-sm font-semibold text-slate-200 hover:text-white transition-colors">
+                        Masuk
+                    </a>
+                </div>
+
+                <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka Menu Navigasi"
+                    class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:text-white focus-visible:ring-2 focus-visible:ring-sky-400">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-slate-900 px-4 py-4 space-y-3">
+            <a href="../index.html" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Beranda</a>
+            <a href="produk.html" class="block py-2 text-sm font-semibold text-sky-400">Katalog Game</a>
+            <a href="../index.html#promo" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Promo Spesial</a>
+            <a href="riwayat.html" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Lacak Pesanan</a>
+            <a href="../auth/login.html" class="block text-center py-2.5 text-sm font-semibold rounded-lg bg-sky-600 text-white">
+                Masuk
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Flow -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-xs sm:text-sm text-slate-400 mb-6" aria-label="Breadcrumb">
+            <a href="../index.html" class="hover:text-sky-400">Beranda</a>
+            <i class="fas fa-chevron-right text-[10px] text-slate-600"></i>
+            <a href="produk.html" class="hover:text-sky-400">Katalog Game</a>
+            <i class="fas fa-chevron-right text-[10px] text-slate-600"></i>
+            <span id="breadcrumb-game-title" class="text-slate-200 font-semibold">Mobile Legends</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Left Column: Game Profile & ID Input -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-5">
+                    <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
+                        <img id="gameBannerImg" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80"
+                            alt="Game Banner" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <h1 id="gameTitleHeader" class="text-2xl font-bold text-white">Mobile Legends</h1>
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/60 text-xs font-semibold">
+                                <i class="fas fa-bolt mr-1"></i> Instan
+                            </span>
+                        </div>
+                        <p id="gameDeveloperLabel" class="text-xs text-slate-400">Moonton</p>
+                        <p id="gameDescription" class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+                            Top up Diamond Mobile Legends resmi & instan 24 jam. Masukkan User ID dan Zone ID kamu.
+                        </p>
+                    </div>
+
+                    <!-- Step 1: Account Input Form -->
+                    <div class="pt-4 border-t border-slate-800">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-6 h-6 rounded-full bg-sky-600 text-white text-xs font-bold flex items-center justify-center">1</span>
+                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Masukkan Data Akun</h2>
+                        </div>
+
+                        <form id="orderForm" class="space-y-3">
+                            <div>
+                                <label for="userIdInput" class="block text-xs font-semibold text-slate-300 mb-1">User ID Game</label>
+                                <input type="text" id="userIdInput" name="userId" required placeholder="Contoh: 12345678"
+                                    class="w-full h-11 px-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                            </div>
+                            <div id="zoneIdContainer">
+                                <label for="zoneIdInput" class="block text-xs font-semibold text-slate-300 mb-1">Zone / Server ID</label>
+                                <input type="text" id="zoneIdInput" name="zoneId" placeholder="Contoh: 2024"
+                                    class="w-full h-11 px-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                            </div>
+                            <p class="text-[11px] text-slate-400 leading-normal pt-1">
+                                <i class="fas fa-info-circle text-sky-400 mr-1"></i> Buka profil game Anda untuk melihat nomor ID dan Server.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Safe Guarantee Box -->
+                <div class="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-sky-950 border border-sky-800/50 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                        <i class="fas fa-shield-halved text-sm"></i>
+                    </div>
+                    <div class="text-xs text-slate-300 leading-relaxed">
+                        <span class="font-bold text-white block mb-0.5">Jaminan 100% Aman</span>
+                        Pesanan langsung diproses melalui server resmi game tanpa resiko ban.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Product Variants, Payment & Summary -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Step 2: Choose Product Nominal -->
+                <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white text-xs font-bold flex items-center justify-center">2</span>
+                        <h2 class="text-sm sm:text-base font-bold text-white uppercase tracking-wider">Pilih Nominal Top Up</h2>
+                    </div>
+
+                    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </section>
+
+                <!-- Step 3: Choose Payment Method -->
+                <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white text-xs font-bold flex items-center justify-center">3</span>
+                        <h2 class="text-sm sm:text-base font-bold text-white uppercase tracking-wider">Pilih Metode Pembayaran</h2>
+                    </div>
+
+                    <div id="paymentGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                        <div class="payment-card interactive-card p-4 rounded-xl border border-slate-700 bg-slate-800/80 cursor-pointer flex items-center justify-between"
+                            data-payment="qris" data-name="QRIS (Semua E-Wallet)">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center font-bold text-xs text-white">
+                                    <i class="fas fa-qrcode text-lg text-sky-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">QRIS</p>
+                                    <p class="text-[11px] text-slate-400">Scan Bebas Biaya</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-circle-check text-slate-600 text-base check-icon"></i>
+                        </div>
+
+                        <div class="payment-card interactive-card p-4 rounded-xl border border-slate-700 bg-slate-800/80 cursor-pointer flex items-center justify-between"
+                            data-payment="gopay" data-name="GoPay">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-800/50 flex items-center justify-center font-bold text-xs text-emerald-300">
+                                    <i class="fas fa-wallet text-base"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">GoPay</p>
+                                    <p class="text-[11px] text-slate-400">Instan</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-circle-check text-slate-600 text-base check-icon"></i>
+                        </div>
+
+                        <div class="payment-card interactive-card p-4 rounded-xl border border-slate-700 bg-slate-800/80 cursor-pointer flex items-center justify-between"
+                            data-payment="dana" data-name="DANA">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-sky-950 border border-sky-800/50 flex items-center justify-center font-bold text-xs text-sky-300">
+                                    <i class="fas fa-mobile-screen-button text-base"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">DANA</p>
+                                    <p class="text-[11px] text-slate-400">Instan</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-circle-check text-slate-600 text-base check-icon"></i>
+                        </div>
+
+                        <div class="payment-card interactive-card p-4 rounded-xl border border-slate-700 bg-slate-800/80 cursor-pointer flex items-center justify-between"
+                            data-payment="ovo" data-name="OVO">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-purple-950 border border-purple-800/50 flex items-center justify-center font-bold text-xs text-purple-300">
+                                    <i class="fas fa-coins text-base"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">OVO</p>
+                                    <p class="text-[11px] text-slate-400">Instan</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-circle-check text-slate-600 text-base check-icon"></i>
+                        </div>
+
+                        <div class="payment-card interactive-card p-4 rounded-xl border border-slate-700 bg-slate-800/80 cursor-pointer flex items-center justify-between"
+                            data-payment="bca_va" data-name="BCA Virtual Account">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-blue-950 border border-blue-800/50 flex items-center justify-center font-bold text-xs text-blue-300">
+                                    <i class="fas fa-building-columns text-base"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">BCA VA</p>
+                                    <p class="text-[11px] text-slate-400">Verifikasi Otomatis</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-circle-check text-slate-600 text-base check-icon"></i>
+                        </div>
+
+                        <div class="payment-card interactive-card p-4 rounded-xl border border-slate-700 bg-slate-800/80 cursor-pointer flex items-center justify-between"
+                            data-payment="mandiri_va" data-name="Mandiri Virtual Account">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-yellow-950 border border-yellow-800/50 flex items-center justify-center font-bold text-xs text-yellow-300">
+                                    <i class="fas fa-landmark text-base"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-white">Mandiri VA</p>
+                                    <p class="text-[11px] text-slate-400">Verifikasi Otomatis</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-circle-check text-slate-600 text-base check-icon"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 4: Checkout Summary & Email -->
+                <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-6 h-6 rounded-full bg-sky-600 text-white text-xs font-bold flex items-center justify-center">4</span>
+                        <h2 class="text-sm sm:text-base font-bold text-white uppercase tracking-wider">Ringkasan & Pembayaran</h2>
+                    </div>
+
+                    <div class="bg-slate-800/60 rounded-xl p-4 sm:p-5 border border-slate-700/80 space-y-3 text-xs sm:text-sm mb-5">
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span>Game Terpilih</span>
+                            <span id="sumGameTitle" class="font-bold text-white">Mobile Legends</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span>User ID Akun</span>
+                            <span id="sumUserId" class="font-bold text-white">-</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span>Item / Nominal</span>
+                            <span id="sumProductName" class="font-bold text-white">-</span>
+                        </div>
+                        <div class="flex justify-between items-center text-slate-400">
+                            <span>Metode Pembayaran</span>
+                            <span id="sumPaymentName" class="font-bold text-white">-</span>
+                        </div>
+                        <div id="promoRow" class="hidden flex justify-between items-center text-emerald-400 font-semibold">
+                            <span>Potongan Kupon Promo</span>
+                            <span id="sumDiscount">-Rp 0</span>
+                        </div>
+                        <div class="pt-3 border-t border-slate-700 flex justify-between items-center">
+                            <span class="text-sm sm:text-base font-bold text-white">Total Pembayaran</span>
+                            <span id="sumTotalPrice" class="text-lg sm:text-xl font-extrabold text-sky-400">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <!-- Voucher Promo & Email Field -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                        <div>
+                            <label for="promoCodeInput" class="block text-xs font-semibold text-slate-300 mb-1">Kode Kupon Promo (Opsional)</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="promoCodeInput" placeholder="Contoh: NEWUSER20"
+                                    class="w-full h-11 px-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm uppercase focus:ring-2 focus:ring-sky-500">
+                                <button type="button" id="applyPromoBtn"
+                                    class="px-4 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-sky-400 whitespace-nowrap">
+                                    Pakai
+                                </button>
+                            </div>
+                            <p id="promoMessage" class="text-[11px] mt-1 hidden"></p>
+                        </div>
+
+                        <div>
+                            <label for="customerEmail" class="block text-xs font-semibold text-slate-300 mb-1">Email Bukti Transaksi (Opsional)</label>
+                            <input type="email" id="customerEmail" placeholder="kamu@email.com"
+                                class="w-full h-11 px-3.5 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-sky-500">
+                        </div>
+                    </div>
+
+                    <button type="submit" form="orderForm" id="btnCheckout" disabled
+                        class="w-full min-h-[48px] rounded-xl bg-sky-600 hover:bg-sky-500 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 transition-all">
+                        <i class="fas fa-lock text-xs"></i> Lanjut ke Pembayaran
+                    </button>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; <span class="current-year"></span> MPTopUp. Transaksi cepat, otomatis & terpercaya.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        const games = TopUpStorage.getGames();
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameParam = urlParams.get('game') || 'game1';
+        const activeGame = games.find(g => g.id === gameParam) || games[0];
+
+        // Render Game Profile
+        document.getElementById('breadcrumb-game-title').textContent = activeGame.title;
+        document.getElementById('gameTitleHeader').textContent = activeGame.title;
+        document.getElementById('gameDeveloperLabel').textContent = activeGame.developer;
+        document.getElementById('gameDescription').textContent = activeGame.description;
+        document.getElementById('gameBannerImg').src = activeGame.banner;
+        document.getElementById('sumGameTitle').textContent = activeGame.title;
+
+        if (!activeGame.hasZoneId) {
+            document.getElementById('zoneIdContainer').style.display = 'none';
+        }
+
+        // Render Product Variants
+        const productGrid = document.getElementById('productGrid');
+        productGrid.innerHTML = '';
+        (activeGame.products || []).forEach(p => {
+            const card = document.createElement('div');
+            card.className = "product-card interactive-card p-3.5 sm:p-4 rounded-xl border border-slate-700 bg-slate-800/80 cursor-pointer flex flex-col justify-between";
+            card.dataset.id = p.id;
+            card.dataset.name = p.name;
+            card.dataset.price = p.price;
+
+            card.innerHTML = `
+                <div>
+                    ${p.bonus ? `<span class="inline-block px-2 py-0.5 mb-1.5 text-[10px] font-bold rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">${p.bonus}</span>` : ''}
+                    <h3 class="font-bold text-xs sm:text-sm text-white">${p.name}</h3>
+                </div>
+                <div class="mt-3 pt-2 border-t border-slate-700/50 flex justify-between items-center">
+                    <span class="text-xs sm:text-sm font-extrabold text-sky-400">Rp ${p.price.toLocaleString('id-ID')}</span>
+                    <i class="fas fa-circle-check text-slate-600 text-sm check-icon"></i>
+                </div>
+            `;
+            productGrid.appendChild(card);
+        });
+
+        // State Management
+        let selectedProduct = null;
+        let selectedPayment = null;
+        let appliedDiscount = 0;
+
+        const userIdInput = document.getElementById('userIdInput');
+        const zoneIdInput = document.getElementById('zoneIdInput');
+        const customerEmail = document.getElementById('customerEmail');
+        const btnCheckout = document.getElementById('btnCheckout');
+
+        const sumUserId = document.getElementById('sumUserId');
+        const sumProductName = document.getElementById('sumProductName');
+        const sumPaymentName = document.getElementById('sumPaymentName');
+        const sumTotalPrice = document.getElementById('sumTotalPrice');
+
+        // Product Click Handling
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.product-card').forEach(c => {
+                    c.classList.remove('border-sky-500', 'bg-sky-950/40');
+                    c.querySelector('.check-icon').classList.replace('text-sky-400', 'text-slate-600');
+                });
+                card.classList.add('border-sky-500', 'bg-sky-950/40');
+                card.querySelector('.check-icon').classList.replace('text-slate-600', 'text-sky-400');
+
+                selectedProduct = {
+                    id: card.dataset.id,
+                    name: card.dataset.name,
+                    price: parseInt(card.dataset.price)
+                };
+                updateSummary();
+                validateForm();
+            });
+        });
+
+        // Payment Click Handling
+        document.querySelectorAll('.payment-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.payment-card').forEach(c => {
+                    c.classList.remove('border-sky-500', 'bg-sky-950/40');
+                    c.querySelector('.check-icon').classList.replace('text-sky-400', 'text-slate-600');
+                });
+                card.classList.add('border-sky-500', 'bg-sky-950/40');
+                card.querySelector('.check-icon').classList.replace('text-slate-600', 'text-sky-400');
+
+                selectedPayment = {
+                    method: card.dataset.payment,
+                    name: card.dataset.name
+                };
+                updateSummary();
+                validateForm();
+            });
+        });
+
+        userIdInput.addEventListener('input', () => {
+            const zVal = zoneIdInput.value.trim();
+            sumUserId.textContent = userIdInput.value.trim() ? (userIdInput.value.trim() + (zVal ? ` (${zVal})` : '')) : '-';
+            validateForm();
+        });
+
+        zoneIdInput.addEventListener('input', () => {
+            const zVal = zoneIdInput.value.trim();
+            sumUserId.textContent = userIdInput.value.trim() ? (userIdInput.value.trim() + (zVal ? ` (${zVal})` : '')) : '-';
+        });
+
+        // Promo Voucher Code Handler
+        const promoInput = document.getElementById('promoCodeInput');
+        const applyPromoBtn = document.getElementById('applyPromoBtn');
+        const promoMessage = document.getElementById('promoMessage');
+        const promoRow = document.getElementById('promoRow');
+        const sumDiscount = document.getElementById('sumDiscount');
+
+        applyPromoBtn.addEventListener('click', () => {
+            const code = promoInput.value.trim().toUpperCase();
+            if (!selectedProduct) {
+                promoMessage.textContent = "Pilih nominal produk terlebih dahulu.";
+                promoMessage.className = "text-[11px] mt-1 text-rose-400 block";
+                return;
+            }
+
+            if (code === 'NEWUSER20') {
+                appliedDiscount = Math.min(10000, Math.round(selectedProduct.price * 0.20));
+                promoMessage.textContent = "Kupon NEWUSER20 berhasil digunakan (Diskon 20%).";
+                promoMessage.className = "text-[11px] mt-1 text-emerald-400 block";
+            } else if (code === 'BONUS10') {
+                appliedDiscount = Math.round(selectedProduct.price * 0.10);
+                promoMessage.textContent = "Kupon BONUS10 berhasil digunakan (Diskon 10%).";
+                promoMessage.className = "text-[11px] mt-1 text-emerald-400 block";
+            } else {
+                appliedDiscount = 0;
+                promoMessage.textContent = "Kode kupon tidak valid atau sudah kadaluarsa.";
+                promoMessage.className = "text-[11px] mt-1 text-rose-400 block";
+            }
+            updateSummary();
+        });
+
+        function updateSummary() {
+            sumProductName.textContent = selectedProduct ? selectedProduct.name : '-';
+            sumPaymentName.textContent = selectedPayment ? selectedPayment.name : '-';
+
+            if (selectedProduct) {
+                const finalAmount = Math.max(0, selectedProduct.price - appliedDiscount);
+                sumTotalPrice.textContent = `Rp ${finalAmount.toLocaleString('id-ID')}`;
+
+                if (appliedDiscount > 0) {
+                    promoRow.classList.remove('hidden');
+                    sumDiscount.textContent = `-Rp ${appliedDiscount.toLocaleString('id-ID')}`;
+                } else {
+                    promoRow.classList.add('hidden');
+                }
+            } else {
+                sumTotalPrice.textContent = 'Rp 0';
+                promoRow.classList.add('hidden');
+            }
+        }
+
+        function validateForm() {
+            const hasUser = userIdInput.value.trim().length > 0;
+            if (hasUser && selectedProduct && selectedPayment) {
+                btnCheckout.disabled = false;
+            } else {
+                btnCheckout.disabled = true;
+            }
+        }
+
+        // Form Submission
+        document.getElementById('orderForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (btnCheckout.disabled) return;
+
+            const orderId = '#MP' + Math.floor(100000 + Math.random() * 900000);
+            const finalPrice = Math.max(0, selectedProduct.price - appliedDiscount);
+            const orderPayload = {
+                id: orderId,
+                date: new Date().toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                game: {
+                    id: activeGame.id,
+                    title: activeGame.title
+                },
+                userId: userIdInput.value.trim(),
+                zoneId: zoneIdInput.value.trim(),
+                product: selectedProduct,
+                payment: selectedPayment,
+                discount: appliedDiscount,
+                total: finalPrice,
+                email: customerEmail.value.trim() || 'Pelanggan',
+                status: 'Selesai'
+            };
+
+            TopUpStorage.addOrder(orderPayload);
+            window.location.href = 'konfirmasi.html';
+        });
+    </script>
+</body>
+
+</html>

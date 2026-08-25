@@ -4,286 +4,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - TopUpKuy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Custom scrollbar styling (optional) */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-            /* slate-800 */
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #4a5568;
-            /* slate-600 */
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #718096;
-            /* slate-500 */
-        }
-
-        .sidebar-menu-item.active {
-            background-color: #7c3aed;
-            /* purple-600 */
-            color: white;
-        }
-
-        .sidebar-menu-item.active i {
-            color: white;
-        }
-    </style>
+    <title>Dashboard Admin - MPTopUp</title>
+    <meta name="description" content="Dashboard manajemen dan analitik transaksi MPTopUp.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="bg-slate-900 text-slate-200 flex">
+<body class="bg-slate-950 text-slate-100 flex min-h-screen antialiased selection:bg-sky-500 selection:text-white">
 
+    <!-- Admin Sidebar -->
     <aside id="sidebar"
-        class="w-64 bg-slate-800 min-h-screen p-4 space-y-6 fixed md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30">
-        <a href="index.html" class="flex items-center space-x-2 px-2">
-            <i class="fas fa-gem fa-2x text-purple-400"></i>
-            <span
-                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">TopUpKuy</span>
-        </a>
+        class="w-64 bg-slate-900 border-r border-slate-800 p-5 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="space-y-6">
+            <!-- Brand -->
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                        <span class="font-black text-sm tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-tight text-white">MP<span class="text-sky-400">Admin</span></span>
+                </a>
+                <button id="closeSidebarBtn" class="md:hidden text-slate-400 hover:text-white" aria-label="Tutup Menu">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
+            </div>
 
-        <nav class="space-y-2">
-            <a href="index.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 active">
-                <i class="fas fa-tachometer-alt fa-fw text-slate-400"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="pesanan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-shopping-cart fa-fw text-slate-400"></i>
-                <span>Manajemen Pesanan</span>
-            </a>
-            <a href="produk.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-gamepad fa-fw text-slate-400"></i>
-                <span>Manajemen Game & Produk</span>
-            </a>
-            <a href="pengguna.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-users fa-fw text-slate-400"></i>
-                <span>Manajemen Pengguna</span>
-            </a>
-            <a href="promo.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tags fa-fw text-slate-400"></i>
-                <span>Manajemen Promo</span>
-            </a>
-            <a href="laporan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-chart-line fa-fw text-slate-400"></i>
-                <span>Laporan</span>
-            </a>
-            <a href="pengaturan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-cog fa-fw text-slate-400"></i>
-                <span>Pengaturan</span>
-            </a>
-        </nav>
+            <!-- Navigation Links -->
+            <nav class="space-y-1.5" aria-label="Menu Admin">
+                <a href="index.html"
+                    class="sidebar-menu-item active flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 text-white shadow-sm shadow-sky-600/20 transition-colors">
+                    <i class="fas fa-gauge-high w-5 text-center"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="pesanan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-receipt w-5 text-center text-slate-400"></i>
+                    <span>Manajemen Pesanan</span>
+                </a>
+                <a href="produk.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gamepad w-5 text-center text-slate-400"></i>
+                    <span>Game & Varian SKU</span>
+                </a>
+                <a href="pengguna.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-users w-5 text-center text-slate-400"></i>
+                    <span>Pengguna</span>
+                </a>
+                <a href="promo.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-tags w-5 text-center text-slate-400"></i>
+                    <span>Promo & Kupon</span>
+                </a>
+                <a href="laporan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-chart-line w-5 text-center text-slate-400"></i>
+                    <span>Laporan Analitik</span>
+                </a>
+                <a href="pengaturan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-sliders w-5 text-center text-slate-400"></i>
+                    <span>Pengaturan Sistem</span>
+                </a>
+            </nav>
+        </div>
 
-        <div class="absolute bottom-4 left-4 right-4">
-            <a href="../login.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-red-600 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 bg-slate-700">
-                <i class="fas fa-sign-out-alt fa-fw text-slate-400"></i>
-                <span>Keluar</span>
+        <!-- Sidebar Footer -->
+        <div class="pt-4 border-t border-slate-800 space-y-2">
+            <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                <i class="fas fa-arrow-up-right-from-square w-5 text-center"></i>
+                <span>Lihat Website Toko</span>
+            </a>
+            <a href="../auth/login.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/40 transition-colors">
+                <i class="fas fa-right-from-bracket w-5 text-center"></i>
+                <span>Keluar Akun</span>
             </a>
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col">
-        <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-20">
-            <button id="sidebar-toggle" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
-                <i class="fas fa-bars fa-lg"></i>
-            </button>
-            <div class="hidden md:block text-xl font-semibold">
-                Dashboard
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-slate-300 hover:text-white relative">
-                    <i class="fas fa-bell fa-lg"></i>
-                    <span
-                        class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col min-w-0">
+        <!-- Top Navbar -->
+        <header class="bg-slate-900 border-b border-slate-800 h-16 sm:h-20 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40">
+            <div class="flex items-center gap-3">
+                <button id="sidebarToggleBtn" class="md:hidden w-10 h-10 rounded-lg border border-slate-800 bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="relative">
-                    <button id="user-menu-button" class="flex items-center space-x-2 text-slate-300 hover:text-white">
-                        <img src="https://via.placeholder.com/40/FFFFFF/000000/?text=A" alt="Admin Avatar"
-                            class="w-8 h-8 rounded-full object-cover border-2 border-slate-600">
-                        <span>Admin Ganteng</span>
-                        <i class="fas fa-chevron-down fa-xs"></i>
-                    </button>
-                    <div id="user-menu"
-                        class="hidden absolute right-0 mt-2 w-48 bg-slate-700 rounded-md shadow-lg py-1 z-50">
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-600">Profil Saya</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-600">Pengaturan
-                            Akun</a>
-                        <hr class="border-slate-600 my-1">
-                        <a href="../login.html"
-                            class="block px-4 py-2 text-sm text-red-400 hover:bg-slate-600">Keluar</a>
+                <div class="hidden sm:block">
+                    <h2 class="text-base sm:text-lg font-bold text-white">Ringkasan Dashboard</h2>
+                    <p class="text-xs text-slate-400">Status operasional dan performa penjualan terkini.</p>
+                </div>
+            </div>
+
+            <!-- Right Controls -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 pl-3">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Admin"
+                        class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border border-slate-700 object-cover">
+                    <div class="hidden sm:block text-left">
+                        <p class="text-xs font-bold text-white">Administrator</p>
+                        <p class="text-[10px] text-emerald-400">Online</p>
                     </div>
                 </div>
             </div>
         </header>
 
-        <main class="flex-1 p-6 space-y-6">
-            <div class="text-sm text-slate-400">
-                <a href="index.html" class="hover:text-purple-400">Admin</a>
-                <span class="mx-2">/</span>
-                <span>Dashboard</span>
+        <!-- Main Content View -->
+        <main class="flex-1 p-4 sm:p-8 space-y-8 overflow-y-auto">
+            <!-- Metrics Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Pendapatan -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-lg">
+                    <div class="space-y-1">
+                        <p class="text-xs font-medium text-slate-400">Total Pendapatan (Bulan Ini)</p>
+                        <p class="text-xl sm:text-2xl font-extrabold text-white">Rp 18.450.000</p>
+                        <span class="text-[11px] font-semibold text-emerald-400 inline-flex items-center gap-1">
+                            <i class="fas fa-arrow-up"></i> +12% dari bulan lalu
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-sky-950/80 border border-sky-700/50 flex items-center justify-center text-sky-400 text-lg">
+                        <i class="fas fa-sack-dollar"></i>
+                    </div>
+                </div>
+
+                <!-- Pesanan Baru -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-lg">
+                    <div class="space-y-1">
+                        <p class="text-xs font-medium text-slate-400">Transaksi Berhasil</p>
+                        <p class="text-xl sm:text-2xl font-extrabold text-white">342 Pesanan</p>
+                        <span class="text-[11px] font-semibold text-emerald-400 inline-flex items-center gap-1">
+                            <i class="fas fa-check"></i> 99.2% tingkat sukses
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-700/50 flex items-center justify-center text-emerald-400 text-lg">
+                        <i class="fas fa-cart-shopping"></i>
+                    </div>
+                </div>
+
+                <!-- Pengguna Terdaftar -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-lg">
+                    <div class="space-y-1">
+                        <p class="text-xs font-medium text-slate-400">Pengguna Terdaftar</p>
+                        <p class="text-xl sm:text-2xl font-extrabold text-white">1.280 Akun</p>
+                        <span class="text-[11px] font-semibold text-sky-400 inline-flex items-center gap-1">
+                            <i class="fas fa-user-plus"></i> +24 pekan ini
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-700/50 flex items-center justify-center text-cyan-400 text-lg">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+
+                <!-- Game Aktif -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-lg">
+                    <div class="space-y-1">
+                        <p class="text-xs font-medium text-slate-400">Game & Varian Aktif</p>
+                        <p class="text-xl sm:text-2xl font-extrabold text-white">8 Game / 48 SKU</p>
+                        <span class="text-[11px] font-semibold text-slate-400 inline-flex items-center gap-1">
+                            <i class="fas fa-signal text-emerald-400"></i> Gateway API Normal
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-amber-950/80 border border-amber-700/50 flex items-center justify-center text-amber-400 text-lg">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg flex items-center space-x-4">
-                    <div class="p-3 rounded-full bg-purple-500 bg-opacity-20 text-purple-400">
-                        <i class="fas fa-dollar-sign fa-2x"></i>
+            <!-- Section 2: Trend & Fast Overview -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Sales Activity summary -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-white">Performa Penjualan Harian (7 Hari Terakhir)</h3>
+                            <p class="text-xs text-slate-400">Total akumulasi transaksi terverifikasi dalam sepekan.</p>
+                        </div>
+                        <a href="laporan.html" class="text-xs font-semibold text-sky-400 hover:text-sky-300">Detail Laporan &rarr;</a>
                     </div>
-                    <div>
-                        <p class="text-slate-400 text-sm">Total Pendapatan</p>
-                        <p class="text-2xl font-semibold">Rp 12.345.678</p>
+
+                    <!-- Bar representation of weekly sales -->
+                    <div class="grid grid-cols-7 gap-2 sm:gap-4 pt-4 items-end h-44">
+                        <div class="flex flex-col items-center gap-2 h-full justify-end">
+                            <div class="w-full bg-sky-600/80 hover:bg-sky-500 rounded-lg transition-all" style="height: 55%;"></div>
+                            <span class="text-[11px] text-slate-400">Sen</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 h-full justify-end">
+                            <div class="w-full bg-sky-600/80 hover:bg-sky-500 rounded-lg transition-all" style="height: 70%;"></div>
+                            <span class="text-[11px] text-slate-400">Sel</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 h-full justify-end">
+                            <div class="w-full bg-sky-600/80 hover:bg-sky-500 rounded-lg transition-all" style="height: 60%;"></div>
+                            <span class="text-[11px] text-slate-400">Rab</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 h-full justify-end">
+                            <div class="w-full bg-sky-600/80 hover:bg-sky-500 rounded-lg transition-all" style="height: 85%;"></div>
+                            <span class="text-[11px] text-slate-400">Kam</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 h-full justify-end">
+                            <div class="w-full bg-sky-600/80 hover:bg-sky-500 rounded-lg transition-all" style="height: 95%;"></div>
+                            <span class="text-[11px] text-slate-400">Jum</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 h-full justify-end">
+                            <div class="w-full bg-sky-500 hover:bg-sky-400 rounded-lg transition-all" style="height: 100%;"></div>
+                            <span class="text-[11px] font-bold text-sky-400">Sab</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-2 h-full justify-end">
+                            <div class="w-full bg-sky-600/80 hover:bg-sky-500 rounded-lg transition-all" style="height: 80%;"></div>
+                            <span class="text-[11px] text-slate-400">Min</span>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg flex items-center space-x-4">
-                    <div class="p-3 rounded-full bg-sky-500 bg-opacity-20 text-sky-400">
-                        <i class="fas fa-shopping-bag fa-2x"></i>
-                    </div>
-                    <div>
-                        <p class="text-slate-400 text-sm">Pesanan Baru</p>
-                        <p class="text-2xl font-semibold">75</p>
-                    </div>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg flex items-center space-x-4">
-                    <div class="p-3 rounded-full bg-green-500 bg-opacity-20 text-green-400">
-                        <i class="fas fa-users fa-2x"></i>
-                    </div>
-                    <div>
-                        <p class="text-slate-400 text-sm">Pengguna Baru</p>
-                        <p class="text-2xl font-semibold">120</p>
-                    </div>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg flex items-center space-x-4">
-                    <div class="p-3 rounded-full bg-yellow-500 bg-opacity-20 text-yellow-400">
-                        <i class="fas fa-gamepad fa-2x"></i>
-                    </div>
-                    <div>
-                        <p class="text-slate-400 text-sm">Total Game Aktif</p>
-                        <p class="text-2xl font-semibold">32</p>
+
+                <!-- Top Products Ranking -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <h3 class="text-base font-bold text-white">Produk Paling Laris</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/80 border border-slate-700/60">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=120&q=80" class="w-9 h-9 rounded-lg object-cover" alt="MLBB">
+                                <div>
+                                    <p class="text-xs font-bold text-white">MLBB - 250 Diamonds</p>
+                                    <p class="text-[10px] text-slate-400">142 Transaksi</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400">Rp 9.7M</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/80 border border-slate-700/60">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=120&q=80" class="w-9 h-9 rounded-lg object-cover" alt="Valorant">
+                                <div>
+                                    <p class="text-xs font-bold text-white">Valorant - 1000 VP</p>
+                                    <p class="text-[10px] text-slate-400">89 Transaksi</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400">Rp 8.9M</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-800/80 border border-slate-700/60">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=120&q=80" class="w-9 h-9 rounded-lg object-cover" alt="Free Fire">
+                                <div>
+                                    <p class="text-xs font-bold text-white">Free Fire - Weekly Pass</p>
+                                    <p class="text-[10px] text-slate-400">65 Transaksi</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400">Rp 1.8M</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4">Statistik Penjualan (7 Hari Terakhir)</h3>
-                    <div class="h-64 bg-slate-700 rounded-md flex items-center justify-center text-slate-500">
-                        [Placeholder untuk Grafik Penjualan]
+            <!-- Section 3: Recent Orders Table -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl space-y-4">
+                <div class="p-5 sm:p-6 border-b border-slate-800 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white">Pesanan Masuk Terbaru</h3>
+                        <p class="text-xs text-slate-400">Daftar transaksi yang perlu pemantauan status.</p>
                     </div>
+                    <a href="pesanan.html" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-white transition-colors">
+                        Kelola Semua Pesanan
+                    </a>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl font-semibold mb-4">Aktivitas Pengguna</h3>
-                    <div class="h-64 bg-slate-700 rounded-md flex items-center justify-center text-slate-500">
-                        [Placeholder untuk Grafik Aktivitas]
-                    </div>
-                </div>
-            </div>
 
-            <div class="bg-slate-800 p-6 rounded-xl shadow-lg">
-                <h3 class="text-xl font-semibold mb-4">Pesanan Terbaru</h3>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b border-slate-700">
-                                <th class="py-2 px-3 text-slate-400 font-semibold">Order ID</th>
-                                <th class="py-2 px-3 text-slate-400 font-semibold">Pelanggan</th>
-                                <th class="py-2 px-3 text-slate-400 font-semibold">Produk</th>
-                                <th class="py-2 px-3 text-slate-400 font-semibold text-right">Total</th>
-                                <th class="py-2 px-3 text-slate-400 font-semibold text-center">Status</th>
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-slate-800/70 border-b border-slate-800 text-slate-300 font-semibold">
+                            <tr>
+                                <th class="py-3 px-5">ID Pesanan</th>
+                                <th class="py-3 px-4">Game & Produk</th>
+                                <th class="py-3 px-4">User ID Akun</th>
+                                <th class="py-3 px-4 text-right">Total Bayar</th>
+                                <th class="py-3 px-4 text-center">Status</th>
+                                <th class="py-3 px-5 text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b border-slate-700 hover:bg-slate-700/50">
-                                <td class="py-3 px-3">#ORD001</td>
-                                <td class="py-3 px-3">Budi Santoso</td>
-                                <td class="py-3 px-3">MLBB - 250 Diamonds</td>
-                                <td class="py-3 px-3 text-right">Rp 70.000</td>
-                                <td class="py-3 px-3 text-center"><span
-                                        class="px-2 py-1 text-xs font-medium rounded-full bg-green-500 text-green-900">Selesai</span>
+                        <tbody class="divide-y divide-slate-800">
+                            <tr class="hover:bg-slate-800/40 transition-colors">
+                                <td class="py-3 px-5 font-mono font-bold text-sky-400">#MP884912</td>
+                                <td class="py-3 px-4">
+                                    <p class="font-bold text-white">Mobile Legends</p>
+                                    <p class="text-xs text-slate-400">250 Diamonds</p>
+                                </td>
+                                <td class="py-3 px-4 text-slate-300 font-mono">89127381 (2024)</td>
+                                <td class="py-3 px-4 text-right font-bold text-white">Rp 69.000</td>
+                                <td class="py-3 px-4 text-center">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/60 text-xs font-semibold">
+                                        <i class="fas fa-check-circle mr-1"></i> Selesai
+                                    </span>
+                                </td>
+                                <td class="py-3 px-5 text-center">
+                                    <a href="pesanan.html" class="text-xs text-sky-400 hover:underline">Kelola</a>
                                 </td>
                             </tr>
-                            <tr class="border-b border-slate-700 hover:bg-slate-700/50">
-                                <td class="py-3 px-3">#ORD002</td>
-                                <td class="py-3 px-3">Siti Aminah</td>
-                                <td class="py-3 px-3">Valorant - 1250 Points</td>
-                                <td class="py-3 px-3 text-right">Rp 100.000</td>
-                                <td class="py-3 px-3 text-center"><span
-                                        class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-500 text-yellow-900">Pending</span>
+                            <tr class="hover:bg-slate-800/40 transition-colors">
+                                <td class="py-3 px-5 font-mono font-bold text-sky-400">#MP723149</td>
+                                <td class="py-3 px-4">
+                                    <p class="font-bold text-white">Valorant</p>
+                                    <p class="text-xs text-slate-400">1000 Points</p>
+                                </td>
+                                <td class="py-3 px-4 text-slate-300 font-mono">AgentViper#ID1</td>
+                                <td class="py-3 px-4 text-right font-bold text-white">Rp 100.000</td>
+                                <td class="py-3 px-4 text-center">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800/60 text-xs font-semibold">
+                                        <i class="fas fa-clock mr-1"></i> Pending
+                                    </span>
+                                </td>
+                                <td class="py-3 px-5 text-center">
+                                    <a href="pesanan.html" class="text-xs text-sky-400 hover:underline">Kelola</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </main>
     </div>
 
-    <script>
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userMenu = document.getElementById('user-menu');
-
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-        });
-
-        userMenuButton.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent click from bubbling to document
-            userMenu.classList.toggle('hidden');
-        });
-
-        // Close user menu if clicked outside
-        document.addEventListener('click', (e) => {
-            if (!userMenu.contains(e.target) && e.target !== userMenuButton && !userMenuButton.contains(e.target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
-
-        // Active sidebar menu item based on current page (simple example)
-        const currentPath = window.location.pathname.split("/").pop();
-        const menuItems = document.querySelectorAll('.sidebar-menu-item');
-        menuItems.forEach(item => {
-            item.classList.remove('active'); // Remove active from all
-            if (item.getAttribute('href') === currentPath || (currentPath === '' && item.getAttribute('href') === 'index.html')) {
-                item.classList.add('active');
-                // Update top navbar title based on active menu (optional)
-                const pageTitle = item.querySelector('span').textContent;
-                document.querySelector('header .hidden.md\\:block.text-xl.font-semibold').textContent = pageTitle;
-
-                // Update breadcrumbs (simple example)
-                const breadcrumbContainer = document.querySelector('main .text-sm.text-slate-400');
-                if (breadcrumbContainer) {
-                    if (pageTitle.toLowerCase() === 'dashboard') {
-                        breadcrumbContainer.innerHTML = `<a href="index.html" class="hover:text-purple-400">Admin</a> <span class="mx-2">/</span> <span>Dashboard</span>`;
-                    } else {
-                        breadcrumbContainer.innerHTML = `<a href="index.html" class="hover:text-purple-400">Admin</a> <span class="mx-2">/</span> <span>${pageTitle}</span>`;
-                    }
-                }
-            }
-        });
-
-    </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

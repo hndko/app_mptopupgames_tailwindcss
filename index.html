@@ -1,239 +1,339 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopUpKuy - Top Up Game Kekinian</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* Anda bisa menambahkan custom style di sini jika diperlukan */
-        body {
-            font-family: 'Poppins', sans-serif;
-            /* Contoh penggunaan font Poppins */
-        }
-
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080/000000/FFFFFF/?text=Gaming+Background');
-            /* Ganti dengan URL gambar hero Anda */
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
+    <title>MPTopUp - Platform Top Up Game Cepat, Aman & Resmi</title>
+    <meta name="description" content="Platform top up diamond game online resmi dan instan 24 jam dengan metode pembayaran lengkap.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="bg-slate-900 text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
 
-    <nav class="bg-slate-800 shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html"
-                class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-                TopUpKuy
-            </a>
-            <div class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="hover:text-purple-400 transition duration-300">Beranda</a>
-                <a href="#games" class="hover:text-purple-400 transition duration-300">Game</a>
-                <a href="#promo" class="hover:text-purple-400 transition duration-300">Promo</a>
-                <a href="riwayat.html" class="hover:text-purple-400 transition duration-300">Riwayat</a>
-                <a href="#"
-                    class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-300">Masuk</a>
-            </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <i class="fas fa-bars fa-lg"></i>
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="index.html" class="flex items-center gap-3 group focus-visible:rounded-lg">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                        <span class="font-black text-lg tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                    </div>
+                    <span class="text-xl font-extrabold tracking-tight text-white">MP<span class="text-sky-400">TopUp</span></span>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8" aria-label="Navigasi Utama">
+                    <a href="index.html" class="text-sm font-semibold text-sky-400">Beranda</a>
+                    <a href="pages/produk.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Katalog Game</a>
+                    <a href="#promo" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Promo Spesial</a>
+                    <a href="#cara-topup" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Cara Top Up</a>
+                    <a href="pages/riwayat.html" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Lacak Pesanan</a>
+                </nav>
+
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="auth/login.html" class="px-4 py-2.5 text-sm font-semibold text-slate-200 hover:text-white transition-colors">
+                        Masuk
+                    </a>
+                    <a href="auth/register.html" class="px-5 py-2.5 text-sm font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white shadow-sm shadow-sky-600/20 transition-all focus-visible:ring-2 focus-visible:ring-sky-400">
+                        Daftar Akun
+                    </a>
+                </div>
+
+                <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Buka Menu Navigasi"
+                    class="md:hidden w-11 h-11 flex items-center justify-center rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:text-white focus-visible:ring-2 focus-visible:ring-sky-400">
+                    <i class="fas fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="md:hidden hidden bg-slate-800 px-6 pb-4 space-y-2">
-            <a href="index.html" class="block hover:text-purple-400 transition duration-300">Beranda</a>
-            <a href="#games" class="block hover:text-purple-400 transition duration-300">Game</a>
-            <a href="#promo" class="block hover:text-purple-400 transition duration-300">Promo</a>
-            <a href="riwayat.html" class="block hover:text-purple-400 transition duration-300">Riwayat</a>
-            <a href="#"
-                class="block bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-300 text-center">Masuk</a>
-        </div>
-    </nav>
 
-    <header class="hero-bg py-20 md:py-32">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Top Up Game Favoritmu, <br
-                    class="hidden md:block"><span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Cepat &
-                    Aman!</span></h1>
-            <p class="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto">Platform top up game termurah,
-                terpercaya, dan proses instan. Ribuan pilihan game menantimu.</p>
-            <div class="max-w-xl mx-auto">
-                <div class="relative">
-                    <input type="search" placeholder="Cari game favoritmu..."
-                        class="w-full py-4 px-6 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-purple-500 text-white placeholder-slate-400">
-                    <button
-                        class="absolute right-0 top-0 bottom-0 bg-purple-600 hover:bg-purple-700 text-white px-6 rounded-r-lg transition duration-300">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-slate-900 px-4 py-4 space-y-3">
+            <a href="index.html" class="block py-2 text-sm font-semibold text-sky-400">Beranda</a>
+            <a href="pages/produk.html" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Katalog Game</a>
+            <a href="#promo" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Promo Spesial</a>
+            <a href="#cara-topup" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Cara Top Up</a>
+            <a href="pages/riwayat.html" class="block py-2 text-sm font-medium text-slate-300 hover:text-white">Lacak Pesanan</a>
+            <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+                <a href="auth/login.html" class="w-full text-center py-2.5 text-sm font-semibold rounded-lg border border-slate-700 bg-slate-800 text-slate-200">
+                    Masuk
+                </a>
+                <a href="auth/register.html" class="w-full text-center py-2.5 text-sm font-semibold rounded-lg bg-sky-600 text-white">
+                    Daftar Akun
+                </a>
             </div>
         </div>
     </header>
 
-    <section id="games" class="py-16 bg-slate-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-2 text-center">Game Populer</h2>
-            <p class="text-center text-slate-400 mb-10">Pilih game yang ingin kamu top up.</p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                <a href="produk.html?game=game1"
-                    class="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1 transition duration-300 group">
-                    <img src="https://via.placeholder.com/300x400/7F00FF/FFFFFF/?text=Game+A" alt="Game A"
-                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-1 truncate">Mobile Legends</h3>
-                        <p class="text-sm text-slate-400">Moonton</p>
-                    </div>
-                </a>
-                <a href="produk.html?game=game2"
-                    class="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1 transition duration-300 group">
-                    <img src="https://via.placeholder.com/300x400/FF69B4/FFFFFF/?text=Game+B" alt="Game B"
-                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-1 truncate">PUBG Mobile</h3>
-                        <p class="text-sm text-slate-400">Tencent</p>
-                    </div>
-                </a>
-                <a href="produk.html?game=game3"
-                    class="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1 transition duration-300 group">
-                    <img src="https://via.placeholder.com/300x400/32CD32/FFFFFF/?text=Game+C" alt="Game C"
-                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-1 truncate">Free Fire</h3>
-                        <p class="text-sm text-slate-400">Garena</p>
-                    </div>
-                </a>
-                <a href="produk.html?game=game4"
-                    class="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1 transition duration-300 group">
-                    <img src="https://via.placeholder.com/300x400/1E90FF/FFFFFF/?text=Game+D" alt="Game D"
-                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-1 truncate">Valorant</h3>
-                        <p class="text-sm text-slate-400">Riot Games</p>
-                    </div>
-                </a>
-                <a href="produk.html?game=game5"
-                    class="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1 transition duration-300 group">
-                    <img src="https://via.placeholder.com/300x400/FFD700/000000/?text=Game+E" alt="Game E"
-                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-1 truncate">Genshin Impact</h3>
-                        <p class="text-sm text-slate-400">HoYoverse</p>
-                    </div>
-                </a>
-                <a href="produk.html?game=game6"
-                    class="bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1 transition duration-300 group">
-                    <img src="https://via.placeholder.com/300x400/FF4500/FFFFFF/?text=Game+F" alt="Game F"
-                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
-                    <div class="p-4">
-                        <h3 class="font-semibold text-lg mb-1 truncate">Roblox</h3>
-                        <p class="text-sm text-slate-400">Roblox Corp.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden border-b border-slate-800/80 bg-slate-900">
+            <div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="absolute inset-0 z-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-slate-900/80"></div>
 
-    <section id="promo" class="py-16 bg-slate-800">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-2 text-center">Promo Spesial Untukmu!</h2>
-            <p class="text-center text-slate-400 mb-10">Jangan lewatkan penawaran terbatas dan diskon menarik.</p>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-gradient-to-br from-purple-600 to-pink-500 rounded-xl p-8 shadow-xl flex items-center">
-                    <div class="w-2/3">
-                        <h3 class="text-2xl font-bold mb-2">Diskon 20% Untuk Pengguna Baru!</h3>
-                        <p class="text-slate-100 mb-4">Dapatkan potongan harga spesial untuk top up pertamamu di game
-                            apapun.</p>
-                        <a href="#"
-                            class="bg-white text-purple-600 font-semibold px-6 py-2 rounded-lg hover:bg-slate-100 transition duration-300">Klaim
-                            Sekarang</a>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
+                <div class="text-center max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-sky-500/30 bg-sky-950/60 text-sky-300 text-xs font-semibold uppercase tracking-wider mb-6">
+                        <i class="fas fa-bolt text-sky-400"></i> Layanan Top Up Otomatis 24 Jam
                     </div>
-                    <div class="w-1/3 text-center">
-                        <i class="fas fa-tags fa-4x text-white opacity-70"></i>
-                    </div>
-                </div>
-                <div class="bg-gradient-to-br from-sky-500 to-cyan-400 rounded-xl p-8 shadow-xl flex items-center">
-                    <div class="w-2/3">
-                        <h3 class="text-2xl font-bold mb-2">Bonus Diamond Setiap Top Up MLBB!</h3>
-                        <p class="text-slate-100 mb-4">Dapatkan bonus diamond hingga 15% setiap melakukan top up Mobile
-                            Legends.</p>
-                        <a href="#"
-                            class="bg-white text-sky-600 font-semibold px-6 py-2 rounded-lg hover:bg-slate-100 transition duration-300">Lihat
-                            Detail</a>
-                    </div>
-                    <div class="w-1/3 text-center">
-                        <i class="fas fa-gem fa-4x text-white opacity-70"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-16 bg-slate-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-2 text-center">Cara Top Up Mudah</h2>
-            <p class="text-center text-slate-400 mb-12">Hanya dalam 3 langkah simpel!</p>
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div class="bg-slate-800 p-8 rounded-xl shadow-lg">
-                    <div
-                        class="bg-purple-500 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                        1</div>
-                    <h3 class="text-xl font-semibold mb-2">Pilih Game & Nominal</h3>
-                    <p class="text-slate-400">Pilih game favoritmu dan nominal top up yang diinginkan.</p>
-                </div>
-                <div class="bg-slate-800 p-8 rounded-xl shadow-lg">
-                    <div
-                        class="bg-pink-500 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                        2</div>
-                    <h3 class="text-xl font-semibold mb-2">Masukkan User ID</h3>
-                    <p class="text-slate-400">Isi User ID game kamu dengan benar. Pastikan tidak ada kesalahan.</p>
-                </div>
-                <div class="bg-slate-800 p-8 rounded-xl shadow-lg">
-                    <div
-                        class="bg-sky-500 text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold">
-                        3</div>
-                    <h3 class="text-xl font-semibold mb-2">Bayar & Selesai</h3>
-                    <p class="text-slate-400">Lakukan pembayaran melalui metode yang tersedia dan top up langsung masuk!
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                        Top Up Game Favoritmu, <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">Cepat, Murah & Resmi</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+                        Proses transaksi instan masuk dalam hitungan detik. Pilihan game terlengkap dengan metode pembayaran QRIS, E-Wallet, dan Virtual Account terpercaya.
                     </p>
+
+                    <!-- Search Input -->
+                    <div class="max-w-xl mx-auto mb-10">
+                        <div class="relative flex items-center">
+                            <i class="fas fa-search absolute left-4 text-slate-400 text-base pointer-events-none"></i>
+                            <input type="search" id="gameSearch" placeholder="Cari Mobile Legends, Valorant, Free Fire..."
+                                class="w-full h-13 pl-12 pr-4 rounded-xl bg-slate-800/90 border border-slate-700 text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Trust Pillars -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-left pt-6 border-t border-slate-800">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-sky-950 border border-sky-800/50 flex items-center justify-center text-sky-400">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Proses</p>
+                                <p class="text-sm font-semibold text-white">Instan &lt; 1 Menit</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-950 border border-emerald-800/50 flex items-center justify-center text-emerald-400">
+                                <i class="fas fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Keamanan</p>
+                                <p class="text-sm font-semibold text-white">100% Legal & Aman</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-amber-950 border border-amber-800/50 flex items-center justify-center text-amber-400">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Bantuan</p>
+                                <p class="text-sm font-semibold text-white">Layanan 24/7</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-cyan-950 border border-cyan-800/50 flex items-center justify-center text-cyan-400">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Metode Bayar</p>
+                                <p class="text-sm font-semibold text-white">Semua Channel</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="bg-slate-800 py-12">
-        <div class="container mx-auto px-6 text-center text-slate-400">
-            <a href="index.html"
-                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4 inline-block">
-                TopUpKuy
-            </a>
-            <p class="mb-4">Platform top up game termurah, tercepat, dan terpercaya di Indonesia.</p>
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" class="hover:text-purple-400 transition duration-300"><i
-                        class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#" class="hover:text-purple-400 transition duration-300"><i
-                        class="fab fa-instagram fa-lg"></i></a>
-                <a href="#" class="hover:text-purple-400 transition duration-300"><i
-                        class="fab fa-twitter fa-lg"></i></a>
-                <a href="#" class="hover:text-purple-400 transition duration-300"><i
-                        class="fab fa-youtube fa-lg"></i></a>
+        <!-- Promo Banner Section -->
+        <section id="promo" class="py-12 sm:py-16 bg-slate-950 border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+                    <div>
+                        <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Penawaran Menarik</div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-white">Promo & Diskon Terkini</h2>
+                    </div>
+                    <span class="text-xs sm:text-sm text-slate-400">Gunakan kode kupon saat melakukan checkout</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="relative overflow-hidden rounded-2xl border border-sky-900/60 bg-gradient-to-r from-slate-900 via-sky-950/30 to-slate-900 p-6 flex flex-col sm:flex-row items-center gap-6">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" alt="Promo MLBB"
+                            class="w-full sm:w-36 h-36 object-cover rounded-xl border border-slate-700 shadow-md">
+                        <div class="flex-1 space-y-2">
+                            <span class="px-2.5 py-1 text-xs font-semibold rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                                Diskon 20%
+                            </span>
+                            <h3 class="text-lg font-bold text-white">Cashback Pelanggan Baru</h3>
+                            <p class="text-xs sm:text-sm text-slate-300">Dapatkan potongan harga hingga Rp 10.000 untuk transaksi pertamamu.</p>
+                            <div class="pt-2 flex items-center gap-3">
+                                <span class="px-3 py-1.5 rounded-md bg-slate-800 font-mono text-xs font-bold text-sky-300 border border-slate-700">NEWUSER20</span>
+                                <a href="pages/produk.html?game=game1" class="text-xs font-semibold text-sky-400 hover:text-sky-300">Gunakan Sekarang &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative overflow-hidden rounded-2xl border border-cyan-900/60 bg-gradient-to-r from-slate-900 via-cyan-950/30 to-slate-900 p-6 flex flex-col sm:flex-row items-center gap-6">
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=300&q=80" alt="Promo Valorant"
+                            class="w-full sm:w-36 h-36 object-cover rounded-xl border border-slate-700 shadow-md">
+                        <div class="flex-1 space-y-2">
+                            <span class="px-2.5 py-1 text-xs font-semibold rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                                Flash Promo
+                            </span>
+                            <h3 class="text-lg font-bold text-white">Bonus Points Valorant & Free Fire</h3>
+                            <p class="text-xs sm:text-sm text-slate-300">Ekstra bonus hingga 10% setiap top up nominal pilihan hari ini.</p>
+                            <div class="pt-2 flex items-center gap-3">
+                                <span class="px-3 py-1.5 rounded-md bg-slate-800 font-mono text-xs font-bold text-cyan-300 border border-slate-700">BONUS10</span>
+                                <a href="pages/produk.html?game=game2" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300">Beli Sekarang &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>&copy; <span id="year"></span> TopUpKuy. All rights reserved.</p>
+        </section>
+
+        <!-- Game Catalog Section -->
+        <section id="games" class="py-12 sm:py-16 bg-slate-900/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Katalog Resmi</div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">Pilih Game Favoritmu</h2>
+                    <p class="text-sm text-slate-400">Pilih judul game di bawah ini untuk memulai pengisian diamond atau voucher secara instan.</p>
+                </div>
+
+                <!-- Game Grid rendered dynamically from data store -->
+                <div id="gameGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="cara-topup" class="py-12 sm:py-16 bg-slate-950 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <div class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-1">Panduan Pengguna</div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">4 Langkah Mudah Melakukan Top Up</h2>
+                    <p class="text-sm text-slate-400">Proses transaksi mudah tanpa perlu registrasi yang rumit.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-left">
+                        <div class="w-12 h-12 rounded-xl bg-sky-950 border border-sky-700/50 flex items-center justify-center text-sky-400 text-lg font-bold mb-4">
+                            1
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1.5">Pilih Game</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">Tentukan game favorit yang ingin kamu isi item atau mata uang digitalnya.</p>
+                    </div>
+
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-left">
+                        <div class="w-12 h-12 rounded-xl bg-sky-950 border border-sky-700/50 flex items-center justify-center text-sky-400 text-lg font-bold mb-4">
+                            2
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1.5">Masukkan Akun ID</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">Ketikkan User ID dan Server ID akun game kamu secara tepat sesuai instruksi.</p>
+                    </div>
+
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-left">
+                        <div class="w-12 h-12 rounded-xl bg-sky-950 border border-sky-700/50 flex items-center justify-center text-sky-400 text-lg font-bold mb-4">
+                            3
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1.5">Pilih Nominal & Bayar</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">Tentukan jumlah diamond dan bayar via QRIS, E-Wallet, atau Virtual Account.</p>
+                    </div>
+
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-left">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-700/50 flex items-center justify-center text-emerald-400 text-lg font-bold mb-4">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1.5">Diamond Masuk</h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">Setelah pembayaran terverifikasi, item langsung masuk ke akun kamu secara otomatis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 pt-12 pb-8 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="md:col-span-2 space-y-4">
+                    <a href="index.html" class="flex items-center gap-2 text-white font-bold text-xl">
+                        <div class="w-7 h-7 rounded-lg bg-sky-500 flex items-center justify-center text-white text-xs font-black">MP</div>
+                        MP<span class="text-sky-400">TopUp</span>
+                    </a>
+                    <p class="text-slate-400 text-xs sm:text-sm max-w-sm leading-relaxed">
+                        MPTopUp adalah penyedia layanan top up voucher dan diamond game online terpercaya di Indonesia dengan transaksi otomatis 24 jam nonstop.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <span class="text-xs text-slate-400">Channel Pembayaran:</span>
+                        <span class="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 font-medium">QRIS</span>
+                        <span class="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 font-medium">GoPay</span>
+                        <span class="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 font-medium">DANA</span>
+                        <span class="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 font-medium">BCA VA</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-3 text-sm">Navigasi</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="index.html" class="hover:text-sky-400 transition-colors">Beranda</a></li>
+                        <li><a href="pages/produk.html" class="hover:text-sky-400 transition-colors">Katalog Game</a></li>
+                        <li><a href="#promo" class="hover:text-sky-400 transition-colors">Promo Spesial</a></li>
+                        <li><a href="pages/riwayat.html" class="hover:text-sky-400 transition-colors">Lacak Pesanan</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-3 text-sm">Bantuan & Legal</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="pages/riwayat.html" class="hover:text-sky-400 transition-colors">Status Transaksi</a></li>
+                        <li><a href="admin/index.html" class="hover:text-sky-400 transition-colors">Portal Admin</a></li>
+                        <li><span class="text-slate-500">support@mptopup.com</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>&copy; <span class="current-year"></span> MPTopUp. Hak Cipta Dilindungi.</p>
+                <p>Platform Top Up Game Resmi & Cepat.</p>
+            </div>
         </div>
     </footer>
 
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        const games = TopUpStorage.getGames();
+        const gameGrid = document.getElementById('gameGrid');
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        function renderGames(list) {
+            gameGrid.innerHTML = list.map(g => `
+                <a href="pages/produk.html?game=${g.id}" class="interactive-card group flex flex-col rounded-2xl bg-slate-800/90 border border-slate-700/80 overflow-hidden hover:border-sky-500 focus-visible:ring-2 focus-visible:ring-sky-400">
+                    <div class="relative aspect-[4/5] overflow-hidden bg-slate-900">
+                        <img src="${g.banner}" alt="${g.title}"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        <span class="absolute top-2.5 right-2.5 px-2 py-0.5 text-[10px] font-bold rounded ${g.category === 'PC' ? 'bg-emerald-600' : (g.category === 'Voucher' ? 'bg-amber-600' : 'bg-sky-600')} text-white uppercase tracking-wider">
+                            ${g.category || 'Mobile'}
+                        </span>
+                    </div>
+                    <div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-sm sm:text-base text-white group-hover:text-sky-400 transition-colors line-clamp-1">${g.title}</h3>
+                            <p class="text-xs text-slate-400">${g.developer}</p>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-700/60 flex items-center justify-between text-xs text-sky-400 font-semibold">
+                            <span>Top Up Instan</span>
+                            <i class="fas fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        renderGames(games);
+
+        // Live search filter
+        const searchInput = document.getElementById('gameSearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                const filtered = games.filter(g => g.title.toLowerCase().includes(query) || g.developer.toLowerCase().includes(query));
+                renderGames(filtered);
+            });
+        }
     </script>
 </body>
 

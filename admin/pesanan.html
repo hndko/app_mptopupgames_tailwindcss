@@ -4,282 +4,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Pesanan - Admin TopUpKuy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #4a5568;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #718096;
-        }
-
-        .sidebar-menu-item.active {
-            background-color: #7c3aed;
-            color: white;
-        }
-
-        .sidebar-menu-item.active i {
-            color: white;
-        }
-    </style>
+    <title>Manajemen Pesanan - MPAdmin</title>
+    <meta name="description" content="Kelola dan verifikasi status transaksi pesanan top up game.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="bg-slate-900 text-slate-200 flex">
+<body class="bg-slate-950 text-slate-100 flex min-h-screen antialiased selection:bg-sky-500 selection:text-white">
 
+    <!-- Admin Sidebar -->
     <aside id="sidebar"
-        class="w-64 bg-slate-800 min-h-screen p-4 space-y-6 fixed md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30">
-        <a href="index.html" class="flex items-center space-x-2 px-2">
-            <i class="fas fa-gem fa-2x text-purple-400"></i>
-            <span
-                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">TopUpKuy</span>
-        </a>
-        <nav class="space-y-2">
-            <a href="index.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tachometer-alt fa-fw text-slate-400"></i>
-                <span>Dashboard</span>
+        class="w-64 bg-slate-900 border-r border-slate-800 p-5 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="space-y-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                        <span class="font-black text-sm tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-tight text-white">MP<span class="text-sky-400">Admin</span></span>
+                </a>
+                <button id="closeSidebarBtn" class="md:hidden text-slate-400 hover:text-white" aria-label="Tutup Menu">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <nav class="space-y-1.5" aria-label="Menu Admin">
+                <a href="index.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gauge-high w-5 text-center text-slate-400"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="pesanan.html"
+                    class="sidebar-menu-item active flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 text-white shadow-sm shadow-sky-600/20 transition-colors">
+                    <i class="fas fa-receipt w-5 text-center"></i>
+                    <span>Manajemen Pesanan</span>
+                </a>
+                <a href="produk.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gamepad w-5 text-center text-slate-400"></i>
+                    <span>Game & Varian SKU</span>
+                </a>
+                <a href="pengguna.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-users w-5 text-center text-slate-400"></i>
+                    <span>Pengguna</span>
+                </a>
+                <a href="promo.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-tags w-5 text-center text-slate-400"></i>
+                    <span>Promo & Kupon</span>
+                </a>
+                <a href="laporan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-chart-line w-5 text-center text-slate-400"></i>
+                    <span>Laporan Analitik</span>
+                </a>
+                <a href="pengaturan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-sliders w-5 text-center text-slate-400"></i>
+                    <span>Pengaturan Sistem</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 space-y-2">
+            <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                <i class="fas fa-arrow-up-right-from-square w-5 text-center"></i>
+                <span>Lihat Website Toko</span>
             </a>
-            <a href="pesanan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 active">
-                <i class="fas fa-shopping-cart fa-fw text-slate-400"></i>
-                <span>Manajemen Pesanan</span>
-            </a>
-            <a href="produk.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-gamepad fa-fw text-slate-400"></i>
-                <span>Manajemen Game & Produk</span>
-            </a>
-            <a href="pengguna.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-users fa-fw text-slate-400"></i>
-                <span>Manajemen Pengguna</span>
-            </a>
-            <a href="promo.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tags fa-fw text-slate-400"></i>
-                <span>Manajemen Promo</span>
-            </a>
-            <a href="laporan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-chart-line fa-fw text-slate-400"></i>
-                <span>Laporan</span>
-            </a>
-            <a href="pengaturan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-cog fa-fw text-slate-400"></i>
-                <span>Pengaturan</span>
-            </a>
-        </nav>
-        <div class="absolute bottom-4 left-4 right-4">
-            <a href="../login.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-red-600 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 bg-slate-700">
-                <i class="fas fa-sign-out-alt fa-fw text-slate-400"></i>
-                <span>Keluar</span>
+            <a href="../auth/login.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/40 transition-colors">
+                <i class="fas fa-right-from-bracket w-5 text-center"></i>
+                <span>Keluar Akun</span>
             </a>
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col">
-        <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-20">
-            <button id="sidebar-toggle" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
-                <i class="fas fa-bars fa-lg"></i>
-            </button>
-            <div class="hidden md:block text-xl font-semibold">
-                Manajemen Pesanan </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-slate-300 hover:text-white relative">
-                    <i class="fas fa-bell fa-lg"></i>
-                    <span
-                        class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col min-w-0">
+        <header class="bg-slate-900 border-b border-slate-800 h-16 sm:h-20 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40">
+            <div class="flex items-center gap-3">
+                <button id="sidebarToggleBtn" class="md:hidden w-10 h-10 rounded-lg border border-slate-800 bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="relative">
-                    <button id="user-menu-button" class="flex items-center space-x-2 text-slate-300 hover:text-white">
-                        <img src="https://via.placeholder.com/40/FFFFFF/000000/?text=A" alt="Admin Avatar"
-                            class="w-8 h-8 rounded-full object-cover border-2 border-slate-600">
-                        <span>Admin Ganteng</span>
-                        <i class="fas fa-chevron-down fa-xs"></i>
-                    </button>
-                    <div id="user-menu"
-                        class="hidden absolute right-0 mt-2 w-48 bg-slate-700 rounded-md shadow-lg py-1 z-50">
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-600">Profil Saya</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-600">Pengaturan
-                            Akun</a>
-                        <hr class="border-slate-600 my-1">
-                        <a href="../login.html"
-                            class="block px-4 py-2 text-sm text-red-400 hover:bg-slate-600">Keluar</a>
-                    </div>
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold text-white">Manajemen Pesanan</h2>
+                    <p class="text-xs text-slate-400">Kelola dan ubah status transaksi pemesanan.</p>
                 </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Admin"
+                    class="w-9 h-9 rounded-xl border border-slate-700 object-cover">
             </div>
         </header>
 
-        <main class="flex-1 p-6 space-y-6">
-            <div class="text-sm text-slate-400">
-                <a href="index.html" class="hover:text-purple-400">Admin</a>
-                <span class="mx-2">/</span>
-                <span>Manajemen Pesanan</span>
-            </div>
+        <main class="flex-1 p-4 sm:p-8 space-y-6 overflow-y-auto">
+            <!-- Filter Bar -->
+            <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="relative w-full md:w-80">
+                    <i class="fas fa-search absolute left-3.5 top-3.5 text-slate-400 text-xs pointer-events-none"></i>
+                    <input type="text" id="adminOrderSearch" placeholder="Cari ID Pesanan, Akun Game, Produk..."
+                        class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500">
+                </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                <h1 class="text-2xl font-semibold text-white">Daftar Semua Pesanan</h1>
-                <div class="flex space-x-2">
-                    <input type="text" placeholder="Cari ID Pesanan, User ID..."
-                        class="bg-slate-700 border border-slate-600 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5 placeholder-slate-400 w-full md:w-auto">
-                    <select
-                        class="bg-slate-700 border border-slate-600 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5 placeholder-slate-400">
-                        <option selected>Semua Status</option>
-                        <option value="sukses">Sukses</option>
-                        <option value="pending">Pending</option>
-                        <option value="gagal">Gagal</option>
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <select id="adminStatusFilter" class="h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <option value="all">Semua Status</option>
+                        <option value="Selesai">Selesai</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Gagal">Gagal</option>
                     </select>
+
+                    <button type="button" onclick="location.reload()" class="h-10 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold flex items-center gap-2">
+                        <i class="fas fa-arrows-rotate text-xs"></i> Refresh
+                    </button>
                 </div>
             </div>
 
-            <div class="bg-slate-800 shadow-xl rounded-xl overflow-hidden">
+            <!-- Orders Table Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-700">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-slate-800/80 border-b border-slate-800 text-slate-300 font-semibold">
                             <tr>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider">ID Pesanan</th>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider">Tanggal</th>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider">User ID Game</th>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider">Game</th>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider">Produk</th>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider text-right">Total
-                                    (Rp)</th>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider text-center">Status
-                                </th>
-                                <th class="p-3 text-sm font-semibold text-slate-300 tracking-wider text-center">Aksi
-                                </th>
+                                <th class="py-3.5 px-4 sm:px-6">ID Pesanan</th>
+                                <th class="py-3.5 px-4">Waktu</th>
+                                <th class="py-3.5 px-4">Game & Produk</th>
+                                <th class="py-3.5 px-4">Akun ID Game</th>
+                                <th class="py-3.5 px-4">Metode Bayar</th>
+                                <th class="py-3.5 px-4 text-right">Total (Rp)</th>
+                                <th class="py-3.5 px-4 text-center">Status</th>
+                                <th class="py-3.5 px-4 sm:px-6 text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-700">
-                            <tr class="hover:bg-slate-700/50 transition-colors">
-                                <td class="p-3 whitespace-nowrap">#TPK12345XYZ</td>
-                                <td class="p-3 whitespace-nowrap">29 Mei 2025, 10:30</td>
-                                <td class="p-3 whitespace-nowrap">12345678 (1234)</td>
-                                <td class="p-3 whitespace-nowrap">Mobile Legends</td>
-                                <td class="p-3 whitespace-nowrap">500 Diamonds</td>
-                                <td class="p-3 whitespace-nowrap text-right">135.000</td>
-                                <td class="p-3 whitespace-nowrap text-center">
-                                    <span
-                                        class="px-2.5 py-1 text-xs font-semibold rounded-full bg-green-500 text-green-900">Selesai</span>
-                                </td>
-                                <td class="p-3 whitespace-nowrap text-center space-x-2">
-                                    <button class="text-sky-400 hover:text-sky-300" title="Lihat Detail"><i
-                                            class="fas fa-eye"></i></button>
-                                    <button class="text-yellow-400 hover:text-yellow-300" title="Edit Status"><i
-                                            class="fas fa-edit"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-slate-700/50 transition-colors">
-                                <td class="p-3 whitespace-nowrap">#TPK98765ABC</td>
-                                <td class="p-3 whitespace-nowrap">29 Mei 2025, 08:15</td>
-                                <td class="p-3 whitespace-nowrap">playerValor</td>
-                                <td class="p-3 whitespace-nowrap">Valorant</td>
-                                <td class="p-3 whitespace-nowrap">2000 Points</td>
-                                <td class="p-3 whitespace-nowrap text-right">200.000</td>
-                                <td class="p-3 whitespace-nowrap text-center">
-                                    <span
-                                        class="px-2.5 py-1 text-xs font-semibold rounded-full bg-yellow-500 text-yellow-900">Pending</span>
-                                </td>
-                                <td class="p-3 whitespace-nowrap text-center space-x-2">
-                                    <button class="text-sky-400 hover:text-sky-300" title="Lihat Detail"><i
-                                            class="fas fa-eye"></i></button>
-                                    <button class="text-yellow-400 hover:text-yellow-300" title="Edit Status"><i
-                                            class="fas fa-edit"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-slate-700/50 transition-colors">
-                                <td class="p-3 whitespace-nowrap">#TPK24680DEF</td>
-                                <td class="p-3 whitespace-nowrap">28 Mei 2025, 17:40</td>
-                                <td class="p-3 whitespace-nowrap">userFreeFire1</td>
-                                <td class="p-3 whitespace-nowrap">Free Fire</td>
-                                <td class="p-3 whitespace-nowrap">Weekly Member</td>
-                                <td class="p-3 whitespace-nowrap text-right">30.000</td>
-                                <td class="p-3 whitespace-nowrap text-center">
-                                    <span
-                                        class="px-2.5 py-1 text-xs font-semibold rounded-full bg-red-500 text-red-900">Gagal</span>
-                                </td>
-                                <td class="p-3 whitespace-nowrap text-center space-x-2">
-                                    <button class="text-sky-400 hover:text-sky-300" title="Lihat Detail"><i
-                                            class="fas fa-eye"></i></button>
-                                    <button class="text-yellow-400 hover:text-yellow-300" title="Edit Status"><i
-                                            class="fas fa-edit"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="adminOrdersTable" class="divide-y divide-slate-800/80">
+                            <!-- Injected by JS -->
                         </tbody>
                     </table>
-                </div>
-                <div class="p-4 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
-                    <span class="text-sm text-slate-400">Menampilkan 1-10 dari 123 pesanan</span>
-                    <div class="inline-flex mt-2 xs:mt-0">
-                        <button
-                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-slate-700 rounded-l hover:bg-slate-600">
-                            <i class="fas fa-chevron-left mr-2"></i> Prev
-                        </button>
-                        <button
-                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-slate-700 border-0 border-l border-slate-600 rounded-r hover:bg-slate-600">
-                            Next <i class="fas fa-chevron-right ml-2"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Edit Status Modal -->
+    <div id="statusModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" aria-modal="true" role="dialog">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-white">Ubah Status Pesanan</h3>
+                <button type="button" onclick="closeStatusModal()" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="editStatusForm" class="space-y-4">
+                <input type="hidden" id="editOrderIndex">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">ID Pesanan</label>
+                    <input type="text" id="modalOrderId" readonly class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-sky-400 font-mono text-xs font-bold">
+                </div>
+
+                <div>
+                    <label for="modalNewStatus" class="block text-xs font-semibold text-slate-300 mb-1">Pilih Status Baru</label>
+                    <select id="modalNewStatus" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <option value="Selesai">Selesai (Berhasil Terkirim)</option>
+                        <option value="Pending">Pending (Menunggu Pembayaran / Verifikasi)</option>
+                        <option value="Gagal">Gagal (Dibatalkan / Kadaluarsa)</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-3 border-t border-slate-800">
+                    <button type="button" onclick="closeStatusModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-xs font-semibold text-white">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script>
-        // Script untuk toggle sidebar & user menu (Sama seperti di admin/index.html)
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userMenu = document.getElementById('user-menu');
+        let adminOrders = TopUpStorage.getOrders();
+        const table = document.getElementById('adminOrdersTable');
+        const searchInput = document.getElementById('adminOrderSearch');
+        const filterSelect = document.getElementById('adminStatusFilter');
 
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-        });
+        function renderOrders() {
+            const query = searchInput.value.toLowerCase().trim();
+            const status = filterSelect.value;
 
-        userMenuButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            userMenu.classList.toggle('hidden');
-        });
-        document.addEventListener('click', (e) => {
-            if (!userMenu.contains(e.target) && e.target !== userMenuButton && !userMenuButton.contains(e.target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
+            const filtered = adminOrders.filter(o => {
+                const gameTitle = (o.game ? o.game.title : '').toLowerCase();
+                const prodName = (o.product ? o.product.name : '').toLowerCase();
+                const oId = (o.id || '').toLowerCase();
+                const uId = (o.userId || '').toLowerCase();
 
-        // Active sidebar menu item (Sama seperti di admin/index.html, tapi sesuaikan 'active' class)
-        const currentPath = window.location.pathname.split("/").pop();
-        const menuItems = document.querySelectorAll('.sidebar-menu-item');
-        menuItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === currentPath) {
-                item.classList.add('active');
-                const pageTitle = item.querySelector('span').textContent;
-                document.querySelector('header .hidden.md\\:block.text-xl.font-semibold').textContent = pageTitle;
-                const breadcrumbContainer = document.querySelector('main .text-sm.text-slate-400');
-                if (breadcrumbContainer) {
-                    breadcrumbContainer.innerHTML = `<a href="index.html" class="hover:text-purple-400">Admin</a> <span class="mx-2">/</span> <span>${pageTitle}</span>`;
+                const matchQuery = oId.includes(query) || gameTitle.includes(query) || prodName.includes(query) || uId.includes(query);
+                const matchStatus = status === 'all' || o.status === status;
+                return matchQuery && matchStatus;
+            });
+
+            table.innerHTML = filtered.map((item, idx) => {
+                let badge = '';
+                if (item.status === 'Selesai') {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/60 text-xs font-semibold inline-flex items-center gap-1"><i class="fas fa-check-circle text-[10px]"></i> Selesai</span>`;
+                } else if (item.status === 'Pending') {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800/60 text-xs font-semibold inline-flex items-center gap-1"><i class="fas fa-clock text-[10px]"></i> Pending</span>`;
+                } else {
+                    badge = `<span class="px-2.5 py-0.5 rounded-full bg-rose-950 text-rose-300 border border-rose-800/60 text-xs font-semibold inline-flex items-center gap-1"><i class="fas fa-triangle-exclamation text-[10px]"></i> Gagal</span>`;
                 }
+
+                return `
+                    <tr class="hover:bg-slate-800/40 transition-colors">
+                        <td class="py-3.5 px-4 sm:px-6 font-mono font-bold text-sky-400">${item.id}</td>
+                        <td class="py-3.5 px-4 text-slate-300 whitespace-nowrap">${item.date}</td>
+                        <td class="py-3.5 px-4">
+                            <p class="font-bold text-white">${item.game ? item.game.title : 'Game'}</p>
+                            <p class="text-xs text-slate-400">${item.product ? item.product.name : '-'}</p>
+                        </td>
+                        <td class="py-3.5 px-4 font-mono text-slate-300 text-xs">${item.userId}${item.zoneId ? ` (${item.zoneId})` : ''}</td>
+                        <td class="py-3.5 px-4 text-slate-300">${item.payment ? item.payment.name : 'QRIS'}</td>
+                        <td class="py-3.5 px-4 text-right font-extrabold text-white">Rp ${(item.total || 0).toLocaleString('id-ID')}</td>
+                        <td class="py-3.5 px-4 text-center">${badge}</td>
+                        <td class="py-3.5 px-4 sm:px-6 text-center">
+                            <button type="button" onclick="openStatusModal(${idx})" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-sky-400 flex items-center gap-1 mx-auto" title="Edit Status">
+                                <i class="fas fa-pen-to-square text-[10px]"></i> Status
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        searchInput.addEventListener('input', renderOrders);
+        filterSelect.addEventListener('change', renderOrders);
+
+        // Edit Modal
+        const statusModal = document.getElementById('statusModal');
+        const modalOrderId = document.getElementById('modalOrderId');
+        const modalNewStatus = document.getElementById('modalNewStatus');
+        const editOrderIndex = document.getElementById('editOrderIndex');
+
+        window.openStatusModal = function (idx) {
+            const item = adminOrders[idx];
+            if (!item) return;
+            editOrderIndex.value = idx;
+            modalOrderId.value = item.id;
+            modalNewStatus.value = item.status;
+            statusModal.classList.remove('hidden');
+        };
+
+        window.closeStatusModal = function () {
+            statusModal.classList.add('hidden');
+        };
+
+        document.getElementById('editStatusForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const idx = parseInt(editOrderIndex.value);
+            if (adminOrders[idx]) {
+                adminOrders[idx].status = modalNewStatus.value;
+                TopUpStorage.saveOrders(adminOrders);
+                renderOrders();
+                closeStatusModal();
             }
         });
+
+        renderOrders();
     </script>
 </body>
 

@@ -4,373 +4,351 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Pengguna - Admin TopUpKuy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #4a5568;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #718096;
-        }
-
-        .sidebar-menu-item.active {
-            background-color: #7c3aed;
-            color: white;
-        }
-
-        .sidebar-menu-item.active i {
-            color: white;
-        }
-
-        .modal {
-            display: none;
-        }
-
-        .modal.open {
-            display: flex;
-        }
-    </style>
+    <title>Manajemen Pengguna - MPAdmin</title>
+    <meta name="description" content="Kelola data akun pengguna, hak akses, dan status verifikasi.">
+    <!-- Local Compiled Tailwind CSS & FontAwesome (No CDN) -->
+    <link rel="stylesheet" href="../assets/vendor/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body class="bg-slate-900 text-slate-200 flex">
+<body class="bg-slate-950 text-slate-100 flex min-h-screen antialiased selection:bg-sky-500 selection:text-white">
 
+    <!-- Sidebar -->
     <aside id="sidebar"
-        class="w-64 bg-slate-800 min-h-screen p-4 space-y-6 fixed md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30">
-        <a href="index.html" class="flex items-center space-x-2 px-2">
-            <i class="fas fa-gem fa-2x text-purple-400"></i>
-            <span
-                class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">TopUpKuy</span>
-        </a>
-        <nav class="space-y-2">
-            <a href="index.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tachometer-alt fa-fw text-slate-400"></i>
-                <span>Dashboard</span>
+        class="w-64 bg-slate-900 border-r border-slate-800 p-5 flex flex-col justify-between fixed md:static inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="space-y-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-slate-900 to-sky-500 border border-sky-400/40 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+                        <span class="font-black text-sm tracking-tighter text-sky-400">M<span class="text-white">P</span></span>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-tight text-white">MP<span class="text-sky-400">Admin</span></span>
+                </a>
+                <button id="closeSidebarBtn" class="md:hidden text-slate-400 hover:text-white" aria-label="Tutup Menu">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <nav class="space-y-1.5" aria-label="Menu Admin">
+                <a href="index.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gauge-high w-5 text-center text-slate-400"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="pesanan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-receipt w-5 text-center text-slate-400"></i>
+                    <span>Manajemen Pesanan</span>
+                </a>
+                <a href="produk.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-gamepad w-5 text-center text-slate-400"></i>
+                    <span>Game & Varian SKU</span>
+                </a>
+                <a href="pengguna.html"
+                    class="sidebar-menu-item active flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 text-white shadow-sm shadow-sky-600/20 transition-colors">
+                    <i class="fas fa-users w-5 text-center"></i>
+                    <span>Pengguna</span>
+                </a>
+                <a href="promo.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-tags w-5 text-center text-slate-400"></i>
+                    <span>Promo & Kupon</span>
+                </a>
+                <a href="laporan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-chart-line w-5 text-center text-slate-400"></i>
+                    <span>Laporan Analitik</span>
+                </a>
+                <a href="pengaturan.html"
+                    class="sidebar-menu-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fas fa-sliders w-5 text-center text-slate-400"></i>
+                    <span>Pengaturan Sistem</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 space-y-2">
+            <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                <i class="fas fa-arrow-up-right-from-square w-5 text-center"></i>
+                <span>Lihat Website Toko</span>
             </a>
-            <a href="pesanan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-shopping-cart fa-fw text-slate-400"></i>
-                <span>Manajemen Pesanan</span>
-            </a>
-            <a href="produk.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-gamepad fa-fw text-slate-400"></i>
-                <span>Manajemen Game & Produk</span>
-            </a>
-            <a href="pengguna.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 active">
-                <i class="fas fa-users fa-fw text-slate-400"></i>
-                <span>Manajemen Pengguna</span>
-            </a>
-            <a href="promo.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-tags fa-fw text-slate-400"></i>
-                <span>Manajemen Promo</span>
-            </a>
-            <a href="laporan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-chart-line fa-fw text-slate-400"></i>
-                <span>Laporan</span>
-            </a>
-            <a href="pengaturan.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-slate-700 hover:text-white px-3 py-2.5 rounded-lg transition duration-200">
-                <i class="fas fa-cog fa-fw text-slate-400"></i>
-                <span>Pengaturan</span>
-            </a>
-        </nav>
-        <div class="absolute bottom-4 left-4 right-4">
-            <a href="../login.html"
-                class="sidebar-menu-item flex items-center space-x-3 text-slate-300 hover:bg-red-600 hover:text-white px-3 py-2.5 rounded-lg transition duration-200 bg-slate-700">
-                <i class="fas fa-sign-out-alt fa-fw text-slate-400"></i>
-                <span>Keluar</span>
+            <a href="../auth/login.html" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-950/40 transition-colors">
+                <i class="fas fa-right-from-bracket w-5 text-center"></i>
+                <span>Keluar Akun</span>
             </a>
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col">
-        <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-20">
-            <button id="sidebar-toggle" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
-                <i class="fas fa-bars fa-lg"></i>
-            </button>
-            <div class="hidden md:block text-xl font-semibold">
-                Manajemen Pengguna
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-slate-300 hover:text-white relative">
-                    <i class="fas fa-bell fa-lg"></i>
-                    <span
-                        class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col min-w-0">
+        <header class="bg-slate-900 border-b border-slate-800 h-16 sm:h-20 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40">
+            <div class="flex items-center gap-3">
+                <button id="sidebarToggleBtn" class="md:hidden w-10 h-10 rounded-lg border border-slate-800 bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="relative">
-                    <button id="user-menu-button" class="flex items-center space-x-2 text-slate-300 hover:text-white">
-                        <img src="https://via.placeholder.com/40/FFFFFF/000000/?text=A" alt="Admin Avatar"
-                            class="w-8 h-8 rounded-full object-cover border-2 border-slate-600">
-                        <span>Admin Ganteng</span>
-                        <i class="fas fa-chevron-down fa-xs"></i>
-                    </button>
-                    <div id="user-menu"
-                        class="hidden absolute right-0 mt-2 w-48 bg-slate-700 rounded-md shadow-lg py-1 z-50">
-                        <a href="#" class="block px-4 py-2 text-sm text-slate-200 hover:bg-slate-600">Profil Saya</a>
-                        <a href="../login.html"
-                            class="block px-4 py-2 text-sm text-red-400 hover:bg-slate-600">Keluar</a>
-                    </div>
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold text-white">Manajemen Pengguna</h2>
+                    <p class="text-xs text-slate-400">Kelola akun terdaftar, hak akses, dan status aktivasi.</p>
                 </div>
             </div>
+
+            <button type="button" onclick="openUserModal()"
+                class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg shadow-sky-600/20">
+                <i class="fas fa-user-plus text-xs"></i> Tambah Pengguna
+            </button>
         </header>
 
-        <main class="flex-1 p-6 space-y-6">
-            <div class="text-sm text-slate-400">
-                <a href="index.html" class="hover:text-purple-400">Admin</a>
-                <span class="mx-2">/</span>
-                <span>Manajemen Pengguna</span>
-            </div>
+        <main class="flex-1 p-4 sm:p-8 space-y-6 overflow-y-auto">
+            <!-- Filter Bar -->
+            <div class="bg-slate-900 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="relative w-full md:w-80">
+                    <i class="fas fa-search absolute left-3.5 top-3.5 text-slate-400 text-xs pointer-events-none"></i>
+                    <input type="text" id="userSearchInput" placeholder="Cari nama, email, ID..."
+                        class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:ring-2 focus:ring-sky-500">
+                </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <h1 class="text-2xl font-semibold text-white">Daftar Pengguna</h1>
-                <div class="flex items-center space-x-2 w-full md:w-auto">
-                    <input type="text" placeholder="Cari nama, email..."
-                        class="flex-grow md:flex-grow-0 bg-slate-700 border border-slate-600 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5 placeholder-slate-400">
-                    <select
-                        class="bg-slate-700 border border-slate-600 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5 placeholder-slate-400">
-                        <option selected>Semua Status</option>
-                        <option value="aktif">Aktif</option>
-                        <option value="nonaktif">Non-Aktif</option>
-                        <option value="verifikasi">Belum Verifikasi</option>
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <select id="userRoleFilter" class="h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <option value="all">Semua Peran</option>
+                        <option value="Pelanggan">Pelanggan</option>
+                        <option value="Admin">Admin</option>
                     </select>
-                    <button id="openAddUserModal"
-                        class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2.5 px-4 rounded-lg flex items-center whitespace-nowrap">
-                        <i class="fas fa-user-plus mr-2"></i> Tambah
-                    </button>
+
+                    <select id="userStatusFilter" class="h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                        <option value="all">Semua Status</option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Nonaktif">Non-Aktif</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="bg-slate-800 shadow-xl rounded-xl overflow-hidden">
+            <!-- Users Table Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-slate-700">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-slate-800/80 border-b border-slate-800 text-slate-300 font-semibold">
                             <tr>
-                                <th class="p-3 font-semibold text-slate-300">Pengguna</th>
-                                <th class="p-3 font-semibold text-slate-300">Email</th>
-                                <th class="p-3 font-semibold text-slate-300">Tgl Bergabung</th>
-                                <th class="p-3 font-semibold text-slate-300 text-center">Status</th>
-                                <th class="p-3 font-semibold text-slate-300 text-center">Peran</th>
-                                <th class="p-3 font-semibold text-slate-300 text-center">Aksi</th>
+                                <th class="py-3.5 px-4 sm:px-6">Pengguna</th>
+                                <th class="py-3.5 px-4">Kontak Email / WA</th>
+                                <th class="py-3.5 px-4">Tgl Bergabung</th>
+                                <th class="py-3.5 px-4 text-center">Peran</th>
+                                <th class="py-3.5 px-4 text-center">Status</th>
+                                <th class="py-3.5 px-4 sm:px-6 text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-700">
-                            <tr class="hover:bg-slate-700/50 transition-colors">
-                                <td class="p-3 whitespace-nowrap">
-                                    <div class="flex items-center space-x-3">
-                                        <img src="https://via.placeholder.com/40/007bff/ffffff?text=BS"
-                                            class="w-8 h-8 rounded-full object-cover" alt="User Avatar">
-                                        <div>
-                                            <p class="font-medium">Budi Santoso</p>
-                                            <p class="text-xs text-slate-400">ID: USR001</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="p-3 whitespace-nowrap">budi.s@example.com</td>
-                                <td class="p-3 whitespace-nowrap">25 Mei 2025</td>
-                                <td class="p-3 whitespace-nowrap text-center">
-                                    <span
-                                        class="px-2 py-0.5 text-xs rounded-full bg-green-500 text-green-900">Aktif</span>
-                                </td>
-                                <td class="p-3 whitespace-nowrap text-center">Pelanggan</td>
-                                <td class="p-3 whitespace-nowrap text-center space-x-1">
-                                    <button class="text-sky-400 hover:text-sky-300" title="Lihat Detail"><i
-                                            class="fas fa-eye"></i></button>
-                                    <button class="text-yellow-400 hover:text-yellow-300" title="Edit Pengguna"><i
-                                            class="fas fa-edit"></i></button>
-                                    <button class="text-red-400 hover:text-red-300" title="Nonaktifkan"><i
-                                            class="fas fa-user-slash"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-slate-700/50 transition-colors">
-                                <td class="p-3 whitespace-nowrap">
-                                    <div class="flex items-center space-x-3">
-                                        <img src="https://via.placeholder.com/40/dc3545/ffffff?text=SA"
-                                            class="w-8 h-8 rounded-full object-cover" alt="User Avatar">
-                                        <div>
-                                            <p class="font-medium">Siti Aminah</p>
-                                            <p class="text-xs text-slate-400">ID: USR002</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="p-3 whitespace-nowrap">siti.a@example.com</td>
-                                <td class="p-3 whitespace-nowrap">20 Mei 2025</td>
-                                <td class="p-3 whitespace-nowrap text-center">
-                                    <span class="px-2 py-0.5 text-xs rounded-full bg-yellow-500 text-yellow-900">Belum
-                                        Verifikasi</span>
-                                </td>
-                                <td class="p-3 whitespace-nowrap text-center">Pelanggan</td>
-                                <td class="p-3 whitespace-nowrap text-center space-x-1">
-                                    <button class="text-sky-400 hover:text-sky-300" title="Lihat Detail"><i
-                                            class="fas fa-eye"></i></button>
-                                    <button class="text-yellow-400 hover:text-yellow-300" title="Edit Pengguna"><i
-                                            class="fas fa-edit"></i></button>
-                                    <button class="text-green-400 hover:text-green-300" title="Aktifkan"><i
-                                            class="fas fa-user-check"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="userTableBody" class="divide-y divide-slate-800/80">
+                            <!-- Populated by JS -->
                         </tbody>
                     </table>
-                </div>
-                <div class="p-4 flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
-                    <span class="text-sm text-slate-400">Menampilkan 1-10 dari 150 pengguna</span>
-                    <div class="inline-flex mt-2 xs:mt-0">
-                        <button
-                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-slate-700 rounded-l hover:bg-slate-600">
-                            <i class="fas fa-chevron-left mr-2"></i> Prev
-                        </button>
-                        <button
-                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-slate-700 border-0 border-l border-slate-600 rounded-r hover:bg-slate-600">
-                            Next <i class="fas fa-chevron-right ml-2"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <div id="addUserModal" class="modal fixed inset-0 bg-slate-900 bg-opacity-75 items-center justify-center p-4 z-40">
-        <div class="bg-slate-800 p-6 rounded-xl shadow-2xl w-full max-w-lg">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold" id="userModalTitle">Tambah Pengguna Baru</h3>
-                <button id="closeAddUserModal" class="text-slate-400 hover:text-white"><i
-                        class="fas fa-times fa-lg"></i></button>
+    <!-- User Modal (Add / Edit) -->
+    <div id="userModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" aria-modal="true" role="dialog">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 id="userModalTitle" class="text-base font-bold text-white">Tambah Pengguna Baru</h3>
+                <button type="button" onclick="closeUserModal()" class="w-8 h-8 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fas fa-xmark text-lg"></i>
+                </button>
             </div>
-            <form>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+            <form id="userForm" class="space-y-4">
+                <input type="hidden" id="editUserIndex">
+                <div>
+                    <label for="formUserName" class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+                    <input type="text" id="formUserName" required placeholder="Contoh: Budi Santoso"
+                        class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label for="userName" class="block text-sm font-medium text-slate-300 mb-1">Nama Lengkap</label>
-                        <input type="text" id="userName"
-                            class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5" placeholder="John Doe">
+                        <label for="formUserEmail" class="block text-xs font-semibold text-slate-300 mb-1">Alamat Email</label>
+                        <input type="email" id="formUserEmail" required placeholder="budi@email.com"
+                            class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
                     </div>
                     <div>
-                        <label for="userEmail" class="block text-sm font-medium text-slate-300 mb-1">Alamat
-                            Email</label>
-                        <input type="email" id="userEmail"
-                            class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5"
-                            placeholder="john@example.com">
+                        <label for="formUserPhone" class="block text-xs font-semibold text-slate-300 mb-1">WhatsApp</label>
+                        <input type="tel" id="formUserPhone" placeholder="08123456789"
+                            class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label for="userPassword" class="block text-sm font-medium text-slate-300 mb-1">Kata
-                            Sandi</label>
-                        <input type="password" id="userPassword"
-                            class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5"
-                            placeholder="Kosongkan jika tidak ingin diubah">
+                        <label for="formUserRole" class="block text-xs font-semibold text-slate-300 mb-1">Peran Akses</label>
+                        <select id="formUserRole" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <option value="Pelanggan">Pelanggan</option>
+                            <option value="Admin">Administrator</option>
+                        </select>
                     </div>
+
                     <div>
-                        <label for="userRole" class="block text-sm font-medium text-slate-300 mb-1">Peran</label>
-                        <select id="userRole" class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5">
-                            <option value="pelanggan">Pelanggan</option>
-                            <option value="admin">Admin</option>
+                        <label for="formUserStatus" class="block text-xs font-semibold text-slate-300 mb-1">Status Akun</label>
+                        <select id="formUserStatus" class="w-full h-10 px-3 rounded-xl bg-slate-800 border border-slate-700 text-xs sm:text-sm text-white focus:ring-2 focus:ring-sky-500">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Nonaktif">Non-Aktif</option>
                         </select>
                     </div>
                 </div>
-                <div class="mb-4">
-                    <label for="userStatus" class="block text-sm font-medium text-slate-300 mb-1">Status Akun</label>
-                    <select id="userStatus" class="w-full bg-slate-700 border border-slate-600 rounded-lg p-2.5">
-                        <option value="aktif">Aktif</option>
-                        <option value="nonaktif">Non-Aktif</option>
-                        <option value="verifikasi">Belum Verifikasi</option>
-                    </select>
-                </div>
-                <div class="flex justify-end space-x-3">
-                    <button type="button" id="cancelAddUserModal"
-                        class="bg-slate-600 hover:bg-slate-500 text-white py-2 px-4 rounded-lg">Batal</button>
-                    <button type="submit"
-                        class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg">Simpan
-                        Pengguna</button>
+
+                <div class="flex justify-end gap-3 pt-3 border-t border-slate-800">
+                    <button type="button" onclick="closeUserModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-xs font-semibold text-white">
+                        Simpan Data
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-
+    <script src="../assets/js/main.js"></script>
     <script>
-        // Script untuk toggle sidebar & user menu (Sama seperti di admin/index.html)
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebar = document.getElementById('sidebar');
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userMenu = document.getElementById('user-menu');
+        let adminUsers = [
+            { id: "USR-001", name: "Budi Santoso", email: "budi.s@gmail.com", phone: "081234567890", date: "15 Mei 2026", role: "Pelanggan", status: "Aktif", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" },
+            { id: "USR-002", name: "Siti Aminah", email: "siti.aminah@yahoo.com", phone: "081987654321", date: "18 Mei 2026", role: "Pelanggan", status: "Aktif", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80" },
+            { id: "USR-003", name: "Rian Hidayat", email: "rian.h@outlook.com", phone: "082133445566", date: "01 Jun 2026", role: "Pelanggan", status: "Nonaktif", avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80" },
+            { id: "ADM-001", name: "Admin Utama", email: "admin@mptopup.com", phone: "081122334455", date: "01 Jan 2026", role: "Admin", status: "Aktif", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" }
+        ];
 
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-full');
-        });
-        userMenuButton.addEventListener('click', (e) => {
-            e.stopPropagation(); userMenu.classList.toggle('hidden');
-        });
-        document.addEventListener('click', (e) => {
-            if (!userMenu.contains(e.target) && e.target !== userMenuButton && !userMenuButton.contains(e.target)) {
-                userMenu.classList.add('hidden');
-            }
-        });
+        const userTable = document.getElementById('userTableBody');
+        const userSearch = document.getElementById('userSearchInput');
+        const roleFilter = document.getElementById('userRoleFilter');
+        const statusFilter = document.getElementById('userStatusFilter');
 
-        const currentPath = window.location.pathname.split("/").pop();
-        const menuItems = document.querySelectorAll('.sidebar-menu-item');
-        menuItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === currentPath) {
-                item.classList.add('active');
-                const pageTitle = item.querySelector('span').textContent;
-                document.querySelector('header .hidden.md\\:block.text-xl.font-semibold').textContent = pageTitle;
-                const breadcrumbContainer = document.querySelector('main .text-sm.text-slate-400');
-                if (breadcrumbContainer) {
-                    breadcrumbContainer.innerHTML = `<a href="index.html" class="hover:text-purple-400">Admin</a> <span class="mx-2">/</span> <span>${pageTitle}</span>`;
-                }
-            }
-        });
+        function renderUsers() {
+            const query = userSearch.value.toLowerCase().trim();
+            const rVal = roleFilter.value;
+            const sVal = statusFilter.value;
 
-        // User Modal Logic
-        const addUserModal = document.getElementById('addUserModal');
-        const openAddUserModalBtn = document.getElementById('openAddUserModal');
-        const closeAddUserModalBtn = document.getElementById('closeAddUserModal');
-        const cancelAddUserModalBtn = document.getElementById('cancelAddUserModal');
-        const userModalTitle = document.getElementById('userModalTitle');
+            const filtered = adminUsers.filter(u => {
+                const matchQ = u.name.toLowerCase().includes(query) || u.email.toLowerCase().includes(query) || u.id.toLowerCase().includes(query);
+                const matchR = rVal === 'all' || u.role === rVal;
+                const matchS = sVal === 'all' || u.status === sVal;
+                return matchQ && matchR && matchS;
+            });
 
-        function toggleUserModal(open, isEdit = false) {
-            userModalTitle.textContent = isEdit ? 'Edit Pengguna' : 'Tambah Pengguna Baru';
-            if (open) addUserModal.classList.add('open');
-            else addUserModal.classList.remove('open');
+            userTable.innerHTML = filtered.map((u, idx) => `
+                <tr class="hover:bg-slate-800/40 transition-colors">
+                    <td class="py-3.5 px-4 sm:px-6">
+                        <div class="flex items-center gap-3">
+                            <img src="${u.avatar}" alt="${u.name}" class="w-9 h-9 rounded-xl object-cover border border-slate-700">
+                            <div>
+                                <p class="font-bold text-white">${u.name}</p>
+                                <p class="text-[11px] font-mono text-slate-400">${u.id}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-3.5 px-4">
+                        <p class="text-white">${u.email}</p>
+                        <p class="text-[11px] text-slate-400">${u.phone || '-'}</p>
+                    </td>
+                    <td class="py-3.5 px-4 text-slate-300 whitespace-nowrap">${u.date}</td>
+                    <td class="py-3.5 px-4 text-center">
+                        <span class="px-2.5 py-0.5 rounded-full ${u.role === 'Admin' ? 'bg-sky-950 text-sky-300 border border-sky-800/60' : 'bg-slate-800 text-slate-300'} text-xs font-semibold">
+                            ${u.role}
+                        </span>
+                    </td>
+                    <td class="py-3.5 px-4 text-center">
+                        <span class="px-2.5 py-0.5 rounded-full ${u.status === 'Aktif' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60' : 'bg-rose-950 text-rose-300 border border-rose-800/60'} text-xs font-semibold">
+                            ${u.status}
+                        </span>
+                    </td>
+                    <td class="py-3.5 px-4 sm:px-6 text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <button type="button" onclick="editUser(${idx})" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors" title="Edit Pengguna">
+                                <i class="fas fa-pen text-xs"></i>
+                            </button>
+                            <button type="button" onclick="deleteUser(${idx})" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 transition-colors" title="Hapus Pengguna">
+                                <i class="fas fa-trash text-xs"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        openAddUserModalBtn.addEventListener('click', () => toggleUserModal(true));
-        closeAddUserModalBtn.addEventListener('click', () => toggleUserModal(false));
-        cancelAddUserModalBtn.addEventListener('click', () => toggleUserModal(false));
+        userSearch.addEventListener('input', renderUsers);
+        roleFilter.addEventListener('change', renderUsers);
+        statusFilter.addEventListener('change', renderUsers);
 
-        // Example: Simulating edit button click
-        // document.querySelectorAll('.edit-user-btn').forEach(btn => {
-        //     btn.addEventListener('click', () => {
-        //         // Populate form with user data first
-        //         toggleUserModal(true, true);
-        //     });
-        // });
+        // Modal
+        const userModal = document.getElementById('userModal');
+        const userModalTitle = document.getElementById('userModalTitle');
+        const editUserIndex = document.getElementById('editUserIndex');
 
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                toggleUserModal(false);
+        window.openUserModal = function (isEdit = false, idx = null) {
+            if (isEdit && idx !== null) {
+                userModalTitle.textContent = "Edit Data Pengguna";
+                editUserIndex.value = idx;
+                const u = adminUsers[idx];
+                document.getElementById('formUserName').value = u.name;
+                document.getElementById('formUserEmail').value = u.email;
+                document.getElementById('formUserPhone').value = u.phone || '';
+                document.getElementById('formUserRole').value = u.role;
+                document.getElementById('formUserStatus').value = u.status;
+            } else {
+                userModalTitle.textContent = "Tambah Pengguna Baru";
+                editUserIndex.value = "";
+                document.getElementById('userForm').reset();
             }
+            userModal.classList.remove('hidden');
+        };
+
+        window.closeUserModal = function () {
+            userModal.classList.add('hidden');
+        };
+
+        window.editUser = function (idx) {
+            openUserModal(true, idx);
+        };
+
+        window.deleteUser = function (idx) {
+            if (confirm("Hapus pengguna ini?")) {
+                adminUsers.splice(idx, 1);
+                renderUsers();
+            }
+        };
+
+        document.getElementById('userForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const idxStr = editUserIndex.value;
+            const name = document.getElementById('formUserName').value.trim();
+            const email = document.getElementById('formUserEmail').value.trim();
+            const phone = document.getElementById('formUserPhone').value.trim();
+            const role = document.getElementById('formUserRole').value;
+            const status = document.getElementById('formUserStatus').value;
+
+            if (idxStr !== "") {
+                const idx = parseInt(idxStr);
+                adminUsers[idx].name = name;
+                adminUsers[idx].email = email;
+                adminUsers[idx].phone = phone;
+                adminUsers[idx].role = role;
+                adminUsers[idx].status = status;
+            } else {
+                adminUsers.unshift({
+                    id: "USR-00" + (adminUsers.length + 1),
+                    name,
+                    email,
+                    phone,
+                    date: "Hari ini",
+                    role,
+                    status,
+                    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80"
+                });
+            }
+
+            renderUsers();
+            closeUserModal();
         });
+
+        renderUsers();
     </script>
 </body>
 
