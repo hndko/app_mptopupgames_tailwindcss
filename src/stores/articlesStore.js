@@ -105,6 +105,80 @@ export const INITIAL_ARTICLES = [
         <li>Promo aktif mulai 01 Agustus hingga 31 Agustus 2026.</li>
       </ul>
     `
+  },
+  {
+    id: 5,
+    slug: 'genshin-impact-build-artefak-dps-terkuat',
+    title: 'Panduan Rinci Build Artefak & Senjata DPS Terbaik Genshin Impact',
+    category: 'Panduan Hero',
+    author: 'Genshin Scholar',
+    date: '15 Agu 2026',
+    readTime: '5 menit baca',
+    views: 3180,
+    banner: '/images/promo/hero-slide-2.svg',
+    gameId: 'game5',
+    gameTitle: 'Genshin Impact Genesis',
+    summary: 'Optimalkan rasio Crit Rate dan Crit DMG karakter utama Anda dengan rekomendasi set artefak dan senjata F2P terbaik.',
+    content: `
+      <h3>Formula Rasio Emas Crit</h3>
+      <p>Untuk memaksimalkan output damage berkelanjutan, pertahankan rasio Crit Rate : Crit DMG sebesar 1:2 (misal 60% CR : 120% CD atau 75% CR : 150% CD).</p>
+      <h3>Top Up Blessing of Welkin Moon</h3>
+      <p>Kumpulkan Primogems setiap hari dengan berlangganan Blessing of the Welkin Moon termurah di MPTopUp.</p>
+    `
+  },
+  {
+    id: 6,
+    slug: 'bocoran-patch-mobile-legends-season-baru',
+    title: 'Bocoran Patch Mobile Legends Season Baru: Buff Assassin & Revamp Map',
+    category: 'Patch Update',
+    author: 'Moonton Insider',
+    date: '12 Agu 2026',
+    readTime: '4 menit baca',
+    views: 6420,
+    banner: '/images/promo/promo-mlbb.svg',
+    gameId: 'game1',
+    gameTitle: 'Mobile Legends: Bang Bang',
+    summary: 'Rangkuman lengkap perubahan meta jungle, penyesuaian hero marksman, dan pembaruan visual medan tempur Land of Dawn.',
+    content: `
+      <h3>Kebangkitan Hero Assassin</h3>
+      <p>Patch terbaru memberikan peningkatan kecepatan jungling pada hero assassin berbasis energy seperti Ling, Fanny, dan Hayabusa.</p>
+    `
+  },
+  {
+    id: 7,
+    slug: 'tips-hemat-diamond-magic-wheel-legend-skin',
+    title: 'Trik Hemat Menembus 200 Magic Points Magic Wheel Skin Legend',
+    category: 'Tips & Trik',
+    author: 'Admin MPTopUp',
+    date: '10 Agu 2026',
+    readTime: '3 menit baca',
+    views: 4890,
+    banner: '/images/promo/promo-cashback.svg',
+    gameId: 'game1',
+    gameTitle: 'Mobile Legends: Bang Bang',
+    summary: 'Simulasi perhitungan efisiensi draw 5x Magic Wheel dan estimasi total diamond yang dibutuhkan sebelum melakukan gacha.',
+    content: `
+      <h3>Manfaatkan Diskon Spin 5x</h3>
+      <p>Melakukan spin 5x sekaligus jauh lebih hemat karena hanya membutuhkan 270 Diamond/COA dibandingkan 300 Diamond jika dilakukan secara satuan.</p>
+    `
+  },
+  {
+    id: 8,
+    slug: 'turnamen-esports-komunitas-mptopup-championship',
+    title: 'MPTopUp Championship 2026: Total Prize Pool 50 Juta Rupiah Terbuka untuk Umum',
+    category: 'Event Promo',
+    author: 'Event Organizer',
+    date: '08 Agu 2026',
+    readTime: '3 menit baca',
+    views: 7120,
+    banner: '/images/promo/promo-valorant.svg',
+    gameId: 'game1',
+    gameTitle: 'Semua Game & Voucher',
+    summary: 'Daftarkan tim squad Anda dalam kompetisi esports MLBB & Valorant tingkat nasional dengan hadiah jutaan rupiah dan voucher diamond.',
+    content: `
+      <h3>Informasi Pendaftaran Turnamen</h3>
+      <p>Kompetisi terbuka bagi seluruh pemain rank Legend ke atas. Pendaftaran gratis bagi member terdaftar MPTopUp.</p>
+    `
   }
 ];
 

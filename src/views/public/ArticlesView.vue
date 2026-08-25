@@ -82,14 +82,14 @@
     </div>
 
     <!-- Filter & Category Toolbar Section -->
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div id="articlesSection" class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3">
       <!-- Category Pills -->
       <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
         <button
           type="button"
           v-for="cat in articlesStore.categories"
           :key="cat"
-          @click="articlesStore.setCategory(cat)"
+          @click="selectCategory(cat)"
           :class="[
             articlesStore.selectedCategory === cat 
               ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30 font-black' 
@@ -106,8 +106,8 @@
       </span>
     </div>
 
-    <!-- Featured Banner Article (If on 'Semua' and no search) -->
-    <div v-if="articlesStore.selectedCategory === 'Semua' && !searchQuery && articlesStore.featuredArticle" class="relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl group">
+    <!-- Featured Banner Article (If on Page 1, category 'Semua' and no search) -->
+    <div v-if="currentPage === 1 && articlesStore.selectedCategory === 'Semua' && !searchQuery && articlesStore.featuredArticle" class="relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl group">
       <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
         <div class="lg:col-span-7 aspect-[16/9] lg:aspect-auto h-full overflow-hidden">
           <img :src="articlesStore.featuredArticle.banner" :alt="articlesStore.featuredArticle.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -140,10 +140,10 @@
       </div>
     </div>
 
-    <!-- Article Grid Cards -->
-    <div v-if="filteredArticles.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Article Grid Cards (Paginated) -->
+    <div v-if="paginatedArticles.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <article 
-        v-for="article in filteredArticles" 
+        v-for="article in paginatedArticles" 
         :key="article.id"
         class="bg-slate-900 border border-slate-800 hover:border-sky-500/50 rounded-3xl overflow-hidden shadow-xl hover:shadow-sky-500/10 transition-all flex flex-col group"
       >
@@ -192,6 +192,66 @@
       <p class="text-xs text-slate-400">Coba ubah kata kunci pencarian atau pilih kategori yang lain.</p>
     </div>
 
+    <!-- Reactive Pagination Toolbar -->
+    <div v-if="totalPages > 1" class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-slate-400 font-medium">
+        Halaman <strong class="text-white">{{ currentPage }}</strong> dari <strong class="text-white">{{ totalPages }}</strong> 
+        (Artikel {{ (currentPage - 1) * itemsPerPage + 1 }} - {{ Math.min(currentPage * itemsPerPage, filteredArticles.length) }})
+      </p>
+
+      <div class="flex items-center gap-1.5">
+        <!-- Previous Page Button -->
+        <button 
+          type="button"
+          :disabled="currentPage === 1"
+          @click="goToPage(currentPage - 1)"
+          :class="[
+            currentPage === 1 
+              ? 'opacity-40 cursor-not-allowed bg-slate-800 text-slate-500' 
+              : 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700'
+          ]"
+          class="h-10 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 btn-press"
+          aria-label="Halaman Sebelumnya"
+        >
+          <i class="fas fa-chevron-left text-[10px]"></i>
+          <span class="hidden sm:inline">Sebelumnya</span>
+        </button>
+
+        <!-- Page Numbers -->
+        <button 
+          type="button"
+          v-for="pageNum in totalPages" 
+          :key="pageNum"
+          @click="goToPage(pageNum)"
+          :class="[
+            currentPage === pageNum 
+              ? 'bg-sky-600 text-white font-black shadow-md shadow-sky-600/30' 
+              : 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 font-bold'
+          ]"
+          class="w-10 h-10 rounded-xl text-xs transition-all flex items-center justify-center btn-press font-mono"
+        >
+          {{ pageNum }}
+        </button>
+
+        <!-- Next Page Button -->
+        <button 
+          type="button"
+          :disabled="currentPage >= totalPages"
+          @click="goToPage(currentPage + 1)"
+          :class="[
+            currentPage >= totalPages 
+              ? 'opacity-40 cursor-not-allowed bg-slate-800 text-slate-500' 
+              : 'bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700'
+          ]"
+          class="h-10 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 btn-press"
+          aria-label="Halaman Berikutnya"
+        >
+          <span class="hidden sm:inline">Berikutnya</span>
+          <i class="fas fa-chevron-right text-[10px]"></i>
+        </button>
+      </div>
+    </div>
+
     <!-- Help & Promo Callout Banner (Matching Lacak Standard) -->
     <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-sky-950/30 border border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
       <div class="space-y-1 text-center sm:text-left">
@@ -212,10 +272,12 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useArticlesStore } from '@/stores/articlesStore';
 
 const articlesStore = useArticlesStore();
+const currentPage = ref(1);
+const itemsPerPage = ref(6);
 
 onMounted(() => {
   articlesStore.fetchArticles();
@@ -223,14 +285,41 @@ onMounted(() => {
 
 const searchQuery = computed({
   get: () => articlesStore.searchQuery,
-  set: (val) => articlesStore.setSearch(val)
+  set: (val) => {
+    articlesStore.setSearch(val);
+    currentPage.value = 1;
+  }
 });
 
 const filteredArticles = computed(() => articlesStore.filteredArticles);
 
+const totalPages = computed(() => {
+  return Math.ceil(filteredArticles.value.length / itemsPerPage.value) || 1;
+});
+
+const paginatedArticles = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  return filteredArticles.value.slice(start, start + itemsPerPage.value);
+});
+
 const totalArticleViews = computed(() => {
   return articlesStore.articles.reduce((acc, item) => acc + (Number(item.views) || 0), 0);
 });
+
+function selectCategory(cat) {
+  articlesStore.setCategory(cat);
+  currentPage.value = 1;
+}
+
+function goToPage(page) {
+  if (page < 1 || page > totalPages.value) return;
+  currentPage.value = page;
+  
+  const el = document.getElementById('articlesSection');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
 function formatNumber(num) {
   return new Intl.NumberFormat('id-ID').format(num || 0);
