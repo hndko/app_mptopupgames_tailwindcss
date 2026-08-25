@@ -228,8 +228,8 @@
             gameGrid.innerHTML = adminGames.map((g, idx) => `
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl p-5 space-y-4 flex flex-col justify-between">
                     <div class="space-y-3">
-                        <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
-                            <img src="${g.banner}" alt="${g.title}" class="w-full h-full object-cover">
+                        <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-950 border border-slate-700 flex items-center justify-center">
+                            <img src="${TopUpStorage.resolveImagePath(g.banner)}" alt="${g.title}" class="w-full h-full object-cover">
                             <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full ${g.status === 'Aktif' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800/60' : 'bg-slate-800 text-slate-400'} text-[11px] font-bold">
                                 ${g.status}
                             </span>

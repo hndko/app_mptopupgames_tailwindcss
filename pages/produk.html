@@ -70,8 +70,8 @@
             <!-- Left Column: Game Profile & ID Input -->
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-5">
-                    <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-800 border border-slate-700">
-                        <img id="gameBannerImg" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80"
+                    <div class="relative aspect-video rounded-xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
+                        <img id="gameBannerImg" src="../assets/images/games/mlbb.svg"
                             alt="Game Banner" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
                     </div>
@@ -319,7 +319,7 @@
         document.getElementById('gameTitleHeader').textContent = activeGame.title;
         document.getElementById('gameDeveloperLabel').textContent = activeGame.developer;
         document.getElementById('gameDescription').textContent = activeGame.description;
-        document.getElementById('gameBannerImg').src = activeGame.banner;
+        document.getElementById('gameBannerImg').src = TopUpStorage.resolveImagePath(activeGame.banner);
         document.getElementById('sumGameTitle').textContent = activeGame.title;
 
         if (!activeGame.hasZoneId) {

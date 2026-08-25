@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="valBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f141c"/>
+      <stop offset="50%" stop-color="#1b222d"/>
+      <stop offset="100%" stop-color="#090b10"/>
+    </linearGradient>
+    <linearGradient id="valRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4655"/>
+      <stop offset="100%" stop-color="#cc2d3b"/>
+    </linearGradient>
+    <filter id="valGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="750" fill="url(#valBg)"/>
+  
+  <!-- Subtle Grid & Tactical lines -->
+  <circle cx="300" cy="280" r="190" fill="#ff4655" opacity="0.08" filter="url(#valGlow)"/>
+  
+  <!-- Tactical Lines -->
+  <line x1="50" y1="50" x2="150" y2="50" stroke="#ff4655" stroke-width="2" opacity="0.4"/>
+  <line x1="50" y1="50" x2="50" y2="150" stroke="#ff4655" stroke-width="2" opacity="0.4"/>
+  <text x="70" y="80" font-family="monospace" font-size="12" fill="#ff4655" opacity="0.6">// TAC-FPS // RIOT</text>
+  
+  <line x1="550" y1="700" x2="450" y2="700" stroke="#ff4655" stroke-width="2" opacity="0.4"/>
+  <line x1="550" y1="700" x2="550" y2="600" stroke="#ff4655" stroke-width="2" opacity="0.4"/>
+
+  <!-- Valorant "V" Emblem -->
+  <g transform="translate(300, 280) scale(1.3)">
+    <!-- Left slash of V -->
+    <path d="M -80,-80 L -10,-80 L -30,40 L -80,-30 Z" fill="url(#valRed)" filter="url(#valGlow)"/>
+    <path d="M -80,-80 L -10,-80 L -30,40 L -80,-30 Z" fill="url(#valRed)"/>
+    <!-- Right polygon of V -->
+    <path d="M 80,-80 L 15,40 L -5,75 L 5,30 L 45,-80 Z" fill="#ece8e1"/>
+    <!-- Center Dot/Cut -->
+    <rect x="-8" y="-70" width="16" height="16" fill="#ff4655" transform="rotate(45)"/>
+  </g>
+
+  <!-- Title & Typography -->
+  <g transform="translate(300, 520)" text-anchor="middle">
+    <!-- Game Tag -->
+    <rect x="-80" y="-30" width="160" height="26" rx="6" fill="#ff4655" opacity="0.2"/>
+    <text x="0" y="-12" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="13" fill="#ff4655" letter-spacing="3">TACTICAL FPS</text>
+
+    <!-- Main Title -->
+    <text x="0" y="50" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="44" fill="#ffffff" letter-spacing="6">VALORANT</text>
+    <text x="0" y="90" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="18" fill="#ece8e1" letter-spacing="3">POINTS (VP)</text>
+    <text x="0" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="14" fill="#94a3b8" letter-spacing="1">Riot Games &bull; Proses Instan IDR</text>
+  </g>
+</svg>

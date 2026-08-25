@@ -8,7 +8,7 @@ const INITIAL_GAMES = [
     title: "Mobile Legends: Bang Bang",
     developer: "Moonton",
     category: "Mobile",
-    banner: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/mlbb.svg",
     description: "Top up Diamond Mobile Legends resmi & instan 24 jam. Masukkan User ID dan Zone ID Anda.",
     hasZoneId: true,
     status: "Aktif",
@@ -26,7 +26,7 @@ const INITIAL_GAMES = [
     title: "Valorant",
     developer: "Riot Games",
     category: "PC",
-    banner: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/valorant.svg",
     description: "Top up Valorant Points (VP) resmi server Indonesia. Masukkan Riot ID lengkap dengan Tagline.",
     hasZoneId: false,
     status: "Aktif",
@@ -43,7 +43,7 @@ const INITIAL_GAMES = [
     title: "Free Fire",
     developer: "Garena",
     category: "Mobile",
-    banner: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/freefire.svg",
     description: "Top up Diamonds Free Fire murah & proses instan. Masukkan Player ID akun Free Fire Anda.",
     hasZoneId: false,
     status: "Aktif",
@@ -60,7 +60,7 @@ const INITIAL_GAMES = [
     title: "PUBG Mobile",
     developer: "Level Infinite",
     category: "Mobile",
-    banner: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/pubg.svg",
     description: "Top up Unknown Cash (UC) PUBG Mobile resmi & cepat. Masukkan Player ID akun PUBG Mobile Anda.",
     hasZoneId: false,
     status: "Aktif",
@@ -76,7 +76,7 @@ const INITIAL_GAMES = [
     title: "Genshin Impact",
     developer: "HoYoverse",
     category: "Mobile",
-    banner: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/genshin.svg",
     description: "Top up Genesis Crystals Genshin Impact. Masukkan UID dan Server Game Anda.",
     hasZoneId: true,
     status: "Aktif",
@@ -92,7 +92,7 @@ const INITIAL_GAMES = [
     title: "Honor of Kings",
     developer: "Tencent Games",
     category: "Mobile",
-    banner: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/hok.svg",
     description: "Top up Tokens Honor of Kings resmi dan instan.",
     hasZoneId: false,
     status: "Aktif",
@@ -106,7 +106,7 @@ const INITIAL_GAMES = [
     title: "Steam Wallet Code",
     developer: "Valve Corporation",
     category: "Voucher",
-    banner: "https://images.unsplash.com/photo-1612287233207-6a164b3ef86d?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/steam.svg",
     description: "Voucher Steam Wallet IDR untuk beli game di platform Steam.",
     hasZoneId: false,
     status: "Aktif",
@@ -120,7 +120,7 @@ const INITIAL_GAMES = [
     title: "Google Play Voucher",
     developer: "Google",
     category: "Voucher",
-    banner: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
+    banner: "assets/images/games/googleplay.svg",
     description: "Kode voucher resmi Google Play Store Indonesia.",
     hasZoneId: false,
     status: "Aktif",
@@ -192,28 +192,28 @@ const INITIAL_ORDERS = [
 const TopUpStorage = {
   getGames() {
     try {
-      const data = localStorage.getItem('mptopup_games_catalog');
+      const data = localStorage.getItem('mptopup_games_catalog_v2');
       if (data) return JSON.parse(data);
     } catch (e) { }
-    localStorage.setItem('mptopup_games_catalog', JSON.stringify(INITIAL_GAMES));
+    localStorage.setItem('mptopup_games_catalog_v2', JSON.stringify(INITIAL_GAMES));
     return INITIAL_GAMES;
   },
 
   saveGames(games) {
-    localStorage.setItem('mptopup_games_catalog', JSON.stringify(games));
+    localStorage.setItem('mptopup_games_catalog_v2', JSON.stringify(games));
   },
 
   getOrders() {
     try {
-      const data = localStorage.getItem('mptopup_orders_history');
+      const data = localStorage.getItem('mptopup_orders_history_v2');
       if (data) return JSON.parse(data);
     } catch (e) { }
-    localStorage.setItem('mptopup_orders_history', JSON.stringify(INITIAL_ORDERS));
+    localStorage.setItem('mptopup_orders_history_v2', JSON.stringify(INITIAL_ORDERS));
     return INITIAL_ORDERS;
   },
 
   saveOrders(orders) {
-    localStorage.setItem('mptopup_orders_history', JSON.stringify(orders));
+    localStorage.setItem('mptopup_orders_history_v2', JSON.stringify(orders));
   },
 
   addOrder(newOrder) {
@@ -221,5 +221,14 @@ const TopUpStorage = {
     orders.unshift(newOrder);
     this.saveOrders(orders);
     localStorage.setItem('latestOrder', JSON.stringify(newOrder));
+  },
+
+  resolveImagePath(path) {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    const isSubfolder = window.location.pathname.includes('/pages/') || 
+                        window.location.pathname.includes('/admin/') || 
+                        window.location.pathname.includes('/auth/');
+    return isSubfolder ? `../${path}` : path;
   }
 };

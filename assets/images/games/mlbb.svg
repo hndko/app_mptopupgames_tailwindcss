@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1128"/>
+      <stop offset="50%" stop-color="#14213d"/>
+      <stop offset="100%" stop-color="#050814"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6d365"/>
+      <stop offset="100%" stop-color="#fda085"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="100%" stop-color="#4facfe"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="750" fill="url(#bg)"/>
+  
+  <!-- Subtle Geometry & Aura -->
+  <circle cx="300" cy="300" r="220" fill="#00f2fe" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="300" cy="300" r="150" fill="#fda085" opacity="0.05" filter="url(#glow)"/>
+
+  <path d="M 0,0 L 600,750" stroke="#00f2fe" stroke-width="1" opacity="0.1" stroke-dasharray="8 8"/>
+  <path d="M 600,0 L 0,750" stroke="#fda085" stroke-width="1" opacity="0.1" stroke-dasharray="8 8"/>
+
+  <!-- Mobile Legends Badge & Diamond Emblem -->
+  <g transform="translate(300, 290)">
+    <!-- Wings / Crest -->
+    <path d="M -160,-20 Q -80,-120 0,-70 Q 80,-120 160,-20 Q 70,-30 0,60 Q -70,-30 -160,-20 Z" fill="url(#gold)" opacity="0.85"/>
+    
+    <!-- Central Shield -->
+    <path d="M 0,-110 L 80,-40 L 55,65 L 0,110 L -55,65 L -80,-40 Z" fill="#0f172a" stroke="url(#gold)" stroke-width="6"/>
+    
+    <!-- Diamond Gem Icon inside Shield -->
+    <polygon points="0,-60 45,-20 0,65 -45,-20" fill="url(#cyan)" filter="url(#glow)"/>
+    <polygon points="0,-60 45,-20 0,10 -45,-20" fill="#e0f2fe" opacity="0.6"/>
+    <polygon points="0,-60 0,65 45,-20" fill="#38bdf8" opacity="0.7"/>
+  </g>
+
+  <!-- Title & Typography -->
+  <g transform="translate(300, 520)" text-anchor="middle">
+    <!-- Game Tag -->
+    <rect x="-70" y="-30" width="140" height="26" rx="6" fill="#0ea5e9" opacity="0.25"/>
+    <text x="0" y="-12" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="13" fill="#38bdf8" letter-spacing="3">5v5 MOBA</text>
+
+    <!-- Main Title -->
+    <text x="0" y="45" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="34" fill="#ffffff" letter-spacing="1">MOBILE LEGENDS</text>
+    <text x="0" y="85" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="20" fill="url(#gold)" letter-spacing="4">BANG BANG</text>
+    <text x="0" y="130" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="14" fill="#94a3b8" letter-spacing="1">Moonton &bull; Top Up Diamond Instan</text>
+  </g>
+</svg>

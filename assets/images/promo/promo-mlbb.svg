@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pbg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c1938"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+    <linearGradient id="pgold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6d365"/>
+      <stop offset="100%" stop-color="#fda085"/>
+    </linearGradient>
+    <linearGradient id="pcyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="100%" stop-color="#4facfe"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="400" rx="24" fill="url(#pbg1)"/>
+  
+  <circle cx="200" cy="180" r="120" fill="#00f2fe" opacity="0.1"/>
+
+  <!-- Badge 20% OFF -->
+  <g transform="translate(200, 160)">
+    <polygon points="0,-70 50,-20 0,70 -50,-20" fill="url(#pcyan)"/>
+    <polygon points="0,-70 50,-20 0,10 -50,-20" fill="#e0f2fe" opacity="0.6"/>
+  </g>
+
+  <!-- Big text -->
+  <text x="200" y="270" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="34" fill="#ffffff">DISKON 20%</text>
+  <text x="200" y="305" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="16" fill="url(#pgold)" letter-spacing="2">MOBILE LEGENDS</text>
+  <text x="200" y="340" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="13" fill="#38bdf8">KODE: NEWUSER20</text>
+</svg>
