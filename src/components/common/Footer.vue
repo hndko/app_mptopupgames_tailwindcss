@@ -322,7 +322,17 @@
             Kebijakan Privasi
           </router-link>
           <span class="hidden sm:inline text-slate-700">&bull;</span>
-          <p>Didesain untuk Komunitas Gamers Indonesia</p>
+          <p>
+            Didesain untuk 
+            <a 
+              href="https://maripartner.com/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="font-semibold text-slate-400 hover:text-sky-400 transition-colors underline-offset-2 hover:underline"
+            >
+              Mari Partner
+            </a>
+          </p>
         </div>
 
         <!-- Back to Top Button -->
